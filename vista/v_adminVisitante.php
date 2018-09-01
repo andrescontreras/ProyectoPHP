@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
-<form action="" method="get">
+<form action="v_adminEditCredito.php" method="get">
        <label for="">
         Creditos del usuario:
         <select name="operacion" id="operacion">
@@ -18,7 +18,7 @@
             <option value="m">MULTIPLICACION</option>
             <option value="d">DIVISION</option>
         </select>
-        <input type="button" value="Entrar">
+        <input type="submit" value="Entrar">
        </label>
     </form>
     

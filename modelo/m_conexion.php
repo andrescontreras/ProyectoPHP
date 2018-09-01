@@ -1,5 +1,5 @@
 <?php
-include("modelo/m_config.php");
+include("m_config.php");
 
 class conexion
 {

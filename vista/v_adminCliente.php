@@ -23,7 +23,7 @@
     </form>
     <br>
     
-    <form action="" method="get">
+    <form action="v_adminEditCredito.php" method="get">
        <label for="">
         creditos del cliente:
         <select name="operacion" id="operacion">
