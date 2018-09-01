@@ -14,7 +14,7 @@ $monto_cuenta=cliente::JaveCoins_CuentaAhorro();
 <form action="" method="get">
 
 <div>
-<label for="agosJC">Tipo de pago</label>
+<label for="pagosJC">Tipo de pago</label>
 <select name="tipoPago" id="pagosJC">
 <option value="javecoins">JaveCoins</option>
 <option value="pesos">Pesos</option>
@@ -34,6 +34,14 @@ $monto_cuenta=cliente::JaveCoins_CuentaAhorro();
 </div>
 <input type="submit" value="Consignar" name=consignar>
 </form>
+<br>
+<form action="v_clienteMenuCAhorro.php">
+<div>
+<input type="submit" value="Volver" name="volver">
+</div>
+</form>
+
+
 
 <?php
 if(isset($_GET['consignar'])){

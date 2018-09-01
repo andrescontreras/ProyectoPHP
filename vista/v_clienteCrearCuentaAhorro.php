@@ -19,7 +19,7 @@ $usuario = cliente::nomUsuario();
 <?php
 if(isset($_POST['botonMonto'])){
     $monto=$_POST['monto_consig'];
-    cliente::crearCuentaAhorro($monto);
+    echo cliente::crearCuentaAhorro($monto);
         
 }
 

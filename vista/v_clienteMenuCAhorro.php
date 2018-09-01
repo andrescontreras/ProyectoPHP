@@ -40,7 +40,7 @@ $_SESSION['id_ahorro']=$id_ahorro;
 </form>
 
 <br>
-<form action="">
+<form action="v_clientePrincipal.php">
 <div>
 <input type="submit" value="Volver" name="volver">
 </div>
