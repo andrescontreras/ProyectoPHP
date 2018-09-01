@@ -8,9 +8,6 @@ if (mysqli_query($con,$sql)) {
 }else{
  echo mysqli_error($con);
 }
-<?php
-include_once dirname(__FILE__) . '/config.php';
-$con=mysqli_connect(HOST_DB,USUARIO_DB,USUARIO_PASS, NOMBRE_DB);
 $sql = "INSERT INTO USUARIO (USUARIO, PASSWORD, TIPO ) VALUES ('felipe', 'god', 'ADMIN')";//:v
 if (mysqli_query($con,$sql)) {
  echo "Datos insertados :3  |";
@@ -78,25 +75,31 @@ if (mysqli_query($con,$sql)) {
 }else{
  echo mysqli_error($con);
 }
-$sql = "INSERT INTO CREDITO (ESTADO, FECHA_PAGO, INTERES, MONTO, USUARIO, CORREO) VALUES ('EN ESPERA', CURDATE(), 0.17, 300, 2, 'felipe@contreras.com' )";
+$sql = "INSERT INTO CREDITO (ESTADO, FECHA_PAGO, INTERES, MONTO, USUARIO) VALUES ('EN ESPERA', CURDATE(), 0.17, 300, 2 )";
 if (mysqli_query($con,$sql)) {
  echo " Credito insertado :3 |";
 }else{
  echo mysqli_error($con);
 }
-$sql = "INSERT INTO CREDITO (ESTADO, FECHA_PAGO, INTERES, MONTO, USUARIO, CORREO) VALUES ('APROBADO', '2018-08-27', 0.17, 800, 4, 'santi@dash.com' )";
+$sql = "INSERT INTO CREDITO (ESTADO, FECHA_PAGO, INTERES, MONTO, USUARIO) VALUES ('APROBADO', '2018-08-27', 0.17, 800, 4 )";
 if (mysqli_query($con,$sql)) {
  echo " Credito insertado :3 |";
 }else{
  echo mysqli_error($con);
 }
-$sql = "INSERT INTO CREDITO (ESTADO, FECHA_PAGO, INTERES, MONTO, USUARIO, CORREO) VALUES ('APROBADO', '2018-08-27', 0.17, 400, 3, 'juan@ario.com' )";
+$sql = "INSERT INTO CREDITO (ESTADO, FECHA_PAGO, INTERES, MONTO, USUARIO) VALUES ('APROBADO', '2018-08-27', 0.17, 400, 3 )";
 if (mysqli_query($con,$sql)) {
  echo " Credito insertado :3 |";
 }else{
  echo mysqli_error($con);
 }
-$sql = "INSERT INTO CREDITO (ESTADO, FECHA_PAGO, INTERES, MONTO, USUARIO, CORREO) VALUES ('RECHAZADO', '2018-08-12', 0.17, 3000, 5, 'zero@grozero.com' )";
+$sql = "INSERT INTO CREDITO (ESTADO, FECHA_PAGO, INTERES, MONTO, USUARIO) VALUES ('RECHAZADO', '2018-08-12', 0.17, 3000, 5 )";
+if (mysqli_query($con,$sql)) {
+ echo " Credito insertado :3 |";
+}else{
+ echo mysqli_error($con);
+}
+$sql = "INSERT INTO CREDITO (ESTADO, FECHA_PAGO, INTERES, MONTO, USUARIO, CORREO) VALUES ('RECHAZADO', '2018-08-12', 0.17, 3000, 431831, 'imroocker@gmail.com' )";
 if (mysqli_query($con,$sql)) {
  echo " Credito insertado :3 |";
 }else{
@@ -108,6 +111,4 @@ if (mysqli_query($con,$sql)) {
 }else{
  echo mysqli_error($con);
 }
- ?>
-
 ?>
