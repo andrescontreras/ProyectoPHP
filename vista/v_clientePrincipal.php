@@ -15,15 +15,17 @@ setcookie("usuario",$idUsu,time()+3600);
 <input type="submit" name="crear_cuenta_ahorro" value="Crear cuenta de ahorro">
 </div>
 </form>
-
+<div>
 <form action="crear_tarjeta_credito.php" method="post">
-<div>
-<div>
 <input type="submit" name="crear_tarjetacredito" value="Crear tarjeta de credito">
+</div>
+<div>
+<form action="" method="post">
+<input type="submit" name="pedir_credito" value="Solicitar credito">
+</form>
 </div>
 </form>
 <div>
-<h3>Retirar</h3>
 <form action="retirar_monto.php" method="get">
 <label for="cuentasR">Cuentas de ahorro</label>
 <select name="cuentasRetirar" id="cuentasR">
@@ -39,11 +41,11 @@ echo cliente::datosCuentaAhorro();
 <div>
 <h3>Consignar</h3>
 <form action="c_ahorro_consignar.php" method="get">
-<label for="cuentasCl">Cuentas del cliente</label>
+<label for="cuentasCl">Tarjetas de credito</label>
 <select name="cuentas" id="cuentasCl">
 <?php
 // -------------------------------------> PARTE DE CONSIGNAR
-echo cliente::datosCuentaAhorro();
+echo cliente::datosTarjetaCredito();
 ?>
 </select>
 </div>
