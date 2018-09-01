@@ -25,5 +25,12 @@ class m_usuario{
         $sql ="SELECT * FROM usuario WHERE IDUSUARIO ='".$_SESSION["usuario"]."'";
         return $conBD->ejecutarconsulta($sql);
     }
+
+    public static function getUsuarios()
+    {
+        $conBD = new conexion();
+        $sql = "SELECT * FROM usuario";
+        return $conBD->ejecutarconsulta($sql);
+    }
 }
 ?>

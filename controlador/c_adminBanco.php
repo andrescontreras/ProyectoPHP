@@ -17,7 +17,6 @@
         {
              $consulta =  m_banco::getDatosBanco();
              $str_datos = "";
-             $this->interes = 0;
              while($fila = mysqli_fetch_array($consulta)) {
                 $this->cuota_manejo = $fila['0'];
                 $this->interes = $fila['1'];
@@ -30,7 +29,13 @@
 
         function setDatosbanco($cuota_manejo,$interes,$costo_operacion,$interes_mora,$nombreBanco)
         {
-            
+            $consulta =  m_banco::getDatosBanco();
+            $str_datos = "";
+            while($fila = mysqli_fetch_array($consulta)) {
+               $this->nombreBanco = $fila['4'];
+            }
+           echo m_banco::setDatosBanco($cuota_manejo,$interes,$costo_operacion,$interes_mora,$nombreBanco,$this->nombreBanco);
+            echo "ENTRO A  LA FUNCION";
         }
     }
 ?>
