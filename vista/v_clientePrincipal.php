@@ -4,9 +4,10 @@ session_start();
 include ("C:/xampp/htdocs/ProyectoPHP/controlador/c_cliente.php");
 $idUsu = cliente::datosUsuario_ID("usuario");
 $_SESSION['usuario']=$idUsu;
+$usuario = cliente::nomUsuario();
 //Si no funciona con COOKIE utilizar session
-setcookie("usuario",$idUsu,time()+3600);
-echo $_COOKIE["usuario"]."<br>";
+//setcookie("usuario",$idUsu,time()+3600);
+//echo $_COOKIE["usuario"]."<br>";
 
 //echo cliente::datosCuentaAhorro();
 
@@ -14,10 +15,10 @@ echo $_COOKIE["usuario"]."<br>";
 ?>
 <html>
 <body>
-<form action="crear_cuentaAhorro.php" method="post">
+<form action="v_clienteCrearCuentaAhorro.php" method="post">
 <div>
 <label for="txtNomUsuario">Nombre del usuario </label>
-<input type ="text" name="nomUsuario" id="txtNomUsuario" value="<?php echo $_POST['usuario'] ?>">
+<input type ="text" name="nomUsuario" id="txtNomUsuario" value="<?php if(isset($usuario))echo $usuario?>">
 </div>
 <div>
 <input type="submit" name="crear_cuenta_ahorro" value="Crear cuenta de ahorro">
@@ -41,6 +42,7 @@ echo $_COOKIE["usuario"]."<br>";
 echo cliente::datosCuentaAhorro();
 ?>
 </select>
+<input type="submit" value ="Seleccionar" name ="selecAhorro">
 <label for="m_retirar">Monto a retirar</label>
 <input type="text" name="monto_retirar">
 <input type="submit" value="Retirar" name="retirarMonto">
@@ -56,6 +58,7 @@ echo cliente::datosCuentaAhorro();
 echo cliente::datosTarjetaCredito();
 ?>
 </select>
+<input type="submit" value ="Seleccionar" name ="selecTCredito">
 </div>
 <div>
 <label for="agosJC">Tipo de pago</label>
