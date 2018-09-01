@@ -1,6 +1,6 @@
 <?php
 session_start();
-include ("C:/xampp/htdocs/ProyectoPHP/controlador/c_cliente.php");
+include_once "C:/xampp/htdocs/ProyectoPHP/controlador/c_cliente.php";
 if(isset($_GET['selecAhorro'])){
 $porciones = explode("_", $_GET['cuentasAhorro']);
 $id_ahorro=$porciones[1]; // porción1
@@ -40,7 +40,7 @@ $_SESSION['id_ahorro']=$id_ahorro;
 </form>
 
 <br>
-<form action="">
+<form action="v_clientePrincipal.php">
 <div>
 <input type="submit" value="Volver" name="volver">
 </div>

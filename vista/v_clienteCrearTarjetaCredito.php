@@ -17,7 +17,7 @@ echo cliente::datosCuentaAhorro();
 if(isset($_POST['solicitar_tarjetacredito'])){
     $porciones = explode("_", $_POST['cuentas']);
     $id_cuenta=$porciones[1]; // porción1
-    cliente::crearTCredito($id_cuenta);
+    echo cliente::crearTCredito($id_cuenta);
 }
 ?>
 </body>

@@ -1,7 +1,9 @@
 <?php
-include("C:/xampp/htdocs/ProyectoPHP/modelo/m_usuario.php");
-include("C:/xampp/htdocs/ProyectoPHP/modelo/m_c_ahorro.php");
-include("C:/xampp/htdocs/ProyectoPHP/modelo/m_tarjeta_c.php");
+include_once "../modelo/m_usuario.php";
+include_once "../modelo/m_c_ahorro.php";
+include_once "../modelo/m_tarjeta_c.php";
+include_once "../modelo/m_transaccion.php";
+include_once "../modelo/m_credito.php";
 class cliente{
     public static function datosUsuario_ID($nom_usuario)
     {
@@ -34,6 +36,11 @@ class cliente{
     }
     public static function crearCuentaAhorro($monto){
         $consulta =  c_ahorro::crearCuentaAhorro($monto);
+        if($consulta){
+            return "Se creo la cuenta de ahorro";
+        }else{
+            return "Ocurrio un error creando la cuenta de ahorro";
+        }
     }
     public static function nomUsuario(){
         $consulta = m_usuario::obtenerNombreUsuario();
@@ -45,6 +52,12 @@ class cliente{
     }
     public static function crearTCredito($id_cAhorro){
         $consulta =  tarjeta_c::crearTCredito($id_cAhorro);
+        if($consulta){
+            return "Se solicito la tarjeta de credito";
+        }
+        else{
+            return "Ocurrio un error solicitando la tarjeta de credito";
+        }
     }
     public static function retirar($monto_retirar){
         $consulta = c_ahorro::retirarMonto();
@@ -98,11 +111,28 @@ class cliente{
             //echo "UPDATE c_ahorro SET JaveCoins = JaveCoins + $pagar WHERE ID =$usuario_depositar";
             if ($consulta) {
             echo "Consignacion realizada";
+                transaccion::crearTransaccionConsignacion($pagar,$usuario_depositar);
             }
             $consulta = c_ahorro::disminuirJaveCoins($monto_cuenta,$pagar);
             }else{
                 return "La cuenta a la que va a consignar no existe";
         } 
+    }
+    public static function JaveCoins_CuentaAhorro(){
+        $consulta = c_ahorro::allSelectAhorrobyUsuario();
+        while($fila = mysqli_fetch_array($consulta)) {
+            if($_SESSION['id_ahorro']==$fila['IDC_AHORRO']){
+            $monto_cuenta = $fila['JAVECOINS'];
+            }
+        }
+        return $monto_cuenta;
+    }
+    public static function solicitudCredito($interes,$monto){
+        $consulta= credito::crearCredito($interes,$monto);
+        if($consulta){
+            return "Se envio la solicitud del credito, espere a que se apruebe por el administrador";
+        }
+            
     }
 }
 ?>

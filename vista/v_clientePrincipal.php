@@ -1,7 +1,7 @@
 <?php 
 session_start();
 //echo "HJOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
-include ("C:/xampp/htdocs/ProyectoPHP/controlador/c_cliente.php");
+include_once "../controlador/c_cliente.php";
 $idUsu = cliente::datosUsuario_ID("usuario");
 $_SESSION['usuario']=$idUsu;
 $usuario = cliente::nomUsuario();
@@ -28,12 +28,12 @@ $usuario = cliente::nomUsuario();
 <form action="v_clienteCrearTarjetaCredito.php" method="post">
 <input type="submit" name="crear_tarjetacredito" value="Crear tarjeta de credito">
 </div>
+</form>
 <div>
-<form action="" method="post">
+<form action="v_clienteSolicitarCredito.php" method="post">
 <input type="submit" name="pedir_credito" value="Solicitar credito">
 </form>
 </div>
-</form>
 <div>
 <form action="v_clienteMenuCAhorro.php" method="get">
 <label for="cuentasR">Cuentas de ahorro</label>
