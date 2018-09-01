@@ -1,4 +1,5 @@
 <?php
+include ("C:/xampp/htdocs/ProyectoPHP/modelo/m_conexion.php");
 class m_usuario{
     public static function getID($nom_usuario)
     {
@@ -9,13 +10,14 @@ class m_usuario{
     public static function getDatosUsuarioxCuentaAhorro()
     {
             $conBD = new conexion();
-            $sql ="SELECT * FROM c_ahorro WHERE Owner=".$_COOKIE["usuario"];
+            //echo "SELECT * FROM c_ahorro WHERE USUARIO=".$_SESSION["usuario"]."<br>";
+            $sql ="SELECT * FROM c_ahorro WHERE USUARIO=".$_COOKIE["usuario"];
             return $conBD->ejecutarconsulta($sql);
     }
     public static function getDatosUsuarioxTarjetaCredito()
     {
             $conBD = new conexion();
-            $sql ="SELECT * FROM tarjeta_c WHERE Owner=".$_COOKIE["usuario"];
+            $sql ="SELECT * FROM tarjeta_c WHERE USUARIO=".$_COOKIE["usuario"];
             return $conBD->ejecutarconsulta($sql);
     }
 }

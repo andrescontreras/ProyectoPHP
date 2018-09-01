@@ -1,8 +1,16 @@
 <?php 
-include ("controlador/c_cliente.php");
-//$idUsu = cliente::datosUsuario_ID($_POST['usuario']);
-$idUsu = cliente::datosUsuario_ID(1);
+session_start();
+//echo "HJOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+include ("C:/xampp/htdocs/ProyectoPHP/controlador/c_cliente.php");
+$idUsu = cliente::datosUsuario_ID("usuario");
+$_SESSION['usuario']=$idUsu;
+//Si no funciona con COOKIE utilizar session
 setcookie("usuario",$idUsu,time()+3600);
+echo $_COOKIE["usuario"]."<br>";
+
+//echo cliente::datosCuentaAhorro();
+
+//$idUsu = cliente::datosUsuario_ID($_POST['usuario']);
 ?>
 <html>
 <body>
