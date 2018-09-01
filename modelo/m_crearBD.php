@@ -1,5 +1,5 @@
 <?php
-include_once dirname(__FILE__) . '/config.php';
+include_once dirname(__FILE__) . '/m_config.php';
 $con=mysqli_connect(HOST_DB,USUARIO_DB,USUARIO_PASS);
 $sql="CREATE DATABASE Banco";
 if (mysqli_query($con,$sql)) {
