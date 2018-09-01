@@ -11,35 +11,44 @@
 <body>
 
 <h3>Modificar valores del banco</h3>
-    <form action="" method="post">
+<?php 
+  include ("../controlador/c_adminBanco.php");
+   $banco = new c_adminBanco();
+   $banco->datosBanco();
+   echo $banco->nombreBanco;
+   echo $banco->cuota_manejo;
+   echo $banco->interes_mora;
+   echo $banco->interes;
+?>
+    <form action="" method="get">
     <div class="form-group row">
     <label for="inputEmail3" class="col-sm-2 col-form-label">Cuota de manejo</label>
     <div class="col-sm-10">
-      <input type="email" class="form-control" id="inputEmail3" placeholder="Cuota de manejo">
+      <input type="text" class="form-control" id="inputEmail3" value="<?php echo $banco->cuota_manejo; ?>">
     </div>
   </div>
   <div class="form-group row">
     <label for="inputEmail3" class="col-sm-2 col-form-label">Interes</label>
     <div class="col-sm-10">
-      <input type="email" class="form-control" id="inputEmail3" placeholder="Cupo">
+      <input type="text" class="form-control" id="inputEmail3" value="<?php echo $banco->interes; ?>">
     </div>
   </div>
   <div class="form-group row">
     <label for="inputEmail3" class="col-sm-2 col-form-label">Costo operacion</label>
     <div class="col-sm-10">
-      <input type="email" class="form-control" id="inputEmail3" placeholder="Sobrecupo">
+      <input type="text" class="form-control" id="inputEmail3" value="<?php echo $banco->costo_operacion; ?>">
     </div>
   </div>
   <div class="form-group row">
     <label for="inputEmail3" class="col-sm-2 col-form-label">Interes mora</label>
     <div class="col-sm-10">
-      <input type="email" class="form-control" id="inputEmail3" placeholder="Tasa interes">
+      <input type="text" class="form-control" id="inputEmail3" value="<?php echo $banco->interes_mora; ?>">
     </div>
   </div>
   <div class="form-group row">
     <label for="inputEmail3" class="col-sm-2 col-form-label">Nombre del banco</label>
     <div class="col-sm-10">
-      <input type="email" class="form-control" id="inputEmail3" placeholder="Tasa interes">
+      <input type="text" class="form-control" id="inputEmail3" value="<?php echo $banco->nombreBanco; ?>">
     </div>
   </div>
   <div class="form-group row">

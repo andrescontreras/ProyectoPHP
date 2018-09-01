@@ -1,6 +1,6 @@
 <?php
 include ("m_conexion.php");
-    class banco {
+    class m_banco {
         
 
         public static function getDatosBanco()
@@ -9,26 +9,10 @@ include ("m_conexion.php");
             $sql ="SELECT * FROM banco";
             return $conBD->ejecutarconsulta($sql);
         }
-        public static function setC_manejo($cuota_manejo)
+        public static function setDatosBAnco()
         {
-            
-            $sql ="SELECT * FROM banco";
-            
-
+            $sql = "";
         }
         
-
-        public static function setInteres($cuota_manejo)
-        {
-            
-        }
-        
-
-        public static function setCosto_operacion($cuota_manejo)
-        {
-            
-        }
-        
-
     } 
 ?>

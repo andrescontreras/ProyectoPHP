@@ -4,7 +4,7 @@ include ("../modelo/m_banco.php");
     {
         public static function datosBanco()
         {
-             $consulta =  banco::getDatosBanco();
+             $consulta =  m_banco::getDatosBanco();
              $str_datos = "";
              while($fila = mysqli_fetch_array($consulta)) {
                 $str_datos.='<tr>';
