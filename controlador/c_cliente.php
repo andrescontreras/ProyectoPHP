@@ -1,6 +1,7 @@
 <?php
 include("C:/xampp/htdocs/ProyectoPHP/modelo/m_usuario.php");
 include("C:/xampp/htdocs/ProyectoPHP/modelo/m_c_ahorro.php");
+include("C:/xampp/htdocs/ProyectoPHP/modelo/m_tarjeta_c.php");
 class cliente{
     public static function datosUsuario_ID($nom_usuario)
     {
@@ -41,6 +42,9 @@ class cliente{
             $str_datos=$fila['USUARIO']; 
          }
          return $str_datos;
+    }
+    public static function crearTCredito($id_cAhorro){
+        $consulta =  tarjeta_c::crearTCredito($id_cAhorro);
     }
 }
 ?>

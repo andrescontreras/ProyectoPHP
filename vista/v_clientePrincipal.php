@@ -25,7 +25,7 @@ $usuario = cliente::nomUsuario();
 </div>
 </form>
 <div>
-<form action="crear_tarjeta_credito.php" method="post">
+<form action="v_clienteCrearTarjetaCredito.php" method="post">
 <input type="submit" name="crear_tarjetacredito" value="Crear tarjeta de credito">
 </div>
 <div>
