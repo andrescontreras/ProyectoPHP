@@ -46,5 +46,63 @@ class cliente{
     public static function crearTCredito($id_cAhorro){
         $consulta =  tarjeta_c::crearTCredito($id_cAhorro);
     }
+    public static function retirar($monto_retirar){
+        $consulta = c_ahorro::retirarMonto();
+        $str_datos = "";
+        $monto_cuenta=0;
+        while($fila = mysqli_fetch_array($consulta)) {
+            if($_SESSION['id_ahorro']==$fila['IDC_AHORRO']){
+            $monto_cuenta = $fila['JAVECOINS'];
+            }
+        }
+        $pagar=$monto_retirar;
+        if(($monto_cuenta-$pagar)<0){
+            return "<br>En su cuenta, no tiene la cantidad que quiere retirar";
+        }
+        else{
+        $consulta = c_ahorro::disminuirJaveCoins($monto_cuenta,$pagar);
+        return "<br>Retiro sus JaveCoins exitosamente";
+        }  
+    }
+    public static function consignar($tipoPago,$monto_consig,$usuario_depositar){
+        $consulta = c_ahorro::buscarCAhorroxUsuario();
+        $id_ahorro=$_SESSION['id_ahorro'];
+        $monto_cuenta=0;
+        while($fila = mysqli_fetch_array($consulta)) {
+            if($id_ahorro==$fila['IDC_AHORRO']){
+            $monto_cuenta = $fila['JAVECOINS'];
+            }
+        }
+        if($_GET["tipoPago"]=="javecoins"){
+            //echo "javecoins";
+                $pagar= $monto_consig;
+        }
+        else{
+            $pagar=$monto_consig/1000;
+            //echo "pagar en pesos $pagar";
+        }
+        if(($monto_cuenta-$pagar)<0){
+            return "No tiene la cantidad de monto a consignar en la cuenta";
+        }
+        else{
+        $flag=false;
+        $consulta= c_ahorro::allSelectAhorro();
+        while($fila = mysqli_fetch_array($consulta)) {
+            if($usuario_depositar==$fila['IDC_AHORRO']){
+                $flag=true;
+            }    
+        }
+        }
+        if($flag){
+            $consulta=c_ahorro::consignarMonto($pagar,$usuario_depositar);
+            //echo "UPDATE c_ahorro SET JaveCoins = JaveCoins + $pagar WHERE ID =$usuario_depositar";
+            if ($consulta) {
+            echo "Consignacion realizada";
+            }
+            $consulta = c_ahorro::disminuirJaveCoins($monto_cuenta,$pagar);
+            }else{
+                return "La cuenta a la que va a consignar no existe";
+        } 
+    }
 }
 ?>

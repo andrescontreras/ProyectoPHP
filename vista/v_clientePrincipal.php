@@ -35,24 +35,19 @@ $usuario = cliente::nomUsuario();
 </div>
 </form>
 <div>
-<form action="retirar_monto.php" method="get">
+<form action="v_clienteMenuCAhorro.php" method="get">
 <label for="cuentasR">Cuentas de ahorro</label>
-<select name="cuentasRetirar" id="cuentasR">
+<select name="cuentasAhorro" id="cuentasR">
 <?php
 echo cliente::datosCuentaAhorro();
 ?>
 </select>
 <input type="submit" value ="Seleccionar" name ="selecAhorro">
-<label for="m_retirar">Monto a retirar</label>
-<input type="text" name="monto_retirar">
-<input type="submit" value="Retirar" name="retirarMonto">
 </form>
 </div>
 <div>
-<h3>Consignar</h3>
-<form action="c_ahorro_consignar.php" method="get">
 <label for="cuentasCl">Tarjetas de credito</label>
-<select name="cuentas" id="cuentasCl">
+<select name="tarjetasCredito" id="cuentasCl">
 <?php
 // -------------------------------------> PARTE DE CONSIGNAR
 echo cliente::datosTarjetaCredito();
@@ -60,27 +55,5 @@ echo cliente::datosTarjetaCredito();
 </select>
 <input type="submit" value ="Seleccionar" name ="selecTCredito">
 </div>
-<div>
-<label for="agosJC">Tipo de pago</label>
-<select name="tipoPago" id="pagosJC">
-<option value="javecoins">JaveCoins</option>
-<option value="pesos">Pesos</option>
-</select>
-</div>
-<div>
-<label for="monto_c">Monto de la cuenta</label>
-<input type="text" name="monto_cuenta" id=monto_c>
-</div>
-<div>
-<label for="monto_cons">Monto a consignar</label>
-<input type="text" id=monto_cons name="monto_consig">
-</div>
-<div>
-<label for="usu_cons">Cuenta a consignar</label>
-<input type="text"  id=usu_cons name="usu_consig">
-</div>
-<input type="submit" value="Consignar" name=consignar>
-
-</form>
 </body>
 </html>
