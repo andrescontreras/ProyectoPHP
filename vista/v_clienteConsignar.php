@@ -1,6 +1,10 @@
 <?php
 session_start(); 
-include ("C:/xampp/htdocs/ProyectoPHP/controlador/c_cliente.php");
+include ("../controlador/c_cliente.php");
+if(isset($_GET['consignar'])){
+    $monto_c=$_GET['monto_consig'];
+    $cuenta_c= $_GET['usu_consig'];
+}
 ?>
 <html>
 <body>
@@ -21,11 +25,11 @@ include ("C:/xampp/htdocs/ProyectoPHP/controlador/c_cliente.php");
 </div>
 <div>
 <label for="monto_cons">Monto a consignar</label>
-<input type="text" id=monto_cons name="monto_consig">
+<input type="text" id=monto_cons name="monto_consig" value="<?php if($monto_c)echo $monto_c; else echo ""; ?>">
 </div>
 <div>
 <label for="usu_cons">Cuenta a consignar</label>
-<input type="text"  id=usu_cons name="usu_consig">
+<input type="text"  id=usu_cons name="usu_consig" value="<?php if($cuenta_c) echo $cuenta_c; else echo ""; ?>">
 </div>
 <input type="submit" value="Consignar" name=consignar>
 </form>
