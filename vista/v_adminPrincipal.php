@@ -13,6 +13,9 @@
     <form action="v_adminBanco.php" method="get">
        <label for="">Valores del banco <input type="submit" value="Modificar"></label>
     </form>
+    <div>
+        <h3>Centro de mensajes</h3>
+    </div>
 
      <form action="v_adminCliente.php" method="get">
        <label for="">
@@ -41,7 +44,9 @@
        </label>
     </form>
 
-
+    <?php include ("../controlador/c_adminPrincipal.php");
+        echo c_adminPrincipal::datosBanco();
+    ?>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>

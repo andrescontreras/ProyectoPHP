@@ -1,5 +1,5 @@
 <?php
-include ("modelo/m_conexion.php");
+include ("m_conexion.php");
     class banco {
         
 

@@ -37,5 +37,14 @@
     <div>
     <a href="visitante.php">Ingresar como visitante</a>
     </div>
+    <form action="vista/v_adminPrincipal.php" method="get">
+<input class="btn btn-success m-1" type="submit" value="Entrar Admin">
+</form>
+<form  action="vista/v_clientePrincipal.php" method="get">
+<input  class="btn btn-success m-1" type="submit" value="Entrar Cliente">
+</form>
+<form action="vista/v_clientePrincipal.php" method="get">
+<input class="btn btn-success m-1"  type="submit" value="Entrar Visitante">
+</form>
   </body>
 </html>

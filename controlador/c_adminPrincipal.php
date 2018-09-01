@@ -1,6 +1,6 @@
 <?php
-include ("modelo/m_banco.php");
-    class administrador 
+include ("../modelo/m_banco.php");
+    class c_adminPrincipal 
     {
         public static function datosBanco()
         {

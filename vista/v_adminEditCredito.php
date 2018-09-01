@@ -10,7 +10,7 @@
 </head>
 <body>
 <body>
-    <h3>Editar tarjeta de credito</h3>
+    <h3>Editar credito</h3>
     <form action="" method="post">
     <div class="form-group row">
     <label for="inputEmail3" class="col-sm-2 col-form-label">Cuota de manejo</label>
@@ -19,26 +19,15 @@
     </div>
   </div>
   <div class="form-group row">
-    <label for="inputEmail3" class="col-sm-2 col-form-label">Cupo</label>
+    <label for="inputEmail3" class="col-sm-2 col-form-label">Interes</label>
     <div class="col-sm-10">
       <input type="email" class="form-control" id="inputEmail3" placeholder="Cupo">
     </div>
   </div>
-  <div class="form-group row">
-    <label for="inputEmail3" class="col-sm-2 col-form-label">Sobrecupo</label>
-    <div class="col-sm-10">
-      <input type="email" class="form-control" id="inputEmail3" placeholder="Sobrecupo">
-    </div>
-  </div>
-  <div class="form-group row">
-    <label for="inputEmail3" class="col-sm-2 col-form-label">Tasa interes</label>
-    <div class="col-sm-10">
-      <input type="email" class="form-control" id="inputEmail3" placeholder="Tasa interes">
-    </div>
-  </div>
+  
 
   <div class="form-group col-md-3">
-    <label for="exampleFormControlSelect1">Estado de la tarjeta</label>
+    <label for="exampleFormControlSelect1">Estado del credito</label>
     <select class="form-control" id="exampleFormControlSelect1">
       <option>Pendiente</option>
       <option>Aprobada</option>
