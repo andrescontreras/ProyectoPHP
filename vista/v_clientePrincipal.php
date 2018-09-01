@@ -35,9 +35,9 @@ $usuario = cliente::nomUsuario();
 </div>
 </form>
 <div>
-<form action="retirar_monto.php" method="get">
+<form action="v_clienteMenuCAhorro.php" method="get">
 <label for="cuentasR">Cuentas de ahorro</label>
-<select name="cuentasRetirar" id="cuentasR">
+<select name="cuentasAhorro" id="cuentasR">
 <?php
 echo cliente::datosCuentaAhorro();
 ?>
@@ -52,7 +52,7 @@ echo cliente::datosCuentaAhorro();
 <h3>Consignar</h3>
 <form action="c_ahorro_consignar.php" method="get">
 <label for="cuentasCl">Tarjetas de credito</label>
-<select name="cuentas" id="cuentasCl">
+<select name="tarjetasCredito" id="cuentasCl">
 <?php
 // -------------------------------------> PARTE DE CONSIGNAR
 echo cliente::datosTarjetaCredito();

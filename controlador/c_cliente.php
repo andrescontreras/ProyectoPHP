@@ -46,5 +46,23 @@ class cliente{
     public static function crearTCredito($id_cAhorro){
         $consulta =  tarjeta_c::crearTCredito($id_cAhorro);
     }
+    public static function retirar($monto_retirar){
+        $consulta = c_ahorro::retirarMonto();
+        $str_datos = "";
+        $monto_cuenta=0;
+        while($fila = mysqli_fetch_array($consulta)) {
+            if($_SESSION['id_ahorro']==$fila['IDC_AHORRO']){
+            $monto_cuenta = $fila['JAVECOINS'];
+            }
+        }
+        $pagar=$monto_retirar;
+        if(($monto_cuenta-$pagar)<0){
+            return "<br>En su cuenta, no tiene la cantidad que quiere retirar";
+        }
+        else{
+        $consulta = c_ahorro::disminuirJaveCoins($monto_cuenta,$pagar);
+        return "<br>Retiro sus JaveCoins exitosamente";
+        }  
+    }
 }
 ?>
