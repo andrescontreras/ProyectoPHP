@@ -1,6 +1,6 @@
 <?php
 session_start();
-include ("C:/xampp/htdocs/ProyectoPHP/controlador/c_cliente.php");
+include_once "C:/xampp/htdocs/ProyectoPHP/controlador/c_cliente.php";
 if(isset($_GET['selecAhorro'])){
 $porciones = explode("_", $_GET['cuentasAhorro']);
 $id_ahorro=$porciones[1]; // porción1

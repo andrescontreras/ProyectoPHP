@@ -1,5 +1,5 @@
 <?php
-include ("C:/xampp/htdocs/ProyectoPHP/modelo/m_conexion.php");
+include ("../modelo/m_conexion.php");
 class m_usuario{
     public static function getID($nom_usuario)
     {

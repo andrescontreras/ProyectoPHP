@@ -6,13 +6,13 @@ class c_ahorro {
     }
     public static function crearCuentaAhorro($monto){
         $conBD = new conexion();
-        $sql = "INSERT INTO c_ahorro (Usuario,JaveCoins) VALUES ("."'".$_SESSION['usuario']."'".",$monto)";
+        $sql = "INSERT INTO c_ahorro (USUARIO,JAVECOINS) VALUES ("."'".$_SESSION['usuario']."'".",$monto)";
         return $conBD->ejecutarconsulta($sql);
     }
     public static function retirarMonto(){
         $conBD = new conexion();
         //echo "SELECT * FROM c_ahorro WHERE Usuario ="."'".$_SESSION['usuario']."'";
-        $sql = "SELECT * FROM c_ahorro WHERE Usuario ="."'".$_SESSION['usuario']."'";
+        $sql = "SELECT * FROM c_ahorro WHERE USUARIO ="."'".$_SESSION['usuario']."'";
         return $conBD->ejecutarconsulta($sql);
     }
     public static function disminuirJaveCoins($monto_cuenta,$pagar){
@@ -39,6 +39,11 @@ class c_ahorro {
         $conBD = new conexion();
         $id_usu=$_SESSION['usuario'];
         $sql = "UPDATE c_ahorro SET JAVECOINS = JAVECOINS + $pagar WHERE IDC_AHORRO =$usuario_depositar";
+        return $conBD->ejecutarconsulta($sql);
+    }
+    public static function allSelectAhorrobyUsuario(){
+        $conBD = new conexion();
+        $sql = "SELECT * FROM c_ahorro WHERE USUARIO ="."'".$_SESSION['usuario']."'";
         return $conBD->ejecutarconsulta($sql);
     }
 }
