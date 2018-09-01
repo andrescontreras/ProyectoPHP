@@ -11,14 +11,19 @@ class m_usuario{
     {
             $conBD = new conexion();
             //echo "SELECT * FROM c_ahorro WHERE USUARIO=".$_SESSION["usuario"]."<br>";
-            $sql ="SELECT * FROM c_ahorro WHERE USUARIO=".$_COOKIE["usuario"];
+            $sql ="SELECT * FROM c_ahorro WHERE USUARIO=".$_SESSION["usuario"];
             return $conBD->ejecutarconsulta($sql);
     }
     public static function getDatosUsuarioxTarjetaCredito()
     {
             $conBD = new conexion();
-            $sql ="SELECT * FROM tarjeta_c WHERE USUARIO=".$_COOKIE["usuario"];
+            $sql ="SELECT * FROM tarjeta_c WHERE USUARIO=".$_SESSION["usuario"];
             return $conBD->ejecutarconsulta($sql);
+    }
+    public static function obtenerNombreUsuario(){
+        $conBD = new conexion();
+        $sql ="SELECT * FROM usuario WHERE IDUSUARIO ='".$_SESSION["usuario"]."'";
+        return $conBD->ejecutarconsulta($sql);
     }
 }
 ?>
