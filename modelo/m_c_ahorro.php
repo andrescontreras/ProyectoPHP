@@ -22,5 +22,24 @@ class c_ahorro {
         $sql = "UPDATE c_ahorro SET JAVECOINS = $monto_cuenta-$pagar WHERE IDC_AHORRO = $id_ahorro";
         return $conBD->ejecutarconsulta($sql);
     }
+    public static function buscarCAhorroxUsuario(){
+        $conBD = new conexion();
+        $id_usu=$_SESSION['usuario'];
+        $sql = "SELECT * FROM c_ahorro WHERE USUARIO = $id_usu";
+        return $conBD->ejecutarconsulta($sql);
+    }
+    public static function allSelectAhorro(){
+        $conBD = new conexion();
+        $id_usu=$_SESSION['usuario'];
+        $sql = "SELECT * FROM c_ahorro";
+        return $conBD->ejecutarconsulta($sql);
+        
+    }
+    public static function consignarMonto($pagar,$usuario_depositar){
+        $conBD = new conexion();
+        $id_usu=$_SESSION['usuario'];
+        $sql = "UPDATE c_ahorro SET JAVECOINS = JAVECOINS + $pagar WHERE IDC_AHORRO =$usuario_depositar";
+        return $conBD->ejecutarconsulta($sql);
+    }
 }
 ?>

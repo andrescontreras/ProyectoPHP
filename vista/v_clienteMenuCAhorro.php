@@ -20,7 +20,7 @@ $_SESSION['id_ahorro']=$id_ahorro;
 </div>
 </form>
 
-<form action="">
+<form action="v_clienteConsignar.php" method="post">
 <div>
 <input type="submit" value="Consignar en cuenta de ahorro" name="consignar_ahorro">
 </div>

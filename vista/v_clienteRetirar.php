@@ -13,8 +13,8 @@ include ("C:/xampp/htdocs/ProyectoPHP/controlador/c_cliente.php");
  <input type="submit" name="retirarMonto" value="Retirar el monto">
  </div>
  </form>
- <?php  
- if(isset($_GET['retirarMonto'])){
+<?php  
+if(isset($_GET['retirarMonto'])){
     echo cliente::retirar($_GET['monto']); 
 } 
 ?>
