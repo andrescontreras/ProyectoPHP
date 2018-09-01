@@ -11,10 +11,9 @@ include ("modelo/m_conexion.php");
         }
         public static function setC_manejo($cuota_manejo)
         {
-            $conBD = new conexion();
-            $conBD->conectarBD();
+            
             $sql ="SELECT * FROM banco";
-            $conBD->desconectarDB();
+            
 
         }
         
