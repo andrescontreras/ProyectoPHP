@@ -1,6 +1,6 @@
 <?php
 session_start();
-include ("C:/xampp/htdocs/ProyectoPHP/controlador/c_cliente.php");
+include_once "../controlador/c_cliente.php";
 if(isset($_GET['selecAhorro'])){
 $porciones = explode("_", $_GET['cuentasAhorro']);
 $id_ahorro=$porciones[1]; // porción1
@@ -27,20 +27,20 @@ $_SESSION['id_ahorro']=$id_ahorro;
 </form>
 
 
-<form action="">
+<form action="v_clientePagarTarjetaCredito.php">
 <div>
 <input type="submit" value="Pagar tarjeta de credito" name="pagar_Tcredito">
 </div>
 </form>
 
-<form action="">
+<form action="v_clientePagarCredito.php">
 <div>
 <input type="submit" value="Pagar credito" name="pagar_credito">
 </div>
 </form>
 
 <br>
-<form action="">
+<form action="v_clientePrincipal.php">
 <div>
 <input type="submit" value="Volver" name="volver">
 </div>
