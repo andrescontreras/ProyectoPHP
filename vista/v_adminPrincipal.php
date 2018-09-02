@@ -16,15 +16,21 @@
     <div>
         <h3>Centro de mensajes</h3>
     </div>
-
+    <?php include_once "../controlador/c_adminPrincipal.php";
+        $admin = new c_adminPrincipal();
+        $admin->getUsuarios();
+        $admin->getVisitantes();
+    ?>
      <form action="v_adminCliente.php" method="get">
        <label for="">
         Usuarios clientes:
-        <select name="operacion" id="operacion">
-            <option value="s">SUMA</option>
-            <option value="r">RESTA</option>
-            <option value="m">MULTIPLICACION</option>
-            <option value="d">DIVISION</option>
+        <select name="cliente" id="cliente">
+            <?php
+                foreach($admin->usuarios as $value)
+                {
+                    echo "<option value=".$value[0].">".$value[1]."</option>";
+                }
+            ?>
         </select>
         <input type="submit" value="Entrar">
        </label>
@@ -34,19 +40,19 @@
     <form action="v_adminVisitante.php" method="get">
        <label for="">
         Usuarios visitantes:
-        <select name="operacion" id="operacion">
-            <option value="s">SUMA</option>
-            <option value="r">RESTA</option>
-            <option value="m">MULTIPLICACION</option>
-            <option value="d">DIVISION</option>
+        <select name="visitante" id="visitante">
+        <?php
+                foreach($admin->visitantes as $value)
+                {
+                    echo "<option value=".$value[6].">".$value[1]."</option>";
+                }
+            ?>
         </select>
         <input type="submit" value="Entrar">
        </label>
     </form>
 
-    <?php include ("../controlador/c_adminPrincipal.php");
-        echo c_adminPrincipal::datosBanco();
-    ?>
+    
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>

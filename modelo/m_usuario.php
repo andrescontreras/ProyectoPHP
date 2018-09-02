@@ -1,5 +1,5 @@
 <?php
-include ("../modelo/m_conexion.php");
+include_once "../modelo/m_conexion.php";
 class m_usuario{
     public static function getID($nom_usuario)
     {
@@ -32,5 +32,6 @@ class m_usuario{
         $sql = "SELECT * FROM usuario";
         return $conBD->ejecutarconsulta($sql);
     }
+
 }
 ?>
