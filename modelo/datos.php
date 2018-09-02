@@ -111,7 +111,19 @@ if (mysqli_query($con,$sql)) {
 }else{
  echo mysqli_error($con);
 }
+$sql = "INSERT INTO MENSAJES (U_ORIGEN, U_DESTINO, FECHA, MENSAJE, ESTADO) VALUES(3, 1, '2018-08-25' , 'Un cliente ha solicitado un credito', 1)";
+if (mysqli_query($con,$sql)) {
+ echo " Mensajeinsertado :3 |";
+}else{
+ echo mysqli_error($con);
+}
 $sql = "INSERT INTO CREDITO (ESTADO, FECHA_PAGO, INTERES, MONTO, USUARIO) VALUES ('APROBADO', '2018-08-27', 0.17, 800, 4 )";
+if (mysqli_query($con,$sql)) {
+ echo " Credito insertado :3 |";
+}else{
+ echo mysqli_error($con);
+}
+$sql = "INSERT INTO CREDITO (ESTADO, FECHA_PAGO, INTERES, MONTO, USUARIO) VALUES ('APROBADO', '2018-08-27', 0.17, 1250, 43176 )";
 if (mysqli_query($con,$sql)) {
  echo " Credito insertado :3 |";
 }else{

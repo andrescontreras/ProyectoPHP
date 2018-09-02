@@ -10,7 +10,7 @@
 <body>
     <h1>CON HTML 5</h1>
     
-    <?php include ("vista/v_login.php")?>
+    <?php header("Location: vista/v_login.php"); ?>
 
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
