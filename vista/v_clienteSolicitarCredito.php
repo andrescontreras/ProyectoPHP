@@ -11,6 +11,11 @@ include_once "../controlador/c_cliente.php";
 <input type="text" name="tasa_interes">
 <input type="submit" value="Solicitar interes" name="solicitar">
 </form>
+<form action="v_clientePrincipal.php">
+<div>
+<input type="submit" value="Volver">
+</div>
+</form>
 <?php
 if(isset($_GET['solicitar'])){
     echo cliente::solicitudCredito($_GET['tasa_interes'],$_GET['monto_credito']) ;
