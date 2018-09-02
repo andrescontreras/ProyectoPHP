@@ -62,7 +62,7 @@ class c_ahorro {
       return $conBD->ejecutarconsulta($sql);
     }
     //Consignacion de un c_visitante
-    public static function consignarVisitante($id,$cedula,$correo,$monto)
+    public static function consignarVisitante($id,$cedula,$monto)
     {
       $conBD = new conexion();
       $sql = "UPDATE C_AHORRO SET JAVECOINS = ".$monto." WHERE C_AHORRO.IDC_AHORRO = ". $id;
