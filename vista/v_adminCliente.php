@@ -17,7 +17,7 @@
 <form action="v_adminEditTarjetaC.php" method="get">
        <label for="">
         tarjetas de credito del cliente:
-        <select name="operacion" id="operacion">
+        <select name="tarjeta_c" id="tarjeta_c">
         <?php
                 foreach($admin->tarjetas_c as $value)
                 {
@@ -33,7 +33,7 @@
     <form action="v_adminEditCredito.php" method="get">
        <label for="">
         creditos del cliente:
-        <select name="operacion" id="operacion">
+        <select name="credito" id="credito">
         <?php
                 foreach($admin->creditos as $value)
                 {

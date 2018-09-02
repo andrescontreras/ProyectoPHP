@@ -13,6 +13,19 @@ class tarjeta_c {
         $sql = "SELECT * FROM tarjeta_c WHERE usuario = $id_usuario ";
         return $conBD->ejecutarconsulta($sql);
     }
+
+    public static function getDatosTarjeta($id_tarjeta)
+    {
+        $conBD = new conexion();
+        $sql = "SELECT * FROM tarjeta_c WHERE idtarjeta_c = $id_tarjeta ";
+        return $conBD->ejecutarconsulta($sql);
+    }
+
+    public static function setDatosTarjeta($cuota_manejo, $cupo, $sobrecupo, $tasa_interes, $estado){
+        $conBD = new conexion();
+        $sql = "SELECT * FROM tarjeta_c WHERE idtarjeta_c = $id_tarjeta ";
+        return $conBD->ejecutarconsulta($sql);
+    }
     //Devuelve el resultado de la busqueda de las tarjetas de credito asociadas a una cuenta de ahorro
     public static function tcreditoxCuentaAhorro(){
         $conBD = new conexion();
