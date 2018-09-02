@@ -33,7 +33,7 @@ $_SESSION['id_ahorro']=$id_ahorro;
 </div>
 </form>
 
-<form action="">
+<form action="v_clientePagarCredito.php">
 <div>
 <input type="submit" value="Pagar credito" name="pagar_credito">
 </div>

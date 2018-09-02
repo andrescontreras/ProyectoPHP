@@ -171,16 +171,66 @@ class cliente{
                     if($sobrante<0 || $sobrante==0){
                         tarjeta_c::disminuir_saldo($pagar,$id_Tcredito);
                         c_ahorro::disminuirJaveCoins($jave_coins,$pagar);
+                        transaccion::crearTransaccionPagoTCredito($pagar,$id_Tcredito);
                         return "Se realizo el pago de la tarjeta";
                     }
                     else{//sobrante>0
                         c_ahorro::disminuirJaveCoins($jave_coins,$saldo);
                         tarjeta_c::disminuir_saldo($saldo,$id_Tcredito);
-                        return "Se realizo el pago de la tarjeta";
+                        transaccion::crearTransaccionPagoTCredito($saldo,$id_Tcredito);
+                        return "Se realizo el pago total de la tarjeta";
                     }
                 }
                 else{
                     return "La tarjeta de credito no tiene saldos que pagar";
+                }
+            }
+        }
+    }
+    public static function CreditosxUsuario(){
+        $consulta = credito::obtenerCreditosxUsuario();
+        $str_datos = "";
+        while($fila = mysqli_fetch_array($consulta)) {
+            if($fila['ESTADO']=="ACEPTADA"){
+                $str_datos.="<option value=\"credito_".$fila['IDCREDITO']."\">Credito ".$fila['IDCREDITO']."</option>"; 
+            }
+        }
+        return $str_datos;
+    }
+    public static function pagarCredito($monto,$id_Credito,$tipoPago){
+        $jave_coins = cliente::JaveCoins_CuentaAhorro();
+        $consulta = credito::allCredito();
+        if($tipoPago=="javecoins"){
+            //echo "javecoins";
+            $pagar= $monto;
+        }
+        else{
+            $pagar=$monto/1000;
+            //echo "pagar en pesos $pagar";
+        }
+        if($pagar>$jave_coins){
+            return "La cantidad que va a pagar excede a lo que tiene en la cuenta de ahorro <br>";
+        }
+        while($fila = mysqli_fetch_array($consulta)) {
+            if($fila['IDCREDITO']==$id_Credito){
+                $saldo =$fila['MONTO'];
+                if($saldo>0){
+                    $sobrante =$pagar-$saldo;
+                    if($sobrante<0 || $sobrante==0){
+                        credito::disminuir_monto($pagar,$id_Credito);
+                        c_ahorro::disminuirJaveCoins($jave_coins,$pagar);
+                        transaccion::crearTransaccionPagoCredito($pagar,$id_Credito);
+                        return "Se realizo el pago del credito";
+                    }
+                    else{//sobrante>0
+                        credito::disminuir_monto($saldo,$id_Credito);
+                        c_ahorro::disminuirJaveCoins($jave_coins,$saldo);
+                        transaccion::crearTransaccionPagoCredito($saldo,$id_Credito);
+                        return "Se realizo el pago total del credito";
+                    }
+                }
+                else{
+                    return "El credito ya ha sido pagado";
                 }
             }
         }
