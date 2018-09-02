@@ -4,6 +4,7 @@ include_once "../modelo/m_c_ahorro.php";
 include_once "../modelo/m_tarjeta_c.php";
 include_once "../modelo/m_transaccion.php";
 include_once "../modelo/m_credito.php";
+include_once "../modelo/m_compra.php";
 class cliente{
     public static function datosUsuario_ID($nom_usuario)
     {
@@ -142,7 +143,7 @@ class cliente{
         return $monto_cuenta;
     }
     public static function solicitudCredito($interes,$monto){
-        $consulta= credito::crearCreditoCliente($interes,$monto);
+        $consulta= m_credito::crearCreditoCliente($interes,$monto);
         if($consulta){
             return "Se envio la solicitud del credito, espere a que se apruebe por el administrador";
         }
@@ -199,7 +200,7 @@ class cliente{
         }
     }
     public static function CreditosxUsuario(){
-        $consulta = credito::obtenerCreditosxUsuario();
+        $consulta = m_credito::obtenerCreditosxUsuario();
         $str_datos = "";
         while($fila = mysqli_fetch_array($consulta)) {
             if($fila['ESTADO']=="APROBADO"){
@@ -218,7 +219,7 @@ class cliente{
     }
     public static function pagarCredito($monto,$id_Credito,$tipoPago){
         $jave_coins = cliente::JaveCoins_CuentaAhorro();
-        $consulta = credito::allCredito();
+        $consulta = m_credito::allCredito();
         if($tipoPago=="javecoins"){
             //echo "javecoins";
             $pagar= $monto;
@@ -236,13 +237,13 @@ class cliente{
                 if($saldo>0){
                     $sobrante =$pagar-$saldo;
                     if($sobrante<0 || $sobrante==0){
-                        credito::disminuir_monto($pagar,$id_Credito);
+                        m_credito::disminuir_monto($pagar,$id_Credito);
                         c_ahorro::disminuirJaveCoins($jave_coins,$pagar);
                         transaccion::crearTransaccionPagoCredito($pagar,$id_Credito);
                         return "Se realizo el pago del credito";
                     }
                     else{//sobrante>0
-                        credito::disminuir_monto($saldo,$id_Credito);
+                        m_credito::disminuir_monto($saldo,$id_Credito);
                         c_ahorro::disminuirJaveCoins($jave_coins,$saldo);
                         transaccion::crearTransaccionPagoCredito($saldo,$id_Credito);
                         return "Se realizo el pago total del credito";
@@ -293,6 +294,14 @@ class cliente{
             }
         }
     }
+    public static function realizarCompra($cuotas,$monto,$descripcion){
+        if($cuotas>6){
+            return "Las cuotas no deben superar los 6 meses";
+        }
+        else{
+            compra::crearCompra($cuotas,$monto,$descripcion);
+        }
+    } 
 
     //Obtiene las notificaciones correspondientes al id
     public static function mostrarNotificaciones($idusuario)

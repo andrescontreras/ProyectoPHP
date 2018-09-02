@@ -1,8 +1,7 @@
 <?php
 include_once 'm_conexion.php';
 
-class m_credito
-{
+class m_credito{
     //Mosrar Creditos pendientes
   public static function mostrarCreditos($id)
   {
