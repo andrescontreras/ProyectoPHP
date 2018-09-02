@@ -4,7 +4,7 @@ class tarjeta_c {
     //Crea una tarjeta de credito
     public static function crearTCredito($id_cuenta){
         $conBD = new conexion();
-        $sql = "INSERT INTO tarjeta_c (USUARIO,C_AHORRO,ESTADO) VALUES ("."'".$_SESSION["usuario"]."'".",$id_cuenta,'PENDIENTE')";
+        $sql = "INSERT INTO tarjeta_c (USUARIO,C_AHORRO,ESTADO,SALDO) VALUES ("."'".$_SESSION["usuario"]."'".",$id_cuenta,'EN ESPERA',0)";
         return $conBD->ejecutarconsulta($sql);
     }
 
@@ -17,7 +17,7 @@ class tarjeta_c {
     public static function getDatosTarjeta($id_tarjeta)
     {
         $conBD = new conexion();
-        $sql = "SELECT * FROM tarjeta_c WHERE idtarjeta_c = $id_tarjeta ";
+        $sql = "SELECT * FROM tarjeta_c WHERE IDTARJETA_C= $id_tarjeta ";
         return $conBD->ejecutarconsulta($sql);
     }
 
@@ -49,5 +49,12 @@ class tarjeta_c {
         $sql ="SELECT * FROM tarjeta_c WHERE IDTARJETA_C = $id_tarjetaC";
         return $conBD->ejecutarconsulta($sql);
     }
+    public static function aumentar_saldo($monto){
+        $conBD = new conexion();
+        $id_tarjeta = $_SESSION['id_credito'];
+        $sql = "UPDATE tarjeta_c SET SALDO = SALDO + $monto WHERE IDTARJETA_C = $id_tarjeta";
+        return $conBD->ejecutarconsulta($sql);
+    }
+
 }
 ?>

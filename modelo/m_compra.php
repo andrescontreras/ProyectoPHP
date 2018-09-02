@@ -4,7 +4,8 @@ class compra {
     public static function crearCompra($cuotas,$monto,$descripcion){
         $conBD = new conexion();
         $id_tarjeta = $_SESSION['id_credito'];
-        $sql = "INSERT INTO compra (CUOTAS,MONTO,DESCRIPCION,IDTARJETA_C) VALUES ($cuotas,$monto,$descripcion,$id_tarjeta)";
+        //echo "INSERT INTO compra (CUOTAS,MONTO,DESCRIPCION,IDTARJETA_C,PAGADO) VALUES ($cuotas,$monto,'$descripcion',$id_tarjeta,0)";
+        $sql = "INSERT INTO compra (CUOTAS,MONTO,DESCRIPCION,IDTARJETA_C,PAGADO) VALUES ($cuotas,$monto,'$descripcion',$id_tarjeta,0)";
         return $conBD->ejecutarconsulta($sql);
     }
 }

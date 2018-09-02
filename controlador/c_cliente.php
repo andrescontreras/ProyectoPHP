@@ -160,7 +160,7 @@ class cliente{
         }
         return $str_datos;
     }
-
+    //SALDO ES LO QUE YO HE GASTADO DE LA TARJETA DE CREDITO
     public static function pagarTCredito($monto,$id_Tcredito,$tipoPago){
         $jave_coins = cliente::JaveCoins_CuentaAhorro();
         $consulta = tarjeta_c::allTCredito();
@@ -216,6 +216,14 @@ class cliente{
 
         }
         return $saldo;
+    }
+    public static function cupoTCredito($id_tarjetaC){
+        $consulta = tarjeta_c::getDatosTarjeta($id_tarjetaC);
+        while($fila = mysqli_fetch_array($consulta)) {
+            $cupo = $fila['CUPO'];
+
+        }
+        return $cupo;
     }
     public static function pagarCredito($monto,$id_Credito,$tipoPago){
         $jave_coins = cliente::JaveCoins_CuentaAhorro();
@@ -299,7 +307,19 @@ class cliente{
             return "Las cuotas no deben superar los 6 meses";
         }
         else{
-            compra::crearCompra($cuotas,$monto,$descripcion);
+            $id_tarjetaC=$_SESSION['id_credito'];
+            $saldo =cliente::saldoTCredito($id_tarjetaC);
+            $cupo =cliente::cupoTCredito($id_tarjetaC);
+            if($saldo + $monto>$cupo){
+                return "Realizando la compra sobrepasa el sobrecupo, compra cancelada";
+            }
+            else{
+                compra::crearCompra($cuotas,$monto,$descripcion);
+                tarjeta_c::aumentar_saldo($monto);
+                transaccion::crearTransaccionCompra($monto,$cuotas);
+                return "Se realizo la compra exitosamente";
+            }
+            
         }
     } 
 

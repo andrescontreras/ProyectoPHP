@@ -8,15 +8,21 @@ class transaccion{
         return $conBD->ejecutarconsulta($sql);
     }
     public static function crearTransaccionPagoTCredito($monto,$c_destino){
-        $conBD = new conexion($monto,$c_destino);
+        $conBD = new conexion();
         $c_origen=$_SESSION['id_ahorro'];
         $sql = "INSERT INTO transaccion (MONTO,TIPO,FECHA,C_ORIGEN,C_DESTINO) VALUES ('$monto','PAGOTARJETA',CURDATE(),'$c_origen','$c_destino')";
         return $conBD->ejecutarconsulta($sql);
     }
     public static function crearTransaccionPagoCredito($monto,$c_destino){
-        $conBD = new conexion($monto,$c_destino);
+        $conBD = new conexion();
         $c_origen=$_SESSION['id_ahorro'];
         $sql = "INSERT INTO transaccion (MONTO,TIPO,FECHA,C_ORIGEN,C_DESTINO) VALUES ('$monto','PAGOCREDITO',CURDATE(),'$c_origen','$c_destino')";
+        return $conBD->ejecutarconsulta($sql);
+    }
+    public static function crearTransaccionCompra($monto,$cuotas){
+        $conBD = new conexion();
+        $c_origen=$_SESSION['id_credito'];
+        $sql = "INSERT INTO transaccion (MONTO,TIPO,FECHA,C_ORIGEN,CUOTAS) VALUES ('$monto','COMPRA',CURDATE(),'$c_origen',$cuotas)";
         return $conBD->ejecutarconsulta($sql);
     }
 
