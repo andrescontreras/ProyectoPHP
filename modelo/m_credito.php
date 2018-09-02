@@ -1,4 +1,5 @@
 <?php
+include_once "../modelo/m_conexion.php";
 class credito{
     public static function crearCredito($interes,$monto){
         $conBD = new conexion();
@@ -11,6 +12,12 @@ class credito{
     {
         $conBD = new conexion();
         $sql = "SELECT * FROM credito WHERE USUARIO NOT IN (SELECT idusuario from USUARIO)";
+        return $conBD->ejecutarconsulta($sql);
+    }
+
+    public static function getCreditosCliente($id_usuario){
+        $conBD = new conexion();
+        $sql = "SELECT * FROM credito WHERE usuario = $id_usuario ";
         return $conBD->ejecutarconsulta($sql);
     }
 }
