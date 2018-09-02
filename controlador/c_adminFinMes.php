@@ -16,7 +16,7 @@
       $consulta = m_usuario::getUsuarios();
       while ($fila = mysqli_fetch_array($consulta))
       {
-        
+        m_credito::mostrarCreditos($fila['IDUSUARIO']);
       }
     }
     //Cobra las tarjetas de crédito
