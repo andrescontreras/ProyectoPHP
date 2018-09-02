@@ -30,7 +30,9 @@ class cliente{
              $consulta =  m_usuario::getDatosUsuarioxTarjetaCredito();
              $str_datos = "";
              while($fila = mysqli_fetch_array($consulta)) {
-                $str_datos.="<option value=\"tarjetacredito_".$fila['IDTARJETA_C']."\">Tarjeta de credito ".$fila['IDTARJETA_C']."</option>"; 
+                 if($fila['ESTADO']=='APROBADO'){
+                    $str_datos.="<option value=\"tarjetacredito_".$fila['IDTARJETA_C']."\">Tarjeta de credito ".$fila['IDTARJETA_C']."</option>"; 
+                 }
              }
              return $str_datos;
     }
@@ -130,8 +132,17 @@ class cliente{
         }
         return $monto_cuenta;
     }
+    public static function JaveCoins_CuentaAhorroxID($id_ahorro){
+        $consulta = c_ahorro::allSelectAhorrobyUsuario();
+        while($fila = mysqli_fetch_array($consulta)) {
+            if($id_ahorro==$fila['IDC_AHORRO']){
+            $monto_cuenta = $fila['JAVECOINS'];
+            }
+        }
+        return $monto_cuenta;
+    }
     public static function solicitudCredito($interes,$monto){
-        $consulta= credito::crearCredito($interes,$monto);
+        $consulta= credito::crearCreditoCliente($interes,$monto);
         if($consulta){
             return "Se envio la solicitud del credito, espere a que se apruebe por el administrador";
         }       
@@ -142,7 +153,7 @@ class cliente{
         $consulta = tarjeta_c::tcreditoxCuentaAhorro();
         $str_datos = "";
         while($fila = mysqli_fetch_array($consulta)) {
-            if($fila['ESTADO']=="ACEPTADA"){
+            if($fila['ESTADO']=="APROBADO"){
                 $str_datos.="<option value=\"tarjetacredito_".$fila['IDTARJETA_C']."\">Tarjeta de credito ".$fila['IDTARJETA_C']."</option>"; 
             }
         }
@@ -191,11 +202,19 @@ class cliente{
         $consulta = credito::obtenerCreditosxUsuario();
         $str_datos = "";
         while($fila = mysqli_fetch_array($consulta)) {
-            if($fila['ESTADO']=="ACEPTADA"){
+            if($fila['ESTADO']=="APROBADO"){
                 $str_datos.="<option value=\"credito_".$fila['IDCREDITO']."\">Credito ".$fila['IDCREDITO']."</option>"; 
             }
         }
         return $str_datos;
+    }
+    public static function saldoTCredito($id_tarjetaC){
+        $consulta = tarjeta_c::obtenerSaldo($id_tarjetaC);
+        while($fila = mysqli_fetch_array($consulta)) {
+            $saldo = $fila['SALDO'];
+            
+        }
+        return $saldo;
     }
     public static function pagarCredito($monto,$id_Credito,$tipoPago){
         $jave_coins = cliente::JaveCoins_CuentaAhorro();
@@ -227,6 +246,45 @@ class cliente{
                         c_ahorro::disminuirJaveCoins($jave_coins,$saldo);
                         transaccion::crearTransaccionPagoCredito($saldo,$id_Credito);
                         return "Se realizo el pago total del credito";
+                    }
+                }
+                else{
+                    return "El credito ya ha sido pagado";
+                }
+            }
+        }
+    }
+    public static function pagarTCreditoxCAhorro($monto,$id_CAhorro,$tipoPago){
+        $jave_coins = cliente::JaveCoins_CuentaAhorroxID($id_CAhorro);
+        $consulta = c_ahorro::buscarCAhorroxUsuario();
+        if($tipoPago=="javecoins"){
+            //echo "javecoins";
+            $pagar= $monto;
+        }
+        else{
+            $pagar=$monto/1000;
+            //echo "pagar en pesos $pagar";
+        }
+        if($pagar>$jave_coins){
+            return "La cantidad que va a pagar excede a lo que tiene en la cuenta de ahorro <br>";
+        }
+        while($fila = mysqli_fetch_array($consulta)) {
+            if($fila['IDC_AHORRO']==$id_CAhorro){
+                $id_tarjetaC=$_SESSION['id_credito'];
+                $saldo =cliente::saldoTCredito($id_tarjetaC);
+                if($saldo>0){
+                    $sobrante =$pagar-$saldo;
+                    if($sobrante<0 || $sobrante==0){
+                        c_ahorro::disminuirJaveCoinsXIDAhorro($pagar,$id_CAhorro);
+                        tarjeta_c::disminuir_saldo($pagar,$id_tarjetaC);
+                        transaccion::crearTransaccionPagoTCredito($pagar,$id_tarjetaC);
+                        return "Se realizo el pago de la tarjeta";
+                    }
+                    else{//sobrante>0
+                        c_ahorro::disminuirJaveCoinsXIDAhorro($saldo,$id_CAhorro);
+                        tarjeta_c::disminuir_saldo($saldo,$id_tarjetaC);
+                        transaccion::crearTransaccionPagoTCredito($saldo,$id_tarjetaC);
+                        return "Se realizo el pago total de la tarjeta";
                     }
                 }
                 else{

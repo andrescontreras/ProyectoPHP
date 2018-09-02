@@ -103,14 +103,22 @@ class m_credito
     return $conBD->ejecutarconsulta($sql);
   }
 
-  public static function setDatosCredito( $interes ,$estado,$id_credito)
+  public static function setDatosCredito($interes, $estado, $id_credito)
   {
     $conBD = new conexion();
     echo $interes;
     echo $estado;
     echo $id_credito;
-        $sql = "UPDATE credito SET INTERES = $interes, ESTADO = '$estado' WHERE IDCREDITO = $id_credito";
-        return $conBD->ejecutarconsulta($sql);
+    $sql = "UPDATE credito SET INTERES = $interes, ESTADO = '$estado' WHERE IDCREDITO = $id_credito";
+    return $conBD->ejecutarconsulta($sql);
   }
+  public static function crearCreditoCliente($interes, $monto)
+  {
+    $conBD = new conexion();
+    $usuario = $_SESSION['usuario'];
+    $sql = "INSERT INTO credito (ESTADO,INTERES,MONTO,USUARIO) VALUES ('EN ESPERA',$interes,$monto,$usuario)";
+    return $conBD->ejecutarconsulta($sql);
+  }
+
 }
 ?>

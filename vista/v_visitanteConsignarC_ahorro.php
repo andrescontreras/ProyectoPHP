@@ -20,10 +20,10 @@ include_once '../controlador/c_visitante.php';
     }
     if (empty($_POST['visCorreo']))
     {
-        $errCorreo = "Por favor ingrese un correo";
+        $errCorreo = "Por favor ingrese un correo.";
         $err = true;
     }else if (!preg_match($pattern,$_POST['visCorreo'])) {
-       $errCorreo = "Por favor ingrese un formato valido de coreo";
+       $errCorreo = "Por favor ingrese un formato valido de coreo.";
        $err = true;
     }
     if (empty($_POST['visIdCuenta']))
@@ -36,22 +36,29 @@ include_once '../controlador/c_visitante.php';
     }
     if ( empty($_POST['visMonto']))
     {
-      $errMonto = "Por favor ingrese un monto";
+      $errMonto = "Por favor ingrese un monto.";
       $err = true;
     }
     else if ( $_POST['visMonto'] <= 0 )
     {
-      $errMonto = "Ingrese un monto valido";
+      $errMonto = "Ingrese un monto valido.";
       $err = true;
     }
 
     if ($err == false)
     {
-       $consulTa = c_visitante::validarId($_POST['visIdCuenta']);
+      if ( $_POST['moneda'] == 1 )
+      {
+        $monto = $_POST['visMonto']/1000;
+      }
+      else {
+        $monto = $_POST['visMonto'];
+      }
+       $consulta = c_visitante::validarId($_POST['visIdCuenta']);
        if ($consulta->num_rows != 0)
        {
-          c_visitante::consignarC_Ahorros($_POST['visIdCuenta'],$_POST['visCedula'],$_POST['visCorreo'],$_POST['visMonto']);
-          $done = "Se realizo con exito la consignación";
+          c_visitante::consignarC_Ahorros($_POST['visIdCuenta'],$_POST['visCedula'],$_POST['visCorreo'],$monto);
+          $done = "Se realizo con exito la consignación.";
        }
        else {
          $errIdCuenta = "No hay una cuenta asociada al ID ". $_POST['visIdCuenta'];
@@ -94,6 +101,10 @@ include_once '../controlador/c_visitante.php';
       Correo: <input type="email" name="visCorreo">
       IdCuenta: <input type="text" name="visIdCuenta">
       Monto: <input type="number" name="visMonto">
+      <select name="moneda">
+        <option value="1">Pesos</option>
+        <option value="2">Javecoins</option>
+      </select>
       <input type="submit" name="visConsignarAhorros" value="Consignar">
     </form>
   </body>

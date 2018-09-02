@@ -19,7 +19,7 @@ $_SESSION['id_credito']=$id_credito;
 <input type="submit" value="Comprar" name="compra">
 </div>
 </form>
-<form action="v_clienteRetirar.php" method="get">
+<form action="v_clientePagarTCreditoxAhorro.php" method="get">
 <div>
 <input type="submit" value="Pagar tarjeta de credito" name="pagar_tcredito">
 </div>
