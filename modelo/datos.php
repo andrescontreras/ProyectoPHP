@@ -207,6 +207,66 @@ if (mysqli_query($con,$sql)) {
 }else{
  echo mysqli_error($con);
 }
+$sql = "INSERT INTO COMPRA (CUOTAS, MONTO, DESCRIPCION, IDTARJETA_C, PAGADO) VALUES (1, 20, 'HEAD & SHOULDERS FOR MEN', 1 , 0 )";
+if (mysqli_query($con,$sql)) {
+ echo " Compra insertado :3 |";
+}else{
+ echo mysqli_error($con);
+}
+$sql = "INSERT INTO COMPRA (CUOTAS, MONTO, DESCRIPCION, IDTARJETA_C, PAGADO) VALUES (3, 900, 'COMPRA MERCADOSEXITO', 1 , 200 )";
+if (mysqli_query($con,$sql)) {
+ echo " Compra insertado :3 |";
+}else{
+ echo mysqli_error($con);
+}
+$sql = "INSERT INTO COMPRA (CUOTAS, MONTO, DESCRIPCION, IDTARJETA_C, PAGADO) VALUES (6, 45000, 'CARRITO BONITO COLOR ROJITO', 2 , 500 )";
+if (mysqli_query($con,$sql)) {
+ echo " Compra insertado :3 |";
+}else{
+ echo mysqli_error($con);
+}
+$sql = "INSERT INTO COMPRA (CUOTAS, MONTO, DESCRIPCION, IDTARJETA_C, PAGADO) VALUES (2, 1700, 'NOTEBOOK HP', 3 , 0 )";
+if (mysqli_query($con,$sql)) {
+ echo " Compra insertado :3 |";
+}else{
+ echo mysqli_error($con);
+}
+$sql = "INSERT INTO COMPRA (CUOTAS, MONTO, DESCRIPCION, IDTARJETA_C, PAGADO) VALUES (1, 80, 'CREPES & WAFFLES', 4 , 0 )";
+if (mysqli_query($con,$sql)) {
+ echo " Compra insertado :3 |";
+}else{
+ echo mysqli_error($con);
+}
 
+$sql = "INSERT INTO TRANSACCION (MONTO, TIPO, FECHA, C_ORIGEN, CUOTAS) VALUES (20, 'COMPRA', '2018-09-01', 2 , 1  )";
+if (mysqli_query($con,$sql)) {
+ echo " Transaccion insertado :3 |";
+}else{
+ echo mysqli_error($con);
+}
+$sql = "INSERT INTO TRANSACCION (MONTO, TIPO, FECHA, C_ORIGEN, CUOTAS) VALUES (900, 'COMPRA', '2018-08-27', 2 , 3  )";
+if (mysqli_query($con,$sql)) {
+ echo " Transaccion insertado :3 |";
+}else{
+ echo mysqli_error($con);
+}
+$sql = "INSERT INTO TRANSACCION (MONTO, TIPO, FECHA, C_ORIGEN, CUOTAS) VALUES (45000, 'COMPRA', '2018-08-11', 2 , 6  )";
+if (mysqli_query($con,$sql)) {
+ echo " Transaccion insertado :3 |";
+}else{
+ echo mysqli_error($con);
+}
+$sql = "INSERT INTO TRANSACCION (MONTO, TIPO, FECHA, C_ORIGEN, CUOTAS) VALUES (1700, 'COMPRA', '2018-08-18', 2 , 2  )";
+if (mysqli_query($con,$sql)) {
+ echo " Transaccion insertado :3 |";
+}else{
+ echo mysqli_error($con);
+}
+$sql = "INSERT INTO TRANSACCION (MONTO, TIPO, FECHA, C_ORIGEN, CUOTAS) VALUES (80, 'COMPRA', '2018-08-05', 1 ,  1 )";
+if (mysqli_query($con,$sql)) {
+ echo " Transaccion insertado :3 |";
+}else{
+ echo mysqli_error($con);
+}
 mysqli_close($con);
 ?>

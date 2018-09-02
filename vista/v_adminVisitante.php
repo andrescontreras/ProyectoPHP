@@ -9,14 +9,20 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
+<?php include_once "../controlador/c_adminVisitante.php";
+        $visitante = new c_adminVisitante();
+        $visitante->getCreditos();
+    ?>
 <form action="v_adminEditCredito.php" method="get">
        <label for="">
         Creditos del usuario:
-        <select name="operacion" id="operacion">
-            <option value="s">SUMA</option>
-            <option value="r">RESTA</option>
-            <option value="m">MULTIPLICACION</option>
-            <option value="d">DIVISION</option>
+        <select name="credito" id="credito">
+        <?php
+                foreach($visitante->creditos as $value)
+                {
+                    echo "<option value=".$value[0].">".$value[0]."</option>";
+                }
+            ?>
         </select>
         <input type="submit" value="Entrar">
        </label>
