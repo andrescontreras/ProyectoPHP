@@ -30,7 +30,7 @@ class cliente{
              $consulta =  m_usuario::getDatosUsuarioxTarjetaCredito();
              $str_datos = "";
              while($fila = mysqli_fetch_array($consulta)) {
-                 if($fila['ESTADO']=='ACEPTADA'){
+                 if($fila['ESTADO']=='APROBADO'){
                     $str_datos.="<option value=\"tarjetacredito_".$fila['IDTARJETA_C']."\">Tarjeta de credito ".$fila['IDTARJETA_C']."</option>"; 
                  }
              }
@@ -153,7 +153,7 @@ class cliente{
         $consulta = tarjeta_c::tcreditoxCuentaAhorro();
         $str_datos = "";
         while($fila = mysqli_fetch_array($consulta)) {
-            if($fila['ESTADO']=="ACEPTADA"){
+            if($fila['ESTADO']=="APROBADO"){
                 $str_datos.="<option value=\"tarjetacredito_".$fila['IDTARJETA_C']."\">Tarjeta de credito ".$fila['IDTARJETA_C']."</option>"; 
             }
         }
@@ -202,7 +202,7 @@ class cliente{
         $consulta = credito::obtenerCreditosxUsuario();
         $str_datos = "";
         while($fila = mysqli_fetch_array($consulta)) {
-            if($fila['ESTADO']=="ACEPTADA"){
+            if($fila['ESTADO']=="APROBADO"){
                 $str_datos.="<option value=\"credito_".$fila['IDCREDITO']."\">Credito ".$fila['IDCREDITO']."</option>"; 
             }
         }
