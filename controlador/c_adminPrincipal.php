@@ -32,7 +32,7 @@ include_once "../modelo/m_credito.php";
         }
         public function getVisitantes()
         {
-            $consulta = credito::getVisitantes();
+            $consulta = m_credito::getVisitantes();
             $str_datos = "";
             while($fila = mysqli_fetch_array($consulta)) {
                 $this->visitantes[] = $fila;

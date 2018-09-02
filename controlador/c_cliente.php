@@ -131,7 +131,7 @@ class cliente{
         return $monto_cuenta;
     }
     public static function solicitudCredito($interes,$monto){
-        $consulta= credito::crearCredito($interes,$monto);
+        $consulta= credito::crearCreditoCliente($interes,$monto);
         if($consulta){
             return "Se envio la solicitud del credito, espere a que se apruebe por el administrador";
         }       

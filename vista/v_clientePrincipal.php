@@ -45,6 +45,7 @@ echo cliente::datosCuentaAhorro();
 <input type="submit" value ="Seleccionar" name ="selecAhorro">
 </form>
 </div>
+<form action="v_clienteMenuTCredito.php">
 <div>
 <label for="cuentasCl">Tarjetas de credito</label>
 <select name="tarjetasCredito" id="cuentasCl">
@@ -55,5 +56,7 @@ echo cliente::datosTarjetaCredito();
 </select>
 <input type="submit" value ="Seleccionar" name ="selecTCredito">
 </div>
+</form>
+
 </body>
 </html>
