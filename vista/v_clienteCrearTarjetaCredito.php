@@ -13,6 +13,9 @@ echo cliente::datosCuentaAhorro();
 </select>
 <input type="submit" value="Solicitar tarjeta de credito" name="solicitar_tarjetacredito">
 </form>
+<form action="v_clientePrincipal.php">
+<input type="submit" name="volver" value="Volver">
+</form>
 <?php
 if(isset($_POST['solicitar_tarjetacredito'])){
     $porciones = explode("_", $_POST['cuentas']);
