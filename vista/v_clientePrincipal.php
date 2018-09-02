@@ -2,7 +2,7 @@
 session_start();
 //echo "HJOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
 include_once "../controlador/c_cliente.php";
-$idUsu = cliente::datosUsuario_ID("usuario");
+$idUsu = cliente::datosUsuario_ID("DASH");
 $_SESSION['usuario']=$idUsu;
 $usuario = cliente::nomUsuario();
 //Si no funciona con COOKIE utilizar session
