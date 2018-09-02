@@ -12,6 +12,7 @@ class c_adminCliente
 
     public function getTajetas_c()
     {
+        $_SESSION['adminCliente'] =  $_GET["cliente"];
         $id_cliente =  $_GET["cliente"];
         echo "CLIENTE: ".$id_cliente;
         $consulta = tarjeta_c::getTarjetas_cCliente($id_cliente);
@@ -25,7 +26,7 @@ class c_adminCliente
     {
         $id_cliente =  $_GET["cliente"];
         echo "CLIENTE: ".$id_cliente;
-        $consulta = credito::getCreditosCliente($id_cliente);
+        $consulta = m_credito::getCreditosCliente($id_cliente);
             $str_datos = "";
             while($fila = mysqli_fetch_array($consulta)) {
                 $this->creditos[] = $fila;

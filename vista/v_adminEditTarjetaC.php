@@ -9,36 +9,43 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 <body>
     <h3>Editar tarjeta de credito</h3>
+    <?php
+      include_once "../controlador/c_adminEditTarjetaC.php";
+      $editT = new c_adminEditTarjetaC();
+      $editT->getDatosTarjeta();
+    ?>
     <form action="" method="post">
     <div class="form-group row">
     <label for="inputEmail3" class="col-sm-2 col-form-label">Cuota de manejo</label>
     <div class="col-sm-10">
-      <input type="email" class="form-control" id="inputEmail3" placeholder="Cuota de manejo">
+      <input type="email" class="form-control" id="inputEmail3" value=" <?php echo $editT->datos[1] ?> ">
     </div>
   </div>
   <div class="form-group row">
     <label for="inputEmail3" class="col-sm-2 col-form-label">Cupo</label>
     <div class="col-sm-10">
-      <input type="email" class="form-control" id="inputEmail3" placeholder="Cupo">
+      <input type="email" class="form-control" id="inputEmail3" value=" <?php echo $editT->datos[4] ?> ">
+    </div>
     </div>
   </div>
   <div class="form-group row">
     <label for="inputEmail3" class="col-sm-2 col-form-label">Sobrecupo</label>
     <div class="col-sm-10">
-      <input type="email" class="form-control" id="inputEmail3" placeholder="Sobrecupo">
+      <input type="email" class="form-control" id="inputEmail3" value=" <?php echo $editT->datos[5] ?> ">
+    </div>
     </div>
   </div>
   <div class="form-group row">
     <label for="inputEmail3" class="col-sm-2 col-form-label">Tasa interes</label>
     <div class="col-sm-10">
-      <input type="email" class="form-control" id="inputEmail3" placeholder="Tasa interes">
+      <input type="email" class="form-control" id="inputEmail3" value=" <?php echo $editT->datos[6] ?> ">
+    </div> <?php echo $editT->datos[6] ?>>
     </div>
   </div>
 
   <div class="form-group col-md-3">
     <label for="exampleFormControlSelect1">Estado de la tarjeta</label>
     <select class="form-control" id="exampleFormControlSelect1">
-      <option>Pendiente</option>
       <option>Aprobada</option>
       <option>Rechazada</option>
     </select>
