@@ -18,7 +18,7 @@ class c_ahorro {
     public static function disminuirJaveCoins($monto_cuenta,$pagar){
         $conBD = new conexion();
         $id_ahorro=$_SESSION['id_ahorro'];
-        
+
         echo "UPDATE c_ahorro SET JAVECOINS = JAVECOINS-$pagar WHERE IDC_AHORRO = $id_ahorro";
         $sql = "UPDATE c_ahorro SET JAVECOINS = JAVECOINS-$pagar WHERE IDC_AHORRO = $id_ahorro";
         return $conBD->ejecutarconsulta($sql);
@@ -80,7 +80,7 @@ class c_ahorro {
     public static function enviarNotificacionConsignaciónVis($u_destino,$texto)
     {
       $conBD = new conexion();
-      $sql = "INSERT INTO MENSAJES (U_DESTINO, MENSAJE) VALUES (".$u_destino.", '$texto' )";
+      $sql = "INSERT INTO MENSAJES (U_DESTINO, MENSAJE, ESTADO) VALUES (".$u_destino.", '$texto', 1 )";
       $conBD->ejecutarconsulta($sql);
     }
     //Se registra la transaccion de Consignacion

@@ -319,14 +319,25 @@ class cliente{
                 transaccion::crearTransaccionCompra($monto,$cuotas);
                 return "Se realizo la compra exitosamente";
             }
-            
+
         }
-    } 
+    }
 
     //Obtiene las notificaciones correspondientes al id
     public static function mostrarNotificaciones($idusuario)
     {
       return $res = m_usuario::mostrarNotificaciones($idusuario);
+    }
+
+    public static function noLeidos($idusuario)
+    {
+      $res = m_usuario::notificacionesNoLeidas($idusuario);
+      $count = 0;
+      while ($fila = mysqli_fetch_array($res))
+      {
+        $count = $count + 1;
+      }
+      return $count;
     }
 }
 ?>

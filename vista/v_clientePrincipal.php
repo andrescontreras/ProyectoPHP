@@ -7,6 +7,8 @@ include_once "../controlador/c_correo.php";
 $idUsu = cliente::datosUsuario_ID("DASH");
 $_SESSION['usuario']=$idUsu;
 $usuario = cliente::nomUsuario();
+$n_notificaiones =  cliente::noLeidos($_SESSION['usuario']);
+
 //Si no funciona con COOKIE utilizar session
 //setcookie("usuario",$idUsu,time()+3600);
 //echo $_COOKIE["usuario"]."<br>";
@@ -16,12 +18,19 @@ $usuario = cliente::nomUsuario();
 //$idUsu = cliente::datosUsuario_ID($_POST['usuario']);
 ?>
 <html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
 <body>
-<div>
-  <nav>
-    <a href="v_notificaciones.php">Notificaciones</a>
-  </nav>
-</div>
+  <div class="navegador">
+    <nav>
+      <a href="v_clientePrincipal.php">Pagina principal</a>
+      <?php echo "<a href='v_notificaciones.php' class = 'gold_plating' data-notificaciones='$n_notificaiones'  > Notificaciones </a> ";?>
+    </nav>
+  </div>
+
 <form action="v_clienteCrearCuentaAhorro.php" method="post">
 <div>
 <label for="txtNomUsuario">Nombre del usuario </label>

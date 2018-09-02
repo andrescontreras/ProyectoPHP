@@ -36,10 +36,24 @@ class m_usuario{
     //retorna las notificaciones del USUARIO
     public static function mostrarNotificaciones($id_usuario)
     {
+      m_usuario::actualizarEstado($id_usuario);
       $conBD = new conexion();
       $sql = "SELECT * FROM MENSAJES WHERE MENSAJES.U_DESTINO = ".$id_usuario. " ORDER BY MENSAJES.ID DESC";
       return $conBD->ejecutarconsulta($sql);
     }
-
+    //Indica que las notificaciones se han leído
+    public static function actualizarEstado($id_usuario)
+    {
+      $conBD = new conexion();
+      $sql = "UPDATE MENSAJES SET MENSAJES.ESTADO = 0 WHERE MENSAJES.U_DESTINO = ". $id_usuario. " and MENSAJES.ESTADO = 1";
+      return $conBD->ejecutarconsulta($sql);
+    }
+    //Cuantas notificaiones no se han leido
+    public static function notificacionesNoLeidas($id_usuario)
+    {
+      $conBD = new conexion ();
+      $sql = "SELECT * FROM MENSAJES WHERE MENSAJES.U_DESTINO = ". $id_usuario. " and MENSAJES.ESTADO = 1";
+      return $conBD->ejecutarconsulta($sql);
+    }
 }
 ?>

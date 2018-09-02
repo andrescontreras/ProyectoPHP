@@ -36,13 +36,14 @@ class c_visitante
     $nuevoMonto = $montoCredito - $monto;
     m_credito::actualizarCredito($id, $nuevoMonto);
     m_credito::agregarTransaccion($id, $monto, $c_origen);
-    m_credito::enviarCorreo($correo);
+    //m_credito::enviarCorreo($correo);
   }
   //Validar ID de cuenta si existe en la base de datos
   public static function validarId($id)
   {
     return $res = c_ahorro::validarId($id);
   }
+
   //Realizar consignacion a cuenta de ahorros
   public static function consignarC_Ahorros ($id, $cedula, $correo, $monto )
   {
