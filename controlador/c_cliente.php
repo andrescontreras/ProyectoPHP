@@ -55,7 +55,10 @@ class cliente{
     }
     public static function crearTCredito($id_cAhorro){
         $consulta =  tarjeta_c::crearTCredito($id_cAhorro);
+        $id_usu = $_SESSION['usuario'];
         if($consulta){
+            $texto= "El usuario con id $id_usu ha solicitado una tarjeta de credito";
+            m_credito::enviarNotificacionCreditoUsuario($texto);
             return "Se solicito la tarjeta de credito";
         }
         else{
@@ -113,7 +116,10 @@ class cliente{
             $consulta=c_ahorro::consignarMonto($pagar,$usuario_depositar);
             //echo "UPDATE c_ahorro SET JaveCoins = JaveCoins + $pagar WHERE ID =$usuario_depositar";
             if ($consulta) {
-            echo "Consignacion realizada";
+                echo "Consignacion realizada";
+                $id_usu=$_SESSION['usuario'];
+                $texto="El usuario $id_usu ha consignado a la cuenta de ahorro $usuario_depositar el valor de $pagar $tipoPago";
+                m_credito::enviarNotificacionCreditoUsuario($texto);
                 transaccion::crearTransaccionConsignacion($pagar,$usuario_depositar);
             }
             if($usuario_depositar!=$_SESSION['usuario']){
@@ -144,7 +150,10 @@ class cliente{
     }
     public static function solicitudCredito($interes,$monto){
         $consulta= m_credito::crearCreditoCliente($interes,$monto);
+        $id_usu = $_SESSION['usuario'];
         if($consulta){
+            $texto= "El usuario con id $id_usu ha solicitado un credito";
+            m_credito::enviarNotificacionCreditoUsuario($texto);
             return "Se envio la solicitud del credito, espere a que se apruebe por el administrador";
         }
     }
