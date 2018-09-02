@@ -24,11 +24,8 @@ class conexion
         if (mysqli_connect_errno()) {
             echo "Error en la conexión: " . mysqli_connect_error();
         }
-        else{
-            echo "correcto";
-        }
         $consulta = mysqli_query($this->con, $sql);
-        
+
         mysqli_close($this->con);
         return $consulta;
     }
