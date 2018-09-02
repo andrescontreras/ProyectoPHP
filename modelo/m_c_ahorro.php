@@ -41,10 +41,9 @@ class c_ahorro {
         $sql = "UPDATE c_ahorro SET JAVECOINS = JAVECOINS + $pagar WHERE IDC_AHORRO =$usuario_depositar";
         return $conBD->ejecutarconsulta($sql);
     }
-
     public static function validarId($id)
     {
-      $conBD = new conexion():
+      $conBD = new conexion();
       $sql = "SELECT IDC_AHORRO FROM C_AHORRO WHERE C_AHORRO.IDC_AHORRO = ". $id;
       return $conBD->ejecutarconsulta($sql);
     }
@@ -52,22 +51,22 @@ class c_ahorro {
     public static function dineroAhorrado($id)
     {
       $conBD = new conexion();
-      $sql = "SELECT MONTO FROM C_AHORRO WHERE C_AHORRO.IDC_AHORRO = ". $id;
+      $sql = "SELECT * FROM C_AHORRO WHERE C_AHORRO.IDC_AHORRO = ". $id;
       return $conBD->ejecutarconsulta($sql);
     }
     //Consignacion de un c_visitante
     public static function consignarVisitante($id,$cedula,$correo,$monto)
     {
       $conBD = new conexion();
-      $sql = "UPDATE MONTO FROM C_AHORRO WHERE C_AHORRO.IDC_AHORRO = ". $id;
+      $sql = "UPDATE C_AHORRO SET JAVECOINS = ".$monto." WHERE C_AHORRO.IDC_AHORRO = ". $id;
       $conBD->ejecutarconsulta($sql);
       $sql = "SELECT USUARIO FROM C_AHORRO WHERE C_AHORRO.IDC_AHORRO = ". $id;
       $consulta = $conBD->ejecutarconsulta($sql);
       $fila = mysqli_fetch_array($consulta);
       $u_destino = $fila['USUARIO'];
       $texto = "Usted ha recibido una consignacion con valor de $".$monto;
-      m_c_ahorro::enviarNotificacionConsignaciónVis($u_desitno,$text);
-      m_c_ahorro::registrarTransaccion($monto, $cedula, $id);
+      c_ahorro::enviarNotificacionConsignaciónVis($u_destino,$texto);
+      c_ahorro::registrarTransaccion($monto, $cedula, $id);
 
     }
     //Notificacion de consignación en la cuenta de ahorros
@@ -83,7 +82,7 @@ class c_ahorro {
       $conBD = new conexion();
       $sql = "INSERT INTO TRANSACCION (MONTO, TIPO, FECHA, C_ORIGEN, C_DESTINO, CUOTAS ) VALUES (".$monto.", 'CONSIGNACION', CURDATE(), ".$c_origen.",".$c_destino.", 1 )";
       $conBD->ejecutarconsulta($sql);
-
+    }
     public static function allSelectAhorrobyUsuario(){
         $conBD = new conexion();
         $sql = "SELECT * FROM c_ahorro WHERE USUARIO ="."'".$_SESSION['usuario']."'";

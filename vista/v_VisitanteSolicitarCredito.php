@@ -4,6 +4,7 @@
   $errCedula = "";
   $errCorreo = "";
   $err = false;
+  $done = "";
   $pattern = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i";
   if ( isset($_POST['visSolicitarCredito']) )
   {
@@ -37,7 +38,15 @@
     }
     if ( $err == false )
     {
-      c_visitante::solicitarCredito($_POST['visMonto'],$_POST['visCorreo'],$_POST['visCedula']);
+      $done = "Credito solicitado.";
+      if ($_POST['moneda'] == 1)
+      {
+        $monto = $_POST['visMonto']/1000;
+      }
+      else {
+        $monto = $_POST['visMonto'];
+      }
+      c_visitante::solicitarCredito($monto,$_POST['visCorreo'],$_POST['visCedula']);
     }
   }
   ?>
@@ -48,25 +57,31 @@
     <title></title>
   </head>
   <body>
+    <h1>Solicitar Crédito</h1>
     <?php
-     if ( $err == true )
-     {
-       if ($errCedula != "")
-       {
-         echo "<span style='color:red;border-style:inset;background-color: rgba(219, 55, 38, 0.56);' >".$errCedula."</span><br>";
-       }
-       if ($errCorreo != "")
-       {
-         echo "<span style='color:red;border-style:inset;background-color: rgba(219, 55, 38, 0.56);' >".$errCorreo."</span><br>";
-       }
-       if ($errMonto != "")
-       {
-         echo "<span style='color:red;border-style:inset;background-color: rgba(219, 55, 38, 0.56);' >".$errMonto."</span><br>";
-       }
-     }?>
-    <h1>Consignar Crédito</h1>
+      if ($errCedula != "")
+      {
+       echo "<span style='color:red;border-style:inset;background-color: rgba(219, 55, 38, 0.56);' >".$errCedula."</span><br>";
+      }
+      if ($errCorreo != "")
+      {
+       echo "<span style='color:red;border-style:inset;background-color: rgba(219, 55, 38, 0.56);' >".$errCorreo."</span><br>";
+      }
+      if ($errMonto != "")
+      {
+       echo "<span style='color:red;border-style:inset;background-color: rgba(219, 55, 38, 0.56);' >".$errMonto."</span><br>";
+      }
+      if ( $done != "" )
+      {
+       echo "<span style='color:rgb(7, 64, 5);border-style:inset;background-color: rgba(13, 193, 36, 0.57);' >".$done."</span><br>";
+      }
+     ?>
     <form action="v_VisitanteSolicitarCredito.php" method="post">
       Monto: <input type="text" name="visMonto">
+      <select name="moneda">
+        <option value="1">Pesos</option>
+        <option value="2">Javecoins</option>
+      </select>
       Cédula: <input type="text" name="visCedula">
       Correo: <input type="email" name="visCorreo">
       <input type="submit" name="visSolicitarCredito" value="enviar">

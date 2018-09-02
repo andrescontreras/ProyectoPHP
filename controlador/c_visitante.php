@@ -1,6 +1,7 @@
 <?php
 include_once("../modelo/m_banco.php");
 include_once("../modelo/m_credito.php");
+include_once("../modelo/m_c_ahorro.php");
 class c_visitante
 {
   //Solicitar un nuevo credito
@@ -40,15 +41,15 @@ class c_visitante
   //Validar ID de cuenta si existe en la base de datos
   public static function validarId($id)
   {
-    return $res = m_c_ahorro::validarId($id);
+    return $res = c_ahorro::validarId($id);
   }
   //Realizar consignacion a cuenta de ahorros
   public static function consignarC_Ahorros ($id, $cedula, $correo, $monto )
   {
-    $consulta = m_c_ahorro::dineroAhorrado($id);
+    $consulta = c_ahorro::dineroAhorrado($id);
     $fila = mysqli_fetch_array($consulta);
-    $nuevoMonto = $fila['MONTO'] + $monto;
-    m_c_ahorro::consignarVisitante($id,$nuevoMonto);
+    $nuevoMonto = $fila['JAVECOINS'] + $monto;
+    c_ahorro::consignarVisitante($id, $cedula, $correo, $nuevoMonto );
   }
 }
 
