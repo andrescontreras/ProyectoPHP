@@ -8,9 +8,9 @@
     <h1>Página principal</h1>
     <div>
       <nav>
-        <a href="v_VisitanteSolicitarCredito">Solicitar crédito</a>
-        <a href="v_VisitanteConsignarCredito">Consignar crédito</a>
-        <a href="v_ConsignarC_ahorro">Consignar a cuenta de ahorros</a>
+        <a href="v_VisitanteSolicitarCredito.php">Solicitar crédito</a>
+        <a href="v_VisitanteConsignarCredito.php">Consignar crédito</a>
+        <a href="v_VisitanteConsignarC_ahorro.php">Consignar a cuenta de ahorros</a>
       </nav>
     </div>
   </body>

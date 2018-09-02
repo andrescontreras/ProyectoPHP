@@ -35,7 +35,7 @@
         <input type="submit" name="ingresar" value="Iniciar sesion">
     </form>
     <div>
-    <a href="visitante.php">Ingresar como visitante</a>
+    <a href="vista/v_visitantePrincipal.php">Ingresar como visitante</a>
     </div>
     <form action="vista/v_adminPrincipal.php" method="get">
 <input class="btn btn-success m-1" type="submit" value="Entrar Admin">
