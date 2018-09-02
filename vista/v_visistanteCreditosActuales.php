@@ -25,11 +25,18 @@
 
     if ($err == false)
     {
+      if ( $_POST['moneda'] == 1 )
+      {
+        $monto = $_POST['visMonto']/1000;
+      }
+      else {
+        $monto = $_POST['visMonto'];
+      }
       if ( $_POST['visMonto'] > c_visitante::mostrarMontoCredito($_POST['visAhorros']))
       {
         $done = "Se le descontaron $". c_visitante::mostrarMontoCredito($_POST['visAhorros']) . "<br>";
       }
-      c_visitante::transaccionCredito( $_POST['visAhorros'], $_POST['visMonto'], $_SESSION['visCedula'], $_SESSION['visCorreo']);
+      c_visitante::transaccionCredito( $_POST['visAhorros'], $monto, $_SESSION['visCedula'], $_SESSION['visCorreo']);
 
     }
   }
@@ -66,13 +73,17 @@
             while ($fila = mysqli_fetch_array($consultaCreditos))
             {
               $id = $fila['IDCREDITO'];
-              $texto = "CC ". $fila['USUARIO']." $ ".$fila['MONTO'];
+              $texto = "CC ". $fila['USUARIO']." $ ".$fila['MONTO']." javecoins";
               echo "<option name = '$id' value = '$id'>$texto</option>";
             }
          }
          ?>
       </select>
       Monto: <input type="text" name="visMonto">
+      <select name="moneda">
+        <option value="1">Pesos</option>
+        <option value="2">Javecoins</option>
+      </select>
       <input type="submit" name="visConsignar" value="consignar">
     </form>
   </body>
