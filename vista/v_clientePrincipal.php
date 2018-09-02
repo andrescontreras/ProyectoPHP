@@ -2,6 +2,8 @@
 session_start();
 //echo "HJOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
 include_once "../controlador/c_cliente.php";
+include_once "../controlador/c_correo.php";
+//correo::enviarCorreo("santiagosw18@gmail.com","Prueba","Esto es una prueba de mandar un correo por PHP");
 $idUsu = cliente::datosUsuario_ID("DASH");
 $_SESSION['usuario']=$idUsu;
 $usuario = cliente::nomUsuario();
