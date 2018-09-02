@@ -44,7 +44,7 @@ class c_ahorro {
 
     public static function validarId($id)
     {
-      $conBD = new conexion():
+      $conBD = new conexion();
       $sql = "SELECT IDC_AHORRO FROM C_AHORRO WHERE C_AHORRO.IDC_AHORRO = ". $id;
       return $conBD->ejecutarconsulta($sql);
     }
@@ -83,7 +83,7 @@ class c_ahorro {
       $conBD = new conexion();
       $sql = "INSERT INTO TRANSACCION (MONTO, TIPO, FECHA, C_ORIGEN, C_DESTINO, CUOTAS ) VALUES (".$monto.", 'CONSIGNACION', CURDATE(), ".$c_origen.",".$c_destino.", 1 )";
       $conBD->ejecutarconsulta($sql);
-
+    }
     public static function allSelectAhorrobyUsuario(){
         $conBD = new conexion();
         $sql = "SELECT * FROM c_ahorro WHERE USUARIO ="."'".$_SESSION['usuario']."'";

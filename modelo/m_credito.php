@@ -1,8 +1,7 @@
 <?php
-<<<<<<< HEAD
-  include_once 'm_conexion.php';
+include_once "../modelo/m_conexion.php";
 
-  class m_credito{
+  class credito{
     //Mosrar Creditos pendientes
     public static function mostrarCreditos($id)
     {
@@ -65,15 +64,11 @@
       $sql = "INSERT INTO TRANSACCION (MONTO, TIPO, FECHA, C_ORIGEN, C_DESTINO, CUOTAS) VALUES (".$monto.",'PAGOCREDITO', CURDATE(), ".$c_origen.",".$c_destino.", 1 )";
       $con->ejecutarconsulta($sql);
     }
-  }
- ?>
-=======
-include_once "../modelo/m_conexion.php";
-class credito{
-    public static function crearCredito($interes,$monto){
+
+    public static function crearCreditoCliente($interes,$monto){
         $conBD = new conexion();
         $usuario = $_SESSION['usuario'];
-        $sql = "INSERT INTO credito (ESTADO,INTERES,MONTO,USUARIO) VALUES ('PENDIENTE',$interes,$monto,$usuario)";
+        $sql = "INSERT INTO credito (ESTADO,INTERES,MONTO,USUARIO) VALUES ('EN ESPERA',$interes,$monto,$usuario)";
         return $conBD->ejecutarconsulta($sql);
     }
 
@@ -107,4 +102,3 @@ class credito{
     }
 }
 ?>
->>>>>>> 1ed706e758a171130f80d291256a6e169be01577
