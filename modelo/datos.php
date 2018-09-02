@@ -75,6 +75,36 @@ if (mysqli_query($con,$sql)) {
 }else{
  echo mysqli_error($con);
 }
+$sql = "INSERT INTO C_AHORRO (JAVECOINS, CUOTA_MANEJO, USUARIO) VALUES (20, 70, 6)";
+if (mysqli_query($con,$sql)) {
+ echo " Ahorros insertados :3 |";
+}else{
+ echo mysqli_error($con);
+}
+$sql = "INSERT INTO C_AHORRO (JAVECOINS, CUOTA_MANEJO, USUARIO) VALUES (20, 70, 6)";
+if (mysqli_query($con,$sql)) {
+ echo " Ahorros insertados :3 |";
+}else{
+ echo mysqli_error($con);
+}
+$sql = "INSERT INTO C_AHORRO (JAVECOINS, CUOTA_MANEJO, USUARIO) VALUES (20, 70, 6)";
+if (mysqli_query($con,$sql)) {
+ echo " Ahorros insertados :3 |";
+}else{
+ echo mysqli_error($con);
+}
+$sql = "INSERT INTO C_AHORRO (JAVECOINS, CUOTA_MANEJO, USUARIO) VALUES (20, 70, 2)";
+if (mysqli_query($con,$sql)) {
+ echo " Ahorros insertados :3 |";
+}else{
+ echo mysqli_error($con);
+}
+$sql = "INSERT INTO C_AHORRO (JAVECOINS, CUOTA_MANEJO, USUARIO) VALUES (20, 70, 2)";
+if (mysqli_query($con,$sql)) {
+ echo " Ahorros insertados :3 |";
+}else{
+ echo mysqli_error($con);
+}
 $sql = "INSERT INTO CREDITO (ESTADO, FECHA_PAGO, INTERES, MONTO, USUARIO) VALUES ('EN ESPERA', CURDATE(), 0.17, 300, 2 )";
 if (mysqli_query($con,$sql)) {
  echo " Credito insertado :3 |";
@@ -105,10 +135,78 @@ if (mysqli_query($con,$sql)) {
 }else{
  echo mysqli_error($con);
 }
-$sql = "INSERT INTO TARJETA_C (CUOTA_MANEJO, USUARIO, C_AHORRO, CUPO, SOBRECUPO, TASA_INTERES, ESTADO, SALDO) VALUES (80, 3, 1, 1000, 300, 0.3, 'APROBADO', 800 )";
+$sql = "INSERT INTO TARJETA_C (CUOTA_MANEJO, USUARIO, C_AHORRO, CUPO, SOBRECUPO, TASA_INTERES, ESTADO, SALDO) VALUES (80, 3, 2, 1000, 300, 0.3, 'APROBADO', 800 )";
 if (mysqli_query($con,$sql)) {
  echo " Tarjeta insertado :3 |";
 }else{
  echo mysqli_error($con);
 }
+$sql = "INSERT INTO TARJETA_C (CUOTA_MANEJO, USUARIO, C_AHORRO, CUPO, SOBRECUPO, TASA_INTERES, ESTADO, SALDO) VALUES (80, 3, 2, 1000, 300, 0.3, 'APROBADO', 800 )";
+if (mysqli_query($con,$sql)) {
+ echo " Tarjeta insertado :3 |";
+}else{
+ echo mysqli_error($con);
+}
+$sql = "INSERT INTO TARJETA_C (CUOTA_MANEJO, USUARIO, C_AHORRO, CUPO, SOBRECUPO, TASA_INTERES, ESTADO, SALDO) VALUES (80, 3, 2, 1000, 300, 0.3, 'APROBADO', 800 )";
+if (mysqli_query($con,$sql)) {
+ echo " Tarjeta insertado :3 |";
+}else{
+ echo mysqli_error($con);
+}
+$sql = "INSERT INTO TARJETA_C (CUOTA_MANEJO, USUARIO, C_AHORRO, CUPO, SOBRECUPO, TASA_INTERES, ESTADO, SALDO) VALUES (80, 2, 1, 1000, 300, 0.3, 'APROBADO', 800 )";
+if (mysqli_query($con,$sql)) {
+ echo " Tarjeta insertado :3 |";
+}else{
+ echo mysqli_error($con);
+}
+$sql = "INSERT INTO TARJETA_C (CUOTA_MANEJO, USUARIO, C_AHORRO, CUPO, SOBRECUPO, TASA_INTERES, ESTADO, SALDO) VALUES (80, 2, 1, 1000, 300, 0.3, 'APROBADO', 800 )";
+if (mysqli_query($con,$sql)) {
+ echo " Tarjeta insertado :3 |";
+}else{
+ echo mysqli_error($con);
+}
+$sql = "INSERT INTO TARJETA_C (CUOTA_MANEJO, USUARIO, C_AHORRO, CUPO, SOBRECUPO, TASA_INTERES, ESTADO, SALDO) VALUES (80, 2, 1, 1000, 300, 0.3, 'APROBADO', 800 )";
+if (mysqli_query($con,$sql)) {
+ echo " Tarjeta insertado :3 |";
+}else{
+ echo mysqli_error($con);
+}
+$sql = "INSERT INTO TARJETA_C (CUOTA_MANEJO, USUARIO, C_AHORRO, CUPO, SOBRECUPO, TASA_INTERES, ESTADO, SALDO) VALUES (80, 5, 5, 1000, 300, 0.3, 'APROBADO', 800 )";
+if (mysqli_query($con,$sql)) {
+ echo " Tarjeta insertado :3 |";
+}else{
+ echo mysqli_error($con);
+}
+$sql = "INSERT INTO TARJETA_C (CUOTA_MANEJO, USUARIO, C_AHORRO, CUPO, SOBRECUPO, TASA_INTERES, ESTADO, SALDO) VALUES (80, 4, 4, 1000, 300, 0.3, 'APROBADO', 800 )";
+if (mysqli_query($con,$sql)) {
+ echo " Tarjeta insertado :3 |";
+}else{
+ echo mysqli_error($con);
+}
+$sql = "INSERT INTO TARJETA_C (CUOTA_MANEJO, USUARIO, C_AHORRO, CUPO, SOBRECUPO, TASA_INTERES, ESTADO, SALDO) VALUES (80, 5, 5, 1000, 300, 0.3, 'APROBADO', 800 )";
+if (mysqli_query($con,$sql)) {
+ echo " Tarjeta insertado :3 |";
+}else{
+ echo mysqli_error($con);
+}
+$sql = "INSERT INTO TARJETA_C (CUOTA_MANEJO, USUARIO, C_AHORRO, CUPO, SOBRECUPO, TASA_INTERES, ESTADO, SALDO) VALUES (80, 5, 5, 1000, 300, 0.3, 'APROBADO', 800 )";
+if (mysqli_query($con,$sql)) {
+ echo " Tarjeta insertado :3 |";
+}else{
+ echo mysqli_error($con);
+}
+$sql = "INSERT INTO TARJETA_C (CUOTA_MANEJO, USUARIO, C_AHORRO, CUPO, SOBRECUPO, TASA_INTERES, ESTADO, SALDO) VALUES (80, 2, 6, 1000, 300, 0.3, 'APROBADO', 800 )";
+if (mysqli_query($con,$sql)) {
+ echo " Tarjeta insertado :3 |";
+}else{
+ echo mysqli_error($con);
+}
+$sql = "INSERT INTO TARJETA_C (CUOTA_MANEJO, USUARIO, C_AHORRO, CUPO, SOBRECUPO, TASA_INTERES, ESTADO, SALDO) VALUES (80, 2, 7, 1000, 300, 0.3, 'APROBADO', 800 )";
+if (mysqli_query($con,$sql)) {
+ echo " Tarjeta insertado :3 |";
+}else{
+ echo mysqli_error($con);
+}
+
+mysqli_close($con);
 ?>

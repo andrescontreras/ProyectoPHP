@@ -9,14 +9,21 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
+<?php include_once "../controlador/c_adminCliente.php";
+        $admin = new c_adminCliente();
+        $admin->getTajetas_c();
+        $admin->getCreditos();
+    ?>
 <form action="v_adminEditTarjetaC.php" method="get">
        <label for="">
         tarjetas de credito del cliente:
         <select name="operacion" id="operacion">
-            <option value="s">SUMA</option>
-            <option value="r">RESTA</option>
-            <option value="m">MULTIPLICACION</option>
-            <option value="d">DIVISION</option>
+        <?php
+                foreach($admin->tarjetas_c as $value)
+                {
+                    echo "<option value=".$value[0].">".$value[0]."</option>";
+                }
+            ?>
         </select>
         <input type="submit" value="Entrar">
        </label>
@@ -27,10 +34,12 @@
        <label for="">
         creditos del cliente:
         <select name="operacion" id="operacion">
-            <option value="s">SUMA</option>
-            <option value="r">RESTA</option>
-            <option value="m">MULTIPLICACION</option>
-            <option value="d">DIVISION</option>
+        <?php
+                foreach($admin->creditos as $value)
+                {
+                    echo "<option value=".$value[0].">".$value[0]."</option>";
+                }
+            ?>
         </select>
         <input type="submit" value="Entrar">
        </label>
