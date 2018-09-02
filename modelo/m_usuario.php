@@ -33,5 +33,13 @@ class m_usuario{
         return $conBD->ejecutarconsulta($sql);
     }
 
+    //retorna las notificaciones del USUARIO
+    public static function mostrarNotificaciones($id_usuario)
+    {
+      $conBD = new conexion();
+      $sql = "SELECT * FROM MENSAJES WHERE MENSAJES.U_DESTINO = ".$id_usuario. " ORDER BY MENSAJES.ID DESC";
+      return $conBD->ejecutarconsulta($sql);
+    }
+
 }
 ?>

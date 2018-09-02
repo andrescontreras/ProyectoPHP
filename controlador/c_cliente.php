@@ -22,7 +22,7 @@ class cliente{
              $consulta =  m_usuario::getDatosUsuarioxCuentaAhorro();
              $str_datos = "";
              while($fila = mysqli_fetch_array($consulta)) {
-                $str_datos.="<option value=\"cuentaahorro_".$fila['IDC_AHORRO']."\">Cuenta de ahorro ".$fila['IDC_AHORRO']."</option>"; 
+                $str_datos.="<option value=\"cuentaahorro_".$fila['IDC_AHORRO']."\">Cuenta de ahorro ".$fila['IDC_AHORRO']."</option>";
              }
              return $str_datos;
     }
@@ -32,7 +32,7 @@ class cliente{
              $str_datos = "";
              while($fila = mysqli_fetch_array($consulta)) {
                  if($fila['ESTADO']=='APROBADO'){
-                    $str_datos.="<option value=\"tarjetacredito_".$fila['IDTARJETA_C']."\">Tarjeta de credito ".$fila['IDTARJETA_C']."</option>"; 
+                    $str_datos.="<option value=\"tarjetacredito_".$fila['IDTARJETA_C']."\">Tarjeta de credito ".$fila['IDTARJETA_C']."</option>";
                  }
              }
              return $str_datos;
@@ -49,7 +49,7 @@ class cliente{
         $consulta = m_usuario::obtenerNombreUsuario();
         $str_datos = "";
         while($fila = mysqli_fetch_array($consulta)) {
-            $str_datos=$fila['USUARIO']; 
+            $str_datos=$fila['USUARIO'];
          }
          return $str_datos;
     }
@@ -78,7 +78,7 @@ class cliente{
         else{
         $consulta = c_ahorro::disminuirJaveCoins($monto_cuenta,$pagar);
         return "<br>Retiro sus JaveCoins exitosamente";
-        }  
+        }
     }
     public static function consignar($tipoPago,$monto_consig,$usuario_depositar){
         $consulta = c_ahorro::buscarCAhorroxUsuario();
@@ -106,7 +106,7 @@ class cliente{
         while($fila = mysqli_fetch_array($consulta)) {
             if($usuario_depositar==$fila['IDC_AHORRO']){
                 $flag=true;
-            }    
+            }
         }
         }
         if($flag){
@@ -119,10 +119,10 @@ class cliente{
             if($usuario_depositar!=$_SESSION['usuario']){
                 $consulta = c_ahorro::disminuirJaveCoins($monto_cuenta,$pagar);
             }
-            
+
         }else{
             return "La cuenta a la que va a consignar no existe";
-        } 
+        }
     }
     public static function JaveCoins_CuentaAhorro(){
         $consulta = c_ahorro::allSelectAhorrobyUsuario();
@@ -146,7 +146,7 @@ class cliente{
         $consulta= m_credito::crearCreditoCliente($interes,$monto);
         if($consulta){
             return "Se envio la solicitud del credito, espere a que se apruebe por el administrador";
-        }       
+        }
     }
 
     //Saca las tarjetas de credito asociadas a una cuenta de ahorro
@@ -155,12 +155,12 @@ class cliente{
         $str_datos = "";
         while($fila = mysqli_fetch_array($consulta)) {
             if($fila['ESTADO']=="APROBADO"){
-                $str_datos.="<option value=\"tarjetacredito_".$fila['IDTARJETA_C']."\">Tarjeta de credito ".$fila['IDTARJETA_C']."</option>"; 
+                $str_datos.="<option value=\"tarjetacredito_".$fila['IDTARJETA_C']."\">Tarjeta de credito ".$fila['IDTARJETA_C']."</option>";
             }
         }
         return $str_datos;
     }
-    
+
     public static function pagarTCredito($monto,$id_Tcredito,$tipoPago){
         $jave_coins = cliente::JaveCoins_CuentaAhorro();
         $consulta = tarjeta_c::allTCredito();
@@ -204,7 +204,7 @@ class cliente{
         $str_datos = "";
         while($fila = mysqli_fetch_array($consulta)) {
             if($fila['ESTADO']=="APROBADO"){
-                $str_datos.="<option value=\"credito_".$fila['IDCREDITO']."\">Credito ".$fila['IDCREDITO']."</option>"; 
+                $str_datos.="<option value=\"credito_".$fila['IDCREDITO']."\">Credito ".$fila['IDCREDITO']."</option>";
             }
         }
         return $str_datos;
@@ -213,7 +213,7 @@ class cliente{
         $consulta = tarjeta_c::obtenerSaldo($id_tarjetaC);
         while($fila = mysqli_fetch_array($consulta)) {
             $saldo = $fila['SALDO'];
-            
+
         }
         return $saldo;
     }
@@ -302,5 +302,11 @@ class cliente{
             compra::crearCompra($cuotas,$monto,$descripcion);
         }
     } 
+
+    //Obtiene las notificaciones correspondientes al id
+    public static function mostrarNotificaciones($idusuario)
+    {
+      return $res = m_usuario::mostrarNotificaciones($idusuario);
+    }
 }
 ?>

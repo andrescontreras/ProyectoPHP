@@ -24,31 +24,31 @@
     <div class="form-group row">
     <label for="inputEmail3" class="col-sm-2 col-form-label">Cuota de manejo</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="inputEmail3" name="cuota_manejo" value="<?php echo $banco->cuota_manejo; ?>">
+      <input type="text" class="form-control"  name="cuota_manejo" value="<?php echo $banco->cuota_manejo; ?>">
     </div>
   </div>
   <div class="form-group row">
     <label for="inputEmail3" class="col-sm-2 col-form-label">Interes</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="inputEmail3" name="interes" value="<?php echo $banco->interes; ?>">
+      <input type="text" class="form-control" name="interes" value="<?php echo $banco->interes; ?>">
     </div>
   </div>
   <div class="form-group row">
     <label for="inputEmail3" class="col-sm-2 col-form-label">Costo operacion</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="inputEmail3" name="costo_operacion" value="<?php echo $banco->costo_operacion; ?>">
+      <input type="text" class="form-control"  name="costo_operacion" value="<?php echo $banco->costo_operacion; ?>">
     </div>
   </div>
   <div class="form-group row">
     <label for="inputEmail3" class="col-sm-2 col-form-label">Interes mora</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="inputEmail3" name="interes_mora" value="<?php echo $banco->interes_mora; ?>">
+      <input type="text" class="form-control"  name="interes_mora" value="<?php echo $banco->interes_mora; ?>">
     </div>
   </div>
   <div class="form-group row">
     <label for="inputEmail3" class="col-sm-2 col-form-label">Nombre del banco</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="inputEmail3" name="nombre_banco" value="<?php echo $banco->nombreBanco; ?>">
+      <input type="text" class="form-control"  name="nombre_banco" value="<?php echo $banco->nombreBanco; ?>">
     </div>
   </div>
   <div class="form-group row">

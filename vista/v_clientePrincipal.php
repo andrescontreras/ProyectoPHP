@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 //echo "HJOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
 include_once "../controlador/c_cliente.php";
@@ -15,6 +15,11 @@ $usuario = cliente::nomUsuario();
 ?>
 <html>
 <body>
+<div>
+  <nav>
+    <a href="v_notificaciones.php">Notificaciones</a>
+  </nav>
+</div>
 <form action="v_clienteCrearCuentaAhorro.php" method="post">
 <div>
 <label for="txtNomUsuario">Nombre del usuario </label>

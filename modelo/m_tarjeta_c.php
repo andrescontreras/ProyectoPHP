@@ -21,9 +21,10 @@ class tarjeta_c {
         return $conBD->ejecutarconsulta($sql);
     }
 
-    public static function setDatosTarjeta($cuota_manejo, $cupo, $sobrecupo, $tasa_interes, $estado){
+    public static function setDatosTarjeta($cuota_manejo, $cupo, $sobrecupo, $tasa_interes, $estado,$id_tarjeta){
         $conBD = new conexion();
-        $sql = "SELECT * FROM tarjeta_c WHERE idtarjeta_c = $id_tarjeta ";
+        echo "<h1> ESSSS:".$id_tarjeta."</h1>";
+        $sql = "UPDATE tarjeta_c SET CUOTA_MANEJO = $cuota_manejo, CUPO = $cupo, SOBRECUPO = $sobrecupo, TASA_INTERES = $tasa_interes, ESTADO = '$estado' WHERE IDTARJETA_C =$id_tarjeta";
         return $conBD->ejecutarconsulta($sql);
     }
     //Devuelve el resultado de la busqueda de las tarjetas de credito asociadas a una cuenta de ahorro
