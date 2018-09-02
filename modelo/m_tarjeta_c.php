@@ -43,5 +43,10 @@ class tarjeta_c {
         $sql = "UPDATE tarjeta_c SET SALDO = SALDO - $monto WHERE IDTARJETA_C =$id_TCredito";
         return $conBD->ejecutarconsulta($sql);
     }
+    public static function obtenerSaldo($id_tarjetaC){
+        $conBD = new conexion();
+        $sql ="SELECT * FROM tarjeta_c WHERE IDTARJETA_C = $id_tarjetaC";
+        return $conBD->ejecutarconsulta($sql);
+    }
 }
 ?>
