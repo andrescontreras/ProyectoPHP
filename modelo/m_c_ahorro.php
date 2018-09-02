@@ -18,7 +18,14 @@ class c_ahorro {
     public static function disminuirJaveCoins($monto_cuenta,$pagar){
         $conBD = new conexion();
         $id_ahorro=$_SESSION['id_ahorro'];
-        //echo "UPDATE c_ahorro SET JAVECOINS = $monto_cuenta-$pagar WHERE IDC_AHORRO = $id_ahorro";
+        
+        echo "UPDATE c_ahorro SET JAVECOINS = JAVECOINS-$pagar WHERE IDC_AHORRO = $id_ahorro";
+        $sql = "UPDATE c_ahorro SET JAVECOINS = JAVECOINS-$pagar WHERE IDC_AHORRO = $id_ahorro";
+        return $conBD->ejecutarconsulta($sql);
+    }
+    public static function disminuirJaveCoinsXIDAhorro($pagar,$id_ahorro){
+        $conBD = new conexion();
+        echo "UPDATE c_ahorro SET JAVECOINS = JAVECOINS-$pagar WHERE IDC_AHORRO = $id_ahorro";
         $sql = "UPDATE c_ahorro SET JAVECOINS = JAVECOINS-$pagar WHERE IDC_AHORRO = $id_ahorro";
         return $conBD->ejecutarconsulta($sql);
     }
