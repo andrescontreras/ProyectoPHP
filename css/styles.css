@@ -1,0 +1,74 @@
+
+.gold_plating
+{
+  position: relative;
+}
+.gold_plating[data-notificaciones]::after
+{
+  content: attr(data-notificaciones);
+  position:absolute;
+  top:-10px;
+  right:-10px;
+  font-size:.7em;
+  background:green;
+  color:white;
+  width:18px;height:18px;
+  text-align:center;
+  line-height:18px;
+  border-radius:50%;
+  box-shadow:0 0 1px #333;
+}
+.navegador
+{
+  padding: 40px;
+
+}
+
+.navegador nav a{
+  color: black;
+  padding: 30px;
+}
+
+.navegador nav a:hover{
+  background-color: rgb(234, 236, 195);
+}
+
+.container
+{
+  margin: 40px;
+}
+.container ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.container ul::before
+{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0px;
+  height: 100%;
+  border: 1px dashed rgb(12, 51, 215);
+}
+.container ul li{
+  margin: 40px 60px;
+  position: relative;
+  border: outset;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: Linen;
+}
+
+.container ul li::before{
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: -63px;
+  width: 0px;
+  height: 100%;
+  border: 1px solid rgb(12, 51, 215);
+}

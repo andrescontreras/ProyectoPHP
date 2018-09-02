@@ -41,7 +41,7 @@ class m_credito{
     $consulta = m_credito::administradores();
     while ($fila = mysqli_fetch_array($consulta)) {
       $usuario = $fila['IDUSUARIO'];
-      $sql = "INSERT INTO MENSAJES (U_DESTINO, MENSAJE, FECHA) VALUES (" . $usuario . ", '$texto', CURDATE() )";
+      $sql = "INSERT INTO MENSAJES (U_DESTINO, MENSAJE, FECHA, ESTADO) VALUES (" . $usuario . ", '$texto', CURDATE(), 1 )";
       $conBD->ejecutarconsulta($sql);
     }
   }
