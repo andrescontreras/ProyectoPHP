@@ -26,13 +26,22 @@ echo cliente::datosCuentaAhorro();
 </div>
 </div>
 </form>
+<form action="v_clienteMenuTCredito.php">
+<input type="submit" name="volver" value="Volver">
+</form>
 <?php
 if(isset($_GET['pagar_monto'])){
-    $porciones = explode("_", $_GET['cuentasAhorro']);
-    $id_CAhorro=$porciones[1]; // porción1
-    $tipo_pago = $_GET["tipoPago"];
-    $monto=$_GET['monto'];
-    echo cliente::pagarTCreditoxCAhorro($monto,$id_CAhorro,$tipo_pago);
+    if(!empty($_GET['monto']) && is_numeric($_GET['monto'])){
+        $porciones = explode("_", $_GET['cuentasAhorro']);
+        $id_CAhorro=$porciones[1]; // porción1
+        $tipo_pago = $_GET["tipoPago"];
+        $monto=$_GET['monto'];
+        echo cliente::pagarTCreditoxCAhorro($monto,$id_CAhorro,$tipo_pago);
+    }
+    else{
+        echo "Debe colocar un valor en monto y debe ser un numero";
+    }
+    
 }
 ?>
 </body>

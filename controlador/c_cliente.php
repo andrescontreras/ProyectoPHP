@@ -191,7 +191,8 @@ class cliente{
                     $sobrante =$pagar-$saldo;
                     if($sobrante<0 || $sobrante==0){
                         $id_usu=$_SESSION['usuario'];
-                        $texto="El usuario $id_usu ha pagado el valor de $saldo $tipoPago con la cuenta de ahorro $id_ahorro a la tarjeta de credito con id $id_Tcredito";
+                        $id_ahorro=$_SESSION['id_ahorro'];
+                        $texto="El usuario $id_usu ha pagado el valor de $pagar $tipoPago con la cuenta de ahorro $id_ahorro a la tarjeta de credito con id $id_Tcredito";
                         m_credito::enviarNotificacionCreditoUsuario($texto);
                         tarjeta_c::disminuir_saldo($pagar,$id_Tcredito);
                         c_ahorro::disminuirJaveCoins($jave_coins,$pagar);

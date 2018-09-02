@@ -18,11 +18,11 @@ include_once "../controlador/c_cliente.php";
 </form>
 <?php
 if(isset($_GET['solicitar'])){
-    if(!empty($_GET['monto_credito'])){
+    if(!empty($_GET['monto_credito']) && is_numeric($_GET['monto_credito'])){
         echo cliente::solicitudCredito($_GET['tasa_interes'],$_GET['monto_credito']) ;
     }
     else{
-        echo "Para solicitar un credito debe colocar un valor en la casilla correspondiente";
+        echo "Para solicitar un credito debe colocar un valor en la casilla correspondiente y debe ser un numero";
     }  
 }
 ?>
