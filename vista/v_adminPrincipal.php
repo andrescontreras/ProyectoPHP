@@ -20,6 +20,8 @@
         $admin = new c_adminPrincipal();
         $admin->getUsuarios();
         $admin->getVisitantes();
+        session_start();
+        echo "SESSION: ".$_SESSION["id_admin"];
     ?>
      <form action="v_adminCliente.php" method="get">
        <label for="">

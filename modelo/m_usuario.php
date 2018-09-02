@@ -13,6 +13,13 @@ class m_usuario{
             $sql ="SELECT * FROM usuario WHERE USUARIO = '$usuario'";
             return $conBD->ejecutarconsulta($sql);
     }
+
+    public static function setUsuario($usuario, $clave)
+    {
+        $conBD = new conexion();
+            $sql ="INSERT INTO usuario ( USUARIO , PASSWORD, TIPO ) VALUES ('$usuario','$clave','CLIENTE')";
+            return $conBD->ejecutarconsulta($sql);
+    }
     public static function getDatosUsuarioxCuentaAhorro()
     {
             $conBD = new conexion();

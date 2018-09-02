@@ -14,12 +14,17 @@
         $login = new c_login();
     ?>
   <?php
-  if(isset($_POST['crear_usuario']) || isset($_POST['ingresar'])){
+  if(isset($_POST['ingresar'])){
     $usuario= $_POST['usuario'];
     $clave= $_POST['clave'];
     echo "<h1>ENTRO LOGIN</h1>";
     $login->iniciar();
-    }
+    }elseif(isset($_POST['crear_usuario'])){
+      $usuario= $_POST['usuario'];
+      $clave= $_POST['clave'];
+      echo "<h1>ENTRO LOGIN</h1>";
+      $login->registrarse();
+      }
   ?>
     
     <form action="" method="post">
@@ -31,7 +36,7 @@
     <label for="exampleInputPassword1">Password</label>
     <input type="password" class="form-control"name="clave" id="txtClave" value="<?php if(isset($clave)) echo $clave ?>">
   </div>
-  <button type="submit" name="ingresar" value="Iniciar sesion" class="btn btn-primary">Submit</button>
+  <button type="submit" name="ingresar" value="Iniciar sesion" class="btn btn-primary">Iniciar sesion</button>
   <button type="submit" name="crear_usuario" value="Crear usuario" class="btn btn-primary">Registrarse</button>
 </form>
 
