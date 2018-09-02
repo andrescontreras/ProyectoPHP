@@ -11,6 +11,7 @@ class tarjeta_c {
     public static function getTarjetas_cCliente($id_usuario){
         $conBD = new conexion();
         $sql = "SELECT * FROM tarjeta_c WHERE usuario = $id_usuario ";
+        return $conBD->ejecutarconsulta($sql);
     }
     //Devuelve el resultado de la busqueda de las tarjetas de credito asociadas a una cuenta de ahorro
     public static function tcreditoxCuentaAhorro(){
