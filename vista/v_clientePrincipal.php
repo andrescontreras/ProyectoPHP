@@ -1,8 +1,8 @@
-<?php 
+<?php
 session_start();
 //echo "HJOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
 include_once "../controlador/c_cliente.php";
-$idUsu = cliente::datosUsuario_ID("usuario");
+$idUsu = cliente::datosUsuario_ID("DASH");
 $_SESSION['usuario']=$idUsu;
 $usuario = cliente::nomUsuario();
 //Si no funciona con COOKIE utilizar session
@@ -15,6 +15,11 @@ $usuario = cliente::nomUsuario();
 ?>
 <html>
 <body>
+<div>
+  <nav>
+    <a href="v_notificaciones.php">Notificaciones</a>
+  </nav>
+</div>
 <form action="v_clienteCrearCuentaAhorro.php" method="post">
 <div>
 <label for="txtNomUsuario">Nombre del usuario </label>
