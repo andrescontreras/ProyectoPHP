@@ -1,9 +1,6 @@
 <?php
-<<<<<<< HEAD
-  include_once 'm_conexion.php';
-=======
-include_once "../modelo/m_conexion.php";
->>>>>>> 4848ca297f798eee4f6ccd6abc8f3099a3d78f51
+include_once 'm_conexion.php';
+
 
   class credito{
     //Mosrar Creditos pendientes
@@ -68,10 +65,6 @@ include_once "../modelo/m_conexion.php";
       $sql = "INSERT INTO TRANSACCION (MONTO, TIPO, FECHA, C_ORIGEN, C_DESTINO, CUOTAS) VALUES (".$monto.",'PAGOCREDITO', CURDATE(), ".$c_origen.",".$c_destino.", 1 )";
       $con->ejecutarconsulta($sql);
     }
-<<<<<<< HEAD
-  }
- ?>
-=======
 
     public static function crearCreditoCliente($interes,$monto){
         $conBD = new conexion();
