@@ -7,6 +7,12 @@ class m_usuario{
             $sql ="SELECT * FROM usuario WHERE USUARIO ='".$nom_usuario."'";
             return $conBD->ejecutarconsulta($sql);
     }
+    public static function getUsuario($usuario)
+    {
+        $conBD = new conexion();
+            $sql ="SELECT * FROM usuario WHERE USUARIO = '$usuario'";
+            return $conBD->ejecutarconsulta($sql);
+    }
     public static function getDatosUsuarioxCuentaAhorro()
     {
             $conBD = new conexion();
