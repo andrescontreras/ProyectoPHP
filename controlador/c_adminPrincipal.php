@@ -6,6 +6,7 @@ include_once "../modelo/m_credito.php";
     {   
         public $usuarios = array();
         public $visitantes = array();
+        public $admin;
         public function __construct()
         {
             

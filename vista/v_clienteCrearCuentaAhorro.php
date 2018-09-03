@@ -21,12 +21,12 @@ $usuario = cliente::nomUsuario();
 </form>
 <?php
 if(isset($_POST['botonMonto'])){
-    if(!empty($_POST['monto_consig'])){
+    if(!empty($_POST['monto_consig']) && is_numeric($_POST['monto_consig'])){
         $monto=$_POST['monto_consig'];
         echo cliente::crearCuentaAhorro($monto);
     }
     else{
-        echo "Debe insertar algun valor en al casilla de monto" ;
+        echo "Debe insertar algun valor en al casilla de monto y debe ser un numero" ;
     }
    
         

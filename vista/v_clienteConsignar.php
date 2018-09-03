@@ -46,13 +46,13 @@ $monto_cuenta=cliente::JaveCoins_CuentaAhorro();
 <?php
 if(isset($_GET['consignar'])){
     if(empty($_GET['usu_consig']) && empty($_GET['monto_consig'])){
-        echo "Debe colocar la cuenta a la que le va a consignar <br>";
-        echo "Debe colocar el monto que quiere consignar <br>";
-    }else if(empty($_GET['monto_consig'])){
-        echo "Debe colocar el monto que quiere consignar <br>";
+        echo "Debe colocar la cuenta a la que le va a consignar y debe ser un numero <br>";
+        echo "Debe colocar el monto que quiere consignar y debe ser un numero <br>";
+    }else if(empty($_GET['monto_consig']) || !is_numeric($_GET['monto_consig'])){
+        echo "Debe colocar el monto que quiere consignar y debe ser un numero<br>";
     }
-    else if(empty($_GET['usu_consig'])){
-        echo "Debe colocar la cuenta a la que le va a consignar <br>";
+    else if(empty($_GET['usu_consig']) || !is_numeric($_GET['usu_consig'])){
+        echo "Debe colocar la cuenta a la que le va a consignar y debe ser un numero<br>";
     }else{
         $usuario_depositar=$_GET['usu_consig'];
         $tipo_pago = $_GET["tipoPago"];

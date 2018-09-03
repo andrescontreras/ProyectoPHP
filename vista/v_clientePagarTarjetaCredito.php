@@ -32,14 +32,14 @@ echo cliente::tarjetaCreditoxAhorro();
 </form>
 <?php
 if(isset($_GET['pagar_monto'])){
-    if(!empty($_GET['monto'])){
+    if(!empty($_GET['monto']) && is_numeric($_GET['monto'])){
         $porciones = explode("_", $_GET['tarjetasCredito']);
         $id_Tcredito=$porciones[1]; // porción1
         $tipo_pago = $_GET["tipoPago"];
         $monto=$_GET['monto'];
         echo cliente::pagarTCredito($monto,$id_Tcredito,$tipo_pago);
     }else{
-        echo "Debe colocar el monto que quiere pagar"; 
+        echo "Debe colocar el monto que quiere pagar y tiene que ser un numero"; 
     }
     
 }

@@ -39,12 +39,10 @@ class m_credito{
   {
     $conBD = new conexion();
     $consulta = m_credito::administradores();
-    while ($fila = mysqli_fetch_array($consulta)) {
       $usuario = $fila['IDUSUARIO'];
       $u_origen = $_SESSION['usuario'];
-      $sql = "INSERT INTO MENSAJES (U_ORIGEN,U_DESTINO, MENSAJE, FECHA) VALUES ($u_origen," . $usuario . ", '$texto', CURDATE() )";
+      $sql = "INSERT INTO MENSAJES (U_ORIGEN,U_DESTINO, MENSAJE, FECHA) VALUES ($u_origen, -1, '$texto', CURDATE() )";
       $conBD->ejecutarconsulta($sql);
-    }
   }
     //Crear credito
   public static function crearCredito($monto, $cedula, $correo, $interes)

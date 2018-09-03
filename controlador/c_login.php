@@ -19,21 +19,24 @@ class c_login
             }
             echo "ID: " . $this->usuario[0];
             if ($this->usuario[3] == 'ADMIN' and $this->usuario[2] == $_POST['clave']) {
-                echo "444444444444545";
                 session_start();
                 $_SESSION["id_admin"] = $this->usuario[0];
                 header("Location: v_adminPrincipal.php");
             } elseif ($this->usuario[3] == 'CLIENTE' and $this->usuario[2] == $_POST['clave']) {
-                echo "zzzzzzzzzzzzzz";
                 session_start();
                 $_SESSION["nombre_cliente"] = $this->usuario[1];
                 header("Location: v_clientePrincipal.php");
 
             } else {
-                echo "verifique las credenciales";
+                echo "<div class='alert alert-danger' role='alert'>
+                Usuario o contraseña incorrectos
+              </div>";
+               
             }
         } else {
-            echo " no existe";
+            echo "<div class='alert alert-danger' role='alert'>
+                Usuario o contraseña incorrectos
+              </div>";
         }
 
     }
@@ -46,8 +49,13 @@ class c_login
         if ($consulta->num_rows < 1) {
             $consulta = m_usuario::setUsuario($usuario,$clave);
             echo "Usuario creado";
+            echo "<div class='alert alert-success' role='alert'>
+            Usuario creado
+          </div>";
         } else {
-            echo "El usuario ya existe";
+            echo "<div class='alert alert-danger' role='alert'>
+                El nombre de usuario ya existe
+              </div>";
         }    
 
     }

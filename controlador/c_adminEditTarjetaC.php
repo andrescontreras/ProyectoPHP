@@ -12,7 +12,7 @@ include_once "../modelo/m_tarjeta_c.php";
     {
         
         $this->tarjeta_c  = $_GET["tarjeta_c"];
-        echo "ENTRO FUNCION11111111111111".$this->tarjeta_c;
+        
         $consulta = tarjeta_c::getDatosTarjeta($this->tarjeta_c);
             $str_datos = "";
             while($fila = mysqli_fetch_array($consulta)) {
@@ -21,8 +21,44 @@ include_once "../modelo/m_tarjeta_c.php";
     }
     public function setDatosTarjeta($cuota_manejo, $cupo, $sobrecupo, $tasa_interes, $estado, $id_tarjeta)
     {
-        echo "ENTRO FUNCION".$this->tarjeta_c;
-        tarjeta_c::setDatosTarjeta($cuota_manejo, $cupo, $sobrecupo, $tasa_interes, $estado, $id_tarjeta);
+        $bandera = true;
+        if(!is_numeric($cuota_manejo))
+        {
+            echo "<div class='alert alert-danger' role='alert'>
+            Cuota manejo debe ser numerico
+          </div>";
+          $bandera = false;
+        }
+        if(!is_numeric($cupo))
+        {
+            echo "<div class='alert alert-danger' role='alert'>
+            Cupo debe ser numerico
+          </div>";
+          $bandera = false;
+        }
+        if(!is_numeric($sobrecupo))
+        {
+            echo "<div class='alert alert-danger' role='alert'>
+            Sobrecupo debe ser numerico
+          </div>";
+          $bandera = false;
+        }
+        if(!is_numeric($tasa_interes))
+        {
+            echo "<div class='alert alert-danger' role='alert'>
+            Tasa interes debe ser numerico
+          </div>";
+          $bandera = false;
+        }
+
+        if($bandera)
+        {
+            echo "<div class='alert alert-success' role='alert'>
+            Se actualizaron los datos correctamente
+          </div>";
+            tarjeta_c::setDatosTarjeta($cuota_manejo, $cupo, $sobrecupo, $tasa_interes, $estado, $id_tarjeta);
+        }
+        
     }
 
     }
