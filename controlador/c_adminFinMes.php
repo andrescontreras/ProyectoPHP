@@ -12,6 +12,7 @@
     {
       c_adminFinMes::cobrarCreditos();
       c_adminFinMes::cobrarTarjetas();
+      c_adminFinMes::cobrarCuotaManejo();
     }
     //cobra los créditos
     public static function cobrarCreditos()
