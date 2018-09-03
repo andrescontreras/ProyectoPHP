@@ -1,14 +1,19 @@
 <?php
 // este archivo se encarga de recibir los pagos de cuentas alojados en este banco
-include_once "../modelo/m_credito";
+include_once "../../modelo/m_credito.php";
 $destino =  $_POST['creditod'];
 $origen = $_POST['cuentao'];
 $banco = $_POST['banco'];
 $monto = $_POST['monto'];
 $pass = $_POST['pass'];
 
-if($_POST['pass'])
+$hash11= '$2y$10$lUr8L1VQ2J0R4OZ64.Qvhe2/n790ka.KL3MfDkeO5D3vf1Nurp4zS';
+
+if(password_verify($pass, $hash11))
 {
+
+    echo json_encode(array('message' => 'CORRECTO'));
+    /*
     $bandera = true;
     if(!is_numeric($destino))
     {
@@ -39,7 +44,11 @@ if($_POST['pass'])
     if($bandera)
     {
         entra();
-    }
+    }*/
+}
+else
+{
+    echo json_encode(array('message' => 'La contraseña de conexion es incorrecta'));
 }
 
 function entra($origen, $destino, $banco, $monto)

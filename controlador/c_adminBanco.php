@@ -34,6 +34,7 @@ class c_adminBanco
         while ($fila = mysqli_fetch_array($consulta)) {
             $this->nombreBanco = $fila['4'];
         }
+        
         $bandera = true;
         if (!is_numeric($cuota_manejo)) {
             echo "<div class='alert alert-danger' role='alert'>

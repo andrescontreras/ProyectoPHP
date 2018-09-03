@@ -8,7 +8,9 @@ $monto = $_POST['monto'];
 $pass = $_POST['pass'];
 $tipo = $_POST['tipo'];
 
-if($_POST['pass'])
+$hashed_password = crypt('mypassword');
+// encriptar pass
+if(hash_equals($hashed_password, crypt($pass, $hashed_password)))
 {
     $bandera = true;
     if(!is_numeric($destino))
@@ -47,6 +49,10 @@ if($_POST['pass'])
             sale($origen, $destino, $banco, $monto);
         }
     }
+}
+else
+{
+    echo json_encode(array('message' => 'la contraseña es incorrecta'));
 }
 
 function entra($origen, $destino, $banco, $monto)

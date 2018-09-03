@@ -44,19 +44,29 @@ class c_login
     {
         $usuario = $_POST['usuario'];
         $clave = $_POST['clave'];
-        $consulta = m_usuario::getUsuario($_POST['usuario']);
-        $str_datos = "";
-        if ($consulta->num_rows < 1) {
-            $consulta = m_usuario::setUsuario($usuario,$clave);
-            echo "Usuario creado";
-            echo "<div class='alert alert-success' role='alert'>
-            Usuario creado
-          </div>";
-        } else {
-            echo "<div class='alert alert-danger' role='alert'>
-                El nombre de usuario ya existe
+        if(!empty($usuario) && !empty($clave))
+        {
+            $consulta = m_usuario::getUsuario($_POST['usuario']);
+            $str_datos = "";
+            if ($consulta->num_rows < 1) {
+                $consulta = m_usuario::setUsuario($usuario,$clave);
+                echo "Usuario creado";
+                echo "<div class='alert alert-success' role='alert'>
+                Usuario creado
               </div>";
-        }    
+            } else {
+                echo "<div class='alert alert-danger' role='alert'>
+                    El nombre de usuario ya existe
+                  </div>";
+            }   
+        }
+        else
+        {
+            echo "<div class='alert alert-danger' role='alert'>
+            Los campos no pueden estar vacios
+          </div>";
+        }
+        
 
     }
 }

@@ -1,40 +1,11 @@
 <?php
-// este archivo se encarga de consignar en una cuenta de este banco 
-include_once "";
-$destino =  $_POST['cuentad'];
-$origen = $_POST['cuentao'];
-$banco = $_POST['banco'];
-$monto = $_POST['monto'];
+// Ver el ejemplo de password_hash() para ver de dónde viene este hash.
 
-if($_POST['pass'])
-{
-    $bandera = true;
-    if(!is_numeric($destino))
-    {
-        $bandera = false;
-        echo json_encode(array('message' => 'El destino debe ser numerico'));
-    }
-    if(!is_numeric($origen))
-    {
-        $bandera = false;
-        echo json_encode(array('message' => 'El origen debe ser numerico'));
-    }
-    if(!is_numeric($monto))
-    {
-        $bandera = false;
-        echo json_encode(array('message' => 'El monto debe ser numerico'));
-    }
-    if(empty($banco))
-    {
-        $bandera = false;
-        echo json_encode(array('message' => 'El banco no debe estar vacio'));
-    }
-
-    if($bandera)
-    {
-        
-    }
+echo $hash =  password_hash("conexionBanco",PASSWORD_DEFAULT);
+    $hash11= '$2y$10$lUr8L1VQ2J0R4OZ64.Qvhe2/n790ka.KL3MfDkeO5D3vf1Nurp4zS';
+if (password_verify('conexionBanco', $hash11)) {
+    echo '¡La contraseña es válida!';
+} else {
+    echo 'La contraseña no es válida.';
 }
-
-// http://localhost/API/cuenta/prueba.php?cuentad=4&cuentao=2&banco0=aaaa&monto=22000
 ?>
