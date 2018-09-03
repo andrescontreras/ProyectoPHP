@@ -118,8 +118,11 @@ class cliente{
             if ($consulta) {
                 echo "Consignacion realizada";
                 $id_usu=$_SESSION['usuario'];
-                $texto="El usuario $id_usu ha consignado a la cuenta de ahorro $usuario_depositar el valor de $pagar $tipoPago";
-                m_credito::enviarNotificacionCreditoUsuario($texto);
+                //$texto="El usuario $id_usu ha consignado a la cuenta de ahorro $usuario_depositar el valor de $pagar $tipoPago";
+                $idusu_depositar=c_ahorro::buscarUsuario($usuario_depositar);
+                $texto = "Usted ha recibido una consignacion con valor de $".$pagar;
+                c_ahorro::enviarNotificacionConsignaciónVis($idusu_depositar,$texto);
+                //m_credito::enviarNotificacionCreditoUsuario($texto);
                 transaccion::crearTransaccionConsignacion($pagar,$usuario_depositar);
             }
             if($usuario_depositar!=$_SESSION['id_ahorro']){

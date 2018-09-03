@@ -55,6 +55,14 @@ class c_ahorro {
       $sql = "SELECT IDC_AHORRO FROM C_AHORRO WHERE C_AHORRO.IDC_AHORRO = ". $id;
       return $conBD->ejecutarconsulta($sql);
     }
+    public static function buscarUsuario($id){
+        $conBD = new conexion();
+        $sql = "SELECT USUARIO FROM C_AHORRO WHERE C_AHORRO.IDC_AHORRO = ". $id;
+      $consulta = $conBD->ejecutarconsulta($sql);
+      $fila = mysqli_fetch_array($consulta);
+      $u_destino = $fila['USUARIO'];
+      return $u_destino;
+    }
     //Obtener dinero cuenta ahorro
     public static function dineroAhorrado($id)
     {
