@@ -1,7 +1,17 @@
 <?php
   include_once("../controlador/c_cliente.php");
+  include_once("../modelo/m_banco.php");
   session_start();
-  $n_notificaiones =  cliente::noLeidos($_SESSION['usuario']);
+  $admin = cliente::esAdmin($_SESSION['usuario']);
+  $n_notificaiones = 0;
+  if ($admin == true)
+  {
+    $n_notificaiones =  cliente::noLeidos(-1);
+  } else {
+    $n_notificaiones =  cliente::noLeidos($_SESSION['usuario']);
+  }
+
+
  ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">

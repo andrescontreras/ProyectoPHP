@@ -373,5 +373,9 @@ class cliente{
       }
       return $count;
     }
+    public static function esAdmin($id_usuario)
+    {
+      return m_usuario::esAdmin($id_usuario);
+    }
 }
 ?>

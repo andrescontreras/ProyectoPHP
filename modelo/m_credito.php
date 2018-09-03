@@ -27,23 +27,12 @@ class m_credito{
     }
     return $conBD->ejecutarconsulta($sql);
   }
-    //Obtener administradores
-  public static function administradores()
-  {
-    $conBD = new conexion();
-    $sql = "SELECT IDUSUARIO FROM USUARIO WHERE USUARIO.TIPO = 'ADMIN'";
-    return $conBD->ejecutarconsulta($sql);
-  }
     //Crear notificacion solicitud crédito
-  public static function enviarNotificacionCredito($texto)
+  public static function enviarNotificacionCredito($texto, $u_origen)
   {
     $conBD = new conexion();
-    $consulta = m_credito::administradores();
-    while ($fila = mysqli_fetch_array($consulta)) {
-      $usuario = $fila['IDUSUARIO'];
-      $sql = "INSERT INTO MENSAJES (U_DESTINO, MENSAJE, FECHA, ESTADO) VALUES (" . $usuario . ", '$texto', CURDATE(), 1 )";
-      $conBD->ejecutarconsulta($sql);
-    }
+    $sql = "INSERT INTO MENSAJES (U_ORIGEN, U_DESTINO, MENSAJE, FECHA, ESTADO) VALUES ( ".$u_origen.", -1 , '$texto', CURDATE(), 1 )";
+    $conBD->ejecutarconsulta($sql);
   }
   //Crear notificacion de solicitud de un credito por parte de un cliente
   public static function enviarNotificacionCreditoUsuario($texto)
@@ -61,7 +50,7 @@ class m_credito{
     $con = new conexion();
     $sql = "INSERT INTO CREDITO (ESTADO, INTERES, MONTO, USUARIO, CORREO) VALUES('EN ESPERA'," . $interes . "," . $monto . "," . $cedula . ", '$correo')";
     $texto = "Un visitante ha solicitado un nuevo credito con valor de $" . $monto . ".";
-    m_credito::enviarNotificacionCredito($texto);
+    m_credito::enviarNotificacionCredito($texto, $cedula);
     return $con->ejecutarconsulta($sql);
   }
     //Añadir transaccion

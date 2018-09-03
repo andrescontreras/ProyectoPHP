@@ -1,5 +1,6 @@
 <?php
 include_once "../modelo/m_conexion.php";
+include_once "../modelo/m_banco.php";
 class m_usuario{
     public static function getID($nom_usuario)
     {
@@ -67,6 +68,26 @@ class m_usuario{
       $conBD = new conexion ();
       $sql = "SELECT * FROM MENSAJES WHERE MENSAJES.U_DESTINO = ". $id_usuario. " and MENSAJES.ESTADO = 1";
       return $conBD->ejecutarconsulta($sql);
+    }
+    //Obtiene las cuentas de ahorros asociadas al USUARIO de mayor a menor monto
+    public static function obtenerC_Ahorro($idusuario)
+    {
+      $conBD = new conexion();
+      $sql = "SELECT * FROM C_AHORRO WHERE C_AHORRO.USUARIO = ". $idusuario. " ORDER BY JAVECOINS DESC";
+      return $conBD->ejecutarconsulta($sql);
+    }
+    //Verifica si el id pertenece a un administrador
+    public static function esAdmin($id_usuario)
+    {
+      $res = m_banco::administradores();
+      $loEs = false;
+      while ( $fila = mysqli_fetch_array($res )) {
+        if ( $fila['IDUSUARIO'] == $id_usuario)
+        {
+          $loEs = true;
+        }
+      }
+      return $loEs;
     }
 }
 ?>
