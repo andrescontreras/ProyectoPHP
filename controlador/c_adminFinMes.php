@@ -5,6 +5,8 @@
   include_once("../modelo/m_c_ahorro.php");
   include_once("../modelo/m_correo.php");
   include_once("../modelo/m_transaccion.php");
+  include_once("../modelo/m_tarjeta_c.php");
+  include_once("c_correo");
   class c_adminFinMes
   {
     //Inicia la operación de fin de mes
@@ -46,7 +48,7 @@
               m_finMes::crearTransaccionPagoCredito($valorPagado, $filaAhorro['IDC_AHORRO'] );
               $texto = "Se le han descontado ".$valorAhorros. " de la cuenta ". $filaAhorro['IDC_AHORRO']." para pagar su crédito ". $filaCredito['IDCREDITO'];
               m_finMes::crearNotificacionTransaccion($texto, $filaUsuario['IDUSUARIO']);
-            } 
+            }
           }
         }
           if ($deudaCredito > 0 )
@@ -76,7 +78,7 @@
             $fin_mes=$_GET['fecha'];
               //Comparar fechas y si la fecha final es menor que la fecha pago, no pasa nada
             //Cuando el ultimo pago que se hizo al credito supera la fecha limite de pago y es antes que el fin de mes
-            if( ($fecha_final>$fecha_pago) && ($fecha_final < $fin_mes)){ 
+            if( ($fecha_final>$fecha_pago) && ($fecha_final < $fin_mes)){
               $datetime1 = new DateTime($fecha_final);
               $datetime2 = new DateTime($fin_mes);
               $interval = $datetime1->diff($datetime2);
@@ -96,18 +98,46 @@
               $dias_mes=diasMes($mes);
               $monto= $interes * $dias_mes;
               m_credito::aumentarMonto($idcredito,$monto);
-              
+
 
           }
         }
       }
-      
+
     //Cobra las tarjetas de crédito
     public static function cobrarTarjetas()
     {
-
+      $usuarios = m_usuario::getUsuarios();
+      while ($filaUsuario = mysqli_fetch_array($usuarios))
+      {
+        $correo = $filaUsuario['CORREO'];
+        $tarjeta = tarjeta_c::getTarjetas_cCliente($filaUsuario['IDUSUARIO']);
+        while ($filaTarjeta = mysqli_fetch_array($tarjeta)) {
+          $compras = m_compra::obtenerMes($filaTarjeta['IDTARJETA_C']);
+          $c_ahorro = c_ahorro::getC_ahorro($filaTarjeta['C_AHORRO']);
+          $filaC_ahorro = mysqli_fetch_array($c_ahorro);
+          $javecoins = $filaC_ahorro['JAVECOINS'];
+          while ($filaCompra = mysqli_fetch_array($compras)) {
+            $texto = "";
+            $valorPagar = $filaCompra['MONTO']/$filaCompra['CUOTAS'];
+            if (  $valorPagar > $javecoins )
+            {
+              $mensaje = "Usted no tiene fondos suficientes para pagar la tarjeta de crédito ".$filaTarjeta['IDTARJETA_C'];
+              $subject = "Pago tarjeta de crédito";
+              correo::enviarCorreo($correo, $subject, $mensaje);
+              c_ahorro::disminuirJaveCoinsXIDAhorro($javecoins, $filaC_ahorro['IDC_AHORRO']);
+              $texto = $mensaje;
+              $deuda = $valorPagar - $javecoins;
+            }else{
+              $javecoins = $javecoins - $filaTarjeta['SALDO'];
+              $texto = "Se le han descontado $".$javecoins. " para pagar su tarjeta de crédito ".$filaTarjeta['IDTARJETA_C'] ;
+            }
+            m_transaccion::t_TCredito($javecoins, $filaC_ahorro['IDC_AHORRO']);
+            m_mensaje::mensaje(NULL,$filaUsuario['IDUSUARIO'], $texto);
+          }
+        }
+      }
     }
-
     //Incrementar saldo de cuentas de ahorro
     public static function incrementarSaldoCuentas()
     {
@@ -135,7 +165,7 @@
         if($total>0){ //Cuando tiene suficiente cantidad de JaveCoins
           c_ahorro::disminuirJaveCoinsXIDAhorro( $cuota_manejo,$id_ahorro);
           $texto = "Se le han descontado $cuota_manejo JaveCoins de la cuenta $id_ahorro para pagar la cuota de manejo ";
-          m_finMes::crearNotificacionTransaccion($texto, $usuario); 
+          m_finMes::crearNotificacionTransaccion($texto, $usuario);
           $consulta2= tarjeta_c::tCreditoAsociada($id_ahorro);
           while($filaTCredito = mysqli_fetch_array($consulta2)){//Como todavia quedan JaveCoins, explorar y pagar las cuotas de manejo de las tarjetas de credito asociadas
             $tcredito_cuota=$filaTCredito['CUOTA_MANEJO'];
@@ -155,7 +185,7 @@
               m_finMes::crearNotificacionTransaccion($texto, $usuario);
             }
           }
-        }else{ //Cuando no le alcanza a pagar con las javecoins que tiene la cuenta, descuento todo lo que tiene 
+        }else{ //Cuando no le alcanza a pagar con las javecoins que tiene la cuenta, descuento todo lo que tiene
           c_ahorro::disminuirJaveCoinsXIDAhorro( $jave_coins,$id_ahorro);
           $texto = "Se le han descontado $jave_coins JaveCoins de la cuenta $id_ahorro para pagar la cuota de manejo de la cuenta de ahorro";
           m_finMes::crearNotificacionTransaccion($texto, $usuario);
@@ -164,7 +194,7 @@
     }
     public static function diasMes($mes){
       cal_days_in_month(CAL_GREGORIAN, $mes, 2018);
-    } 
+    }
     public static function diaHabil($fecha){
       $porciones = explode("-", $fecha);
       $año = $porciones[1];
@@ -176,18 +206,18 @@
         $nuevo_dia=$dia+2;
         if($nuevo_dia>$dias_mes){
           return $fecha;
-        } 
+        }
         else{
           return "$año-$mes-$nuevo_dia";
         }
-        //Verificar todos los meses 
+        //Verificar todos los meses
       }
       else if($tipo_dia == 7){
         $dias_mes=diasMes($mes);
         $nuevo_dia=$dia+1;
         if($nuevo_dia>$dias_mes){
           return $fecha;
-        } 
+        }
         else{
           return "$año-$mes-$nuevo_dia";
         }
