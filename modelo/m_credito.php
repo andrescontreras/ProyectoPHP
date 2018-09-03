@@ -120,8 +120,13 @@ class m_credito{
   public static function creditosVisitanteAprobados(){
     
     $conBD = new conexion();
-    $sql = "SELECT * FROM `credito` WHERE CORREO != '' AND ESTADO = 'APROBADO' ";
+    $sql = "SELECT * FROM credito WHERE CORREO != '' AND ESTADO = 'APROBADO' ";
     return $conBD->ejecutarconsulta($sql); 
+  }
+  public static function aumentarMonto($id_credito,$monto){
+    $conBD = new conexion();
+    $sql = "UPDATE credito SET MONTO = MONTO + $monto WHERE IDCREDITO = $id_credito";
+    return $conBD->ejecutarconsulta($sql);
   }
 
 }
