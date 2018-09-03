@@ -14,6 +14,7 @@
     {
       c_adminFinMes::cobrarCreditos();
       c_adminFinMes::cobrarTarjetas();
+      c_adminFinMes::cobrarCuotaManejo();
       c_adminFinMes::incrementarSaldoCuentas();
     }
     //cobra los créditos
@@ -63,6 +64,7 @@
         while ($fila = mysqli_fetch_array($consulta)){
           $correo = $fila['CORREO'];
           $fecha_pago = $fila['FECHA_PAGO'];
+          $fecha_pago= diaHabil($fecha_pago);
           $idcredito=$fila['IDCREDITO'];
           $interes = $fila['INTERES'];
           $monto_debe =$fila['MONTO'];
@@ -133,10 +135,8 @@
             m_transaccion::t_TCredito($javecoins, $filaC_ahorro['IDC_AHORRO']);
             m_mensaje::mensaje(NULL,$filaUsuario['IDUSUARIO'], $texto);
           }
-
         }
-
-
+      }
     }
     //Incrementar saldo de cuentas de ahorro
     public static function incrementarSaldoCuentas()
@@ -194,6 +194,37 @@
     }
     public static function diasMes($mes){
       cal_days_in_month(CAL_GREGORIAN, $mes, 2018);
+    }
+    public static function diaHabil($fecha){
+      $porciones = explode("-", $fecha);
+      $año = $porciones[1];
+      $dia=$porciones[2];
+      $mes=$porciones[1]; // porción1
+      $tipo_dia=date("N", mktime(0,0,0,$mes,$dia,$año)); // Me dice el dia(1 para Lunes, 7 para Domingo) de una fecha ingresada
+      if($tipo_dia == 6){
+        $dias_mes=diasMes($mes);
+        $nuevo_dia=$dia+2;
+        if($nuevo_dia>$dias_mes){
+          return $fecha;
+        }
+        else{
+          return "$año-$mes-$nuevo_dia";
+        }
+        //Verificar todos los meses
+      }
+      else if($tipo_dia == 7){
+        $dias_mes=diasMes($mes);
+        $nuevo_dia=$dia+1;
+        if($nuevo_dia>$dias_mes){
+          return $fecha;
+        }
+        else{
+          return "$año-$mes-$nuevo_dia";
+        }
+      }
+      else{
+        return $fecha;
+      }
     }
   }
 ?>

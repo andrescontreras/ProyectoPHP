@@ -41,7 +41,7 @@ class m_credito{
     //$consulta = m_credito::administradores();
       //$usuario = $fila['IDUSUARIO'];
       $u_origen = $_SESSION['usuario'];
-      $sql = "INSERT INTO MENSAJES (U_ORIGEN,U_DESTINO, MENSAJE, FECHA) VALUES ($u_origen, -1, '$texto', CURDATE() )";
+      $sql = "INSERT INTO MENSAJES (U_ORIGEN,U_DESTINO, MENSAJE, FECHA,ESTADO) VALUES ($u_origen, -1, '$texto', CURDATE(),1)";
       $conBD->ejecutarconsulta($sql);
   }
     //Crear credito
