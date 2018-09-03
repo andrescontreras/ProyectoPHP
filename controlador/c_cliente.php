@@ -153,7 +153,7 @@ class cliente{
         $id_usu = $_SESSION['usuario'];
         if($consulta){
             $texto= "El usuario con id $id_usu ha solicitado un credito";
-            
+
             m_credito::enviarNotificacionCreditoUsuario($texto);
             return "Se envio la solicitud del credito, espere a que se apruebe por el administrador";
         }
@@ -368,10 +368,14 @@ class cliente{
     {
       $res = m_usuario::notificacionesNoLeidas($idusuario);
       $count = 0;
-      while ($fila = mysqli_fetch_array($res))
+      if ( $res->num_rows > 0 )
       {
-        $count = $count + 1;
+        while ($fila = mysqli_fetch_array($res))
+        {
+          $count = $count + 1;
+        }
       }
+
       return $count;
     }
     public static function esAdmin($id_usuario)
