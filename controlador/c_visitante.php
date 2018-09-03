@@ -10,7 +10,7 @@ class c_visitante
   {
     $consulta = m_banco::getDatosBanco();
     $fila = mysqli_fetch_array($consulta);
-    $interes = $fila['INTERES'];
+    $interes = $fila['INTERES_MORA'];
     $res = m_credito::crearCredito($monto, $cedula, $correo, $interes);
     $subject = "Solicitud de crédito";
     $mensaje = "Usted ha realizado una solicitud de un credito con valor de $" . $monto;

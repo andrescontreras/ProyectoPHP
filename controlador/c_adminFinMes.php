@@ -9,6 +9,7 @@
     {
       c_adminFinMes::cobrarCreditos();
       c_adminFinMes::cobrarTarjetas();
+      c_adminFinMes::incrementarSaldoCuentas();
     }
     //cobra los créditos
     public static function cobrarCreditos()
@@ -47,7 +48,7 @@
           }
           if ($deudaCredito > 0 )
           {
-            $deudaCredito = $deudaCredito * $filaCredito*['INTERES'];
+            $deudaCredito = ($deudaCredito * $filaCredito['INTERES']) + $deudaCredito;
             m_credito::actualizarCredito( $filaCredito['IDCREDITO'] , $deudaCredito );
             $texto = "Se ha actualizado el valor de su credito ".$filaCredito['IDCREDITO'];
             m_finMes::crearNotificacionTransaccion($texto, $filaUsuario['IDUSUARIO']);
@@ -58,6 +59,21 @@
     //Cobra las tarjetas de crédito
     public static function cobrarTarjetas()
     {
+
+    }
+
+    //Incrementar saldo de cuentas de ahorro
+    public static function incrementarSaldoCuentas()
+    {
+      $consulta = m_banco::getDatosBanco();
+      $fila = mysqli_fetch_array($consulta);
+      $interes = $fila['INTERES'];
+      $consulta = m_finMes::obtenerC_Ahorros();
+      while ($fila = mysqli_fetch_array($consulta))
+      {
+        $saldo = ($fila['JAVECOINS']*$interes) + $fila['JAVECOINS'];
+        m_finMes::incrementarSaldo($saldo, $fila['IDC_AHORRO']);
+      }
 
     }
   }

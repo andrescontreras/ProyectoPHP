@@ -26,7 +26,7 @@ if (mysqli_query($con,$sql)) {
 }else{
  echo mysqli_error($con);
 }
-$sql = "CREATE TABLE BANCO (CUOTA_MANEJO INT NOT NULL, INTERES FLOAT, CUOTA_OPERACION INT, INTERES_MORA INT, NOMBRE VARCHAR(45))";
+$sql = "CREATE TABLE BANCO (CUOTA_MANEJO INT NOT NULL, INTERES FLOAT, CUOTA_OPERACION INT, INTERES_MORA FLOAT, NOMBRE VARCHAR(45))";
 if (mysqli_query($con,$sql)) {
  echo "| Tabla banco creada ";
 }else{
