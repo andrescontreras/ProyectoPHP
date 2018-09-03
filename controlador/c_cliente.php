@@ -153,6 +153,7 @@ class cliente{
         $id_usu = $_SESSION['usuario'];
         if($consulta){
             $texto= "El usuario con id $id_usu ha solicitado un credito";
+            
             m_credito::enviarNotificacionCreditoUsuario($texto);
             return "Se envio la solicitud del credito, espere a que se apruebe por el administrador";
         }

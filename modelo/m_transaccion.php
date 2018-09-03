@@ -25,6 +25,11 @@ class transaccion{
         $sql = "INSERT INTO transaccion (MONTO,TIPO,FECHA,C_ORIGEN,CUOTAS) VALUES ('$monto','COMPRA',CURDATE(),'$c_origen',$cuotas)";
         return $conBD->ejecutarconsulta($sql);
     }
+    public static function buscarTransaccionVisitante($idcredito_destino){
+        $conBD = new conexion();
+        $sql ="SELECT * FROM `transaccion` WHERE TIPO = 'PAGOCREDITO' AND C_DESTINO = $idcredito_destino";
+        return $conBD->ejecutarconsulta($sql);
+    }
 
 }
 ?>

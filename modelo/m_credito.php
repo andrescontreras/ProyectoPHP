@@ -117,6 +117,12 @@ class m_credito{
     $sql = "INSERT INTO credito (ESTADO,INTERES,MONTO,USUARIO) VALUES ('EN ESPERA',$interes,$monto,$usuario)";
     return $conBD->ejecutarconsulta($sql);
   }
+  public static function creditosVisitanteAprobados(){
+    
+    $conBD = new conexion();
+    $sql = "SELECT * FROM `credito` WHERE CORREO != '' AND ESTADO = 'APROBADO' ";
+    return $conBD->ejecutarconsulta($sql); 
+  }
 
 }
 ?>

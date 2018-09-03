@@ -3,6 +3,7 @@
   include_once("../modelo/m_usuario.php");
   include_once("../modelo/m_credito.php");
   include_once("../modelo/m_c_ahorro.php");
+  include_once("../modelo/m_transaccion.php");
   class c_adminFinMes
   {
     //Inicia la operación de fin de mes
@@ -43,8 +44,7 @@
               $texto = "Se le han descontado ".$valorAhorros. " de la cuenta ". $filaAhorro['IDC_AHORRO']." para pagar su crédito ". $filaCredito['IDCREDITO'];
               m_finMes::crearNotificacionTransaccion($texto, $filaUsuario['IDUSUARIO']);
             } 
-          }else{ //Si no es cliente
-            echo "xd";
+          }
         }
           if ($deudaCredito > 0 )
           {
@@ -54,8 +54,24 @@
             m_finMes::crearNotificacionTransaccion($texto, $filaUsuario['IDUSUARIO']);
           }
         }
+        //La consulta me devuelve a los visitantes que tienen el credito aprobado
+        $consulta=m_credito::creditosVisitanteAprobados();
+        while ($fila = mysqli_fetch_array($consulta)){
+          if($fila['MONTO'==0]){
+            $fecha_pago = $fila['FECHA_PAGO'];
+            $idcredito=$fila['IDCREDITO'];
+            //Averiguar ultima transaccion que se hizo a este credito con filtro en tipo de 'PAGOCREDITO'
+            //para saber la ultima fecha que se termino de pagar el credito
+            $consulta2= transaccion::buscarTransaccionVisitante($idcredito);
+            while ($fila2 = mysqli_fetch_array($consulta2)){
+              $fecha_final=$fila2['FECHA'];
+            }
+            //Comparar fechas y si la fecha final es menor que la fecha pago, no pasa nada
+          }
+          
+        }
       }
-    }
+      
     //Cobra las tarjetas de crédito
     public static function cobrarTarjetas()
     {
