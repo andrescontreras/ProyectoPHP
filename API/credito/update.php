@@ -1,6 +1,10 @@
 <?php
 // este archivo se encarga de recibir los pagos de cuentas alojados en este banco
+
 include_once "../../modelo/m_credito.php";
+include_once "../../modelo/m_transaccion.php";
+include_once "../../modelo/m_mensaje";
+
 $destino =  $_POST['creditod'];
 $origen = $_POST['cuentao'];
 $banco = $_POST['banco'];
@@ -11,9 +15,7 @@ $hash11= '$2y$10$lUr8L1VQ2J0R4OZ64.Qvhe2/n790ka.KL3MfDkeO5D3vf1Nurp4zS';
 
 if(password_verify($pass, $hash11))
 {
-
-    echo json_encode(array('message' => 'CORRECTO'));
-    /*
+    
     $bandera = true;
     if(!is_numeric($destino))
     {
@@ -43,17 +45,18 @@ if(password_verify($pass, $hash11))
     }
     if($bandera)
     {
-        entra();
-    }*/
+        pagarCredito();
+    }
 }
 else
 {
     echo json_encode(array('message' => 'La contraseña de conexion es incorrecta'));
 }
 
-function entra($origen, $destino, $banco, $monto)
+// se paga un credito desde un banco externo
+function pagarCredito($origen, $destino, $banco, $monto)
 {
- $consulta = c_ahorro::getDatosCredito($destino);
+ $consulta = m_credito::getDatosCredito($destino);
  if(!mysqli_num_rows($consulta) < 1)
  {
     $datos;
@@ -62,9 +65,14 @@ function entra($origen, $destino, $banco, $monto)
      }
      if(datos[5] - $monto >= 0)
      {
-        c_ahorro::disminuir_monto($monto, $destino);
-        // hacer la transaccion
-        // hacer la notificacion
+         // operacion
+         m_credito::disminuir_monto($monto, $destino);
+        // transaccion
+        transaccion::t_pagoCredito($monto,$destino,$origen,$banco);
+        // mensaje
+        $mensaje = "Se ha pagado el credito con id: $destino con un monto de $monto a través de la cuenta $origen del banco $banco  el dia ".date("Y-m-d H:i:s");
+        m_mensaje::mensaje($origen,$datos[6],$mensaje);
+        
      }
     
  }

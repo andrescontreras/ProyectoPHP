@@ -1,9 +1,15 @@
 <?php
-include_once "../modelo/m_conexion.php";
+include_once "m_conexion.php";
 class transaccion{
     public static function crearTransaccionConsignacion($monto,$c_destino){
         $conBD = new conexion();
         $c_origen=$_SESSION['id_ahorro'];
+        $sql = "INSERT INTO transaccion (MONTO,TIPO,FECHA,C_ORIGEN,C_DESTINO) VALUES ('$monto','CONSIGNACION',CURDATE(),'$c_origen','$c_destino')";
+        return $conBD->ejecutarconsulta($sql);
+    }
+
+    public static function consignarC_ahorro($c_origen,$c_destino,$monto){
+        $conBD = new conexion();
         $sql = "INSERT INTO transaccion (MONTO,TIPO,FECHA,C_ORIGEN,C_DESTINO) VALUES ('$monto','CONSIGNACION',CURDATE(),'$c_origen','$c_destino')";
         return $conBD->ejecutarconsulta($sql);
     }
@@ -19,6 +25,13 @@ class transaccion{
         $sql = "INSERT INTO transaccion (MONTO,TIPO,FECHA,C_ORIGEN,C_DESTINO) VALUES ('$monto','PAGOCREDITO',CURDATE(),'$c_origen','$c_destino')";
         return $conBD->ejecutarconsulta($sql);
     }
+    public static function t_pagoCredito($monto,$c_destino,$c_origen,$banco){
+        $conBD = new conexion();
+        $c_origen=$_SESSION['id_ahorro'];
+        $sql = "INSERT INTO transaccion (MONTO,TIPO,FECHA,C_ORIGEN,C_DESTINO,BANCO) VALUES ('$monto','PAGOCREDITO',CURDATE(),'$c_origen','$c_destino','$banco')";
+        return $conBD->ejecutarconsulta($sql);
+    }
+
     public static function crearTransaccionCompra($monto,$cuotas){
         $conBD = new conexion();
         $c_origen=$_SESSION['id_credito'];
