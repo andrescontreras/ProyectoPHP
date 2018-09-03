@@ -6,7 +6,7 @@ class m_mensaje
     {
         $conBD = new conexion();
         $sql = "INSERT INTO MENSAJES (U_ORIGEN, U_DESTINO, MENSAJE, FECHA, ESTADO)
-        VALUES ($origen,$destino,$mensaje,$fecha,1)";
+        VALUES ($origen,$destino,'$mensaje',CURDATE(),1)";
         return $conBD->ejecutarconsulta($sql);
     }
 }

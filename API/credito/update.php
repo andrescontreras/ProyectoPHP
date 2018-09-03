@@ -3,7 +3,7 @@
 
 include_once "../../modelo/m_credito.php";
 include_once "../../modelo/m_transaccion.php";
-include_once "../../modelo/m_mensaje";
+include_once "../../modelo/m_mensaje.php";
 
 $destino =  $_POST['creditod'];
 $origen = $_POST['cuentao'];
@@ -38,19 +38,14 @@ if(password_verify($pass, $hash11))
         echo json_encode(array('message' => 'El banco no debe estar vacio'));
     }
 
-    if($tipo != 'ENTRA' or $tipo != 'SALE')
-    {
-        $bandera = false;
-        echo json_encode(array('message' => 'El tipo de la transaccion no es valido'));
-    }
     if($bandera)
     {
-        pagarCredito();
+        pagarCredito($origen, $destino, $banco, $monto);
     }
 }
 else
 {
-    echo json_encode(array('message' => 'La contraseña de conexion es incorrecta'));
+    echo json_encode(array('message' => 'La contrasena de conexion es incorrecta'));
 }
 
 // se paga un credito desde un banco externo
@@ -63,7 +58,7 @@ function pagarCredito($origen, $destino, $banco, $monto)
     while($fila = mysqli_fetch_array($consulta)) {
         $datos = $fila;
      }
-     if(datos[5] - $monto >= 0)
+     if($datos[5] - $monto >= 0)
      {
          // operacion
          m_credito::disminuir_monto($monto, $destino);
@@ -72,7 +67,7 @@ function pagarCredito($origen, $destino, $banco, $monto)
         // mensaje
         $mensaje = "Se ha pagado el credito con id: $destino con un monto de $monto a través de la cuenta $origen del banco $banco  el dia ".date("Y-m-d H:i:s");
         m_mensaje::mensaje($origen,$datos[6],$mensaje);
-        
+        echo json_encode(array('message' => "El pago del credito con id: $destino, a traves de la cuenta de ahorros $origen del banco $banco se realizo correctamente"));
      }
     
  }
