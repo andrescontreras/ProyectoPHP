@@ -19,6 +19,6 @@ class compra {
     public static function actualizarPagoCompra($idcompra, $monto, $pagado )
     {
       $conBD = new conexion();
-      $sql = "UPDATE COMPRA SET COMPRA.MONTO"
+      $sql = "UPDATE COMPRA SET COMPRA.MONTO";
     }
 }
