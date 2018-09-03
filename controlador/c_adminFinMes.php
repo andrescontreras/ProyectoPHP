@@ -86,6 +86,14 @@
               $subject="Credito sin pagar";
               $mensaje ="El credito que pedio con un valor de $monto_debe vencio la fecha de pago $fecha_pago";
               correo::enviarCorreo($correo,$subject,$mensaje);
+              //Sacar del fecha de pago el mes, para que pueda sacar los dias de ese mes y multiplicarlos con el interes
+              //y despues aumentar el monto de ese credito
+              $porciones = explode("-", $fecha_pago);
+              $mes=$porciones[1]; // porción1
+              $dias_mes=diasMes($mes);
+              $monto= $interes * $dias_mes;
+              m_credito::aumentarMonto($idcredito,$monto);
+              
 
           }
         }
@@ -135,6 +143,9 @@
           m_finMes::crearNotificacionTransaccion($texto, $usuario);
         }
       }
+    }
+    public static function diasMes($mes){
+      cal_days_in_month(CAL_GREGORIAN, $mes, 2018);
     } 
   }
 ?>
