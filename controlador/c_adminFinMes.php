@@ -24,7 +24,7 @@
           $deudaCredito = $filaCredito['MONTO'];
           $valorPagado = 0;
           if ($deudaCredito->num_rows > 0 ){ //Si es cliente
-            while ( $filaAhorro = mysqli_fetch_array() && $deudaCredito > 0)
+            while ( $filaAhorro = mysqli_fetch_array($ahorro) && $deudaCredito > 0)
             {
               $valorAhorros = $filaAhorro['JAVECOINS'] ;
               if (  $valorAhorros - $deudaCredito <= 0 )
@@ -62,27 +62,44 @@
 
     }
     public static function cobrarCuotaManejo(){
-      c_adminFinMes::cuotaManejoCAhorro();
-      c_adminFinMes::cuotaManejoTCredito();
-    }
-    public static function cuotaManejoCAhorro(){
       $consulta=c_ahorro::allSelectAhorro();
       while ($fila = mysqli_fetch_array($consulta))
       {
         $id_ahorro= $fila['IDC_AHORRO'];
+        $usuario = $fila['USUARIO'];
         $cuota_manejo=$fila['CUOTA_MANEJO'];
         $jave_coins=$fila['JAVECOINS'];
         $total = $jave_coins - $cuota_manejo;
-        //Cuando no le alcanza a pagar con las javecoins que tiene la cuenta, descuento todo lo que tiene 
-        if($total<0){
-          c_ahorro::disminuirJaveCoinsXIDAhorro( $jave_coins,$id_ahorro);
-        }else{
+        $jave_coins = $total;
+        if($total>0){ //Cuando tiene suficiente cantidad de JaveCoins
           c_ahorro::disminuirJaveCoinsXIDAhorro( $cuota_manejo,$id_ahorro);
+          $texto = "Se le han descontado $cuota_manejo JaveCoins de la cuenta $id_ahorro para pagar la cuota de manejo ";
+          m_finMes::crearNotificacionTransaccion($texto, $usuario); 
+          $consulta2= tarjeta_c::tCreditoAsociada($id_ahorro);
+          while($filaTCredito = mysqli_fetch_array($consulta2)){//Como todavia quedan JaveCoins, explorar y pagar las cuotas de manejo de las tarjetas de credito asociadas
+            $tcredito_cuota=$filaTCredito['CUOTA_MANEJO'];
+            $idtarjeta_c= $filaTCredito['ID_TARJETAC'];
+            $total = $jave_coins-$tcredito_cuota;
+            $jave_coins=$total;
+            if($total<0){ //Cuando la cuota de manejo de la tarjeta es mayor que lo que se tiene en la cuenta de ahorro, se descuenta todo lo que se tiene de la cuenta
+              c_ahorro::disminuirJaveCoinsXIDAhorro( $jave_coins,$id_ahorro);
+              $texto = "Se le han descontado $jave_coins JaveCoins de la cuenta $id_ahorro para pagar la cuota de manejo de la tarjeta de credito $idtarjeta_c";
+              m_finMes::crearNotificacionTransaccion($texto, $usuario);
+              //Como ya no tengo mas JaveCoins en la cuenta rompo el ciclo
+              break;
+            }
+            else{
+              c_ahorro::disminuirJaveCoinsXIDAhorro( $tcredito_cuota,$id_ahorro);
+              $texto = "Se le han descontado $tcredito_cuota JaveCoins de la cuenta $id_ahorro para pagar la cuota de manejo de la tarjeta de credito $idtarjeta_c";
+              m_finMes::crearNotificacionTransaccion($texto, $usuario);
+            }
+          }
+        }else{ //Cuando no le alcanza a pagar con las javecoins que tiene la cuenta, descuento todo lo que tiene 
+          c_ahorro::disminuirJaveCoinsXIDAhorro( $jave_coins,$id_ahorro);
+          $texto = "Se le han descontado $jave_coins JaveCoins de la cuenta $id_ahorro para pagar la cuota de manejo de la cuenta de ahorro";
+          m_finMes::crearNotificacionTransaccion($texto, $usuario);
         }
       }
-    }
-    public static function cuotaManejoTCredito(){
-
-    }
+    } 
   }
 ?>

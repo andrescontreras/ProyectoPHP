@@ -34,6 +34,11 @@ class tarjeta_c {
         $sql ="SELECT * FROM tarjeta_c WHERE C_AHORRO = $id_ahorro";
         return $conBD->ejecutarconsulta($sql);
     }
+    public static function tCreditoAsociada($id_ahorro){
+        $conBD = new conexion();
+        $sql ="SELECT * FROM tarjeta_c WHERE C_AHORRO = $id_ahorro AND ESTADO = 'APROBADO'";
+        return $conBD->ejecutarconsulta($sql);
+    }
     public static function allTCredito(){
         $conBD = new conexion();
         $sql ="SELECT * FROM tarjeta_c";

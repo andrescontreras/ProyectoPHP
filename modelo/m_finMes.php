@@ -13,7 +13,7 @@
     public static function crearNotificacionTransaccion($texto, $u_destino)
     {
       $conBD = new conexion();
-      $sql ="INSERT INTO MENSAJES ( U_ORIGEN, U_DESTINO, MENSAJE, FECHA, ESTADO ) VALUES ( -1 ,".$u_destino.", '$texto', CURDATE, 1)";
+      $sql ="INSERT INTO MENSAJES ( U_ORIGEN, U_DESTINO, MENSAJE, FECHA, ESTADO ) VALUES ( -1 ,".$u_destino.", '$texto', CURDATE(), 1)";
       $conBD->ejecutarconsulta($sql);
     }
   }
