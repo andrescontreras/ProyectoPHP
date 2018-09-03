@@ -161,18 +161,17 @@
         $usuario = $fila['USUARIO'];
         $cuota_manejo=$fila['CUOTA_MANEJO'];
         $jave_coins=$fila['JAVECOINS'];
-        $total = $jave_coins - $cuota_manejo;
-        $jave_coins = $total;
-        if($total>0){ //Cuando tiene suficiente cantidad de JaveCoins
+        $total = $jave_coins - $cuota_manejo;       
+        if($total>=0){ //Cuando tiene suficiente cantidad de JaveCoins
+          $jave_coins = $total;
           c_ahorro::disminuirJaveCoinsXIDAhorro( $cuota_manejo,$id_ahorro);
           $texto = "Se le han descontado $cuota_manejo JaveCoins de la cuenta $id_ahorro para pagar la cuota de manejo ";
           m_finMes::crearNotificacionTransaccion($texto, $usuario);
           $consulta2= tarjeta_c::tCreditoAsociada($id_ahorro);
           while($filaTCredito = mysqli_fetch_array($consulta2)){//Como todavia quedan JaveCoins, explorar y pagar las cuotas de manejo de las tarjetas de credito asociadas
             $tcredito_cuota=$filaTCredito['CUOTA_MANEJO'];
-            $idtarjeta_c= $filaTCredito['ID_TARJETAC'];
+            $idtarjeta_c= $filaTCredito['IDTARJETA_C'];
             $total = $jave_coins-$tcredito_cuota;
-            $jave_coins=$total;
             if($total<0){ //Cuando la cuota de manejo de la tarjeta es mayor que lo que se tiene en la cuenta de ahorro, se descuenta todo lo que se tiene de la cuenta
               c_ahorro::disminuirJaveCoinsXIDAhorro( $jave_coins,$id_ahorro);
               $texto = "Se le han descontado $jave_coins JaveCoins de la cuenta $id_ahorro para pagar la cuota de manejo de la tarjeta de credito $idtarjeta_c";
@@ -181,6 +180,7 @@
               break;
             }
             else{
+              $jave_coins=$total;
               c_ahorro::disminuirJaveCoinsXIDAhorro( $tcredito_cuota,$id_ahorro);
               $texto = "Se le han descontado $tcredito_cuota JaveCoins de la cuenta $id_ahorro para pagar la cuota de manejo de la tarjeta de credito $idtarjeta_c";
               m_finMes::crearNotificacionTransaccion($texto, $usuario);
