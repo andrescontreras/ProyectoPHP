@@ -12,11 +12,8 @@
     {
       c_adminFinMes::cobrarCreditos();
       c_adminFinMes::cobrarTarjetas();
-<<<<<<< HEAD
       c_adminFinMes::cobrarCuotaManejo();
-=======
       c_adminFinMes::incrementarSaldoCuentas();
->>>>>>> 21c0ee60053078e8a6d134447041c2443a47f03d
     }
     //cobra los créditos
     public static function cobrarCreditos()
@@ -109,7 +106,6 @@
     {
 
     }
-<<<<<<< HEAD
 
     //Incrementar saldo de cuentas de ahorro
     public static function incrementarSaldoCuentas()
@@ -125,7 +121,6 @@
       }
 
     }
-=======
     public static function cobrarCuotaManejo(){
       $consulta=c_ahorro::allSelectAhorro();
       while ($fila = mysqli_fetch_array($consulta))
@@ -169,6 +164,5 @@
     public static function diasMes($mes){
       cal_days_in_month(CAL_GREGORIAN, $mes, 2018);
     } 
->>>>>>> 4546fde0da335e35ba319c959567c34724ceb479
   }
 ?>
