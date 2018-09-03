@@ -61,6 +61,7 @@ class c_visitante
     $mensaje = "Usted ha realizado una consignacion con valor de $" . $nuevoMonto;
     correo::enviarCorreo($correo,$subject,$mensaje);
   }
+
 }
 
 ?>

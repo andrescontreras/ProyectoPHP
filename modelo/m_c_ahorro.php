@@ -1,4 +1,5 @@
 <?php
+include_once 'm_conexion.php';
 class c_ahorro {
     public static function setC_manejo($cuota_manejo)
     {
@@ -38,13 +39,13 @@ class c_ahorro {
     public static function allSelectAhorro(){
         $conBD = new conexion();
         $id_usu=$_SESSION['usuario'];
-        $sql = "SELECT * FROM c_ahorro";
+        $sql = "SELECT * FROM c_ahorro" ;
         return $conBD->ejecutarconsulta($sql);
 
     }
     public static function consignarMonto($pagar,$usuario_depositar){
         $conBD = new conexion();
-        $id_usu=$_SESSION['usuario'];
+        //$id_usu=$_SESSION['usuario'];
         $sql = "UPDATE c_ahorro SET JAVECOINS = JAVECOINS + $pagar WHERE IDC_AHORRO =$usuario_depositar";
         return $conBD->ejecutarconsulta($sql);
     }
@@ -95,5 +96,14 @@ class c_ahorro {
         $sql = "SELECT * FROM c_ahorro WHERE USUARIO ="."'".$_SESSION['usuario']."'";
         return $conBD->ejecutarconsulta($sql);
     }
+
+    public static function getC_ahorro($id_cuenta)
+    {
+        $conBD = new conexion();
+        $sql = "SELECT * FROM c_ahorro WHERE IDC_AHORRO = $id_cuenta";
+        return $conBD->ejecutarconsulta($sql);
+    }
+
+   
 }
 ?>

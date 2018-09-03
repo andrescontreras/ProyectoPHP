@@ -1,5 +1,5 @@
 <?php
-include_once "../modelo/m_config.php";
+include_once __DIR__."/m_config.php";
 
 class conexion
 {

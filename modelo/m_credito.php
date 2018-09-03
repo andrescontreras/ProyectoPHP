@@ -38,8 +38,8 @@ class m_credito{
   public static function enviarNotificacionCreditoUsuario($texto)
   {
     $conBD = new conexion();
-    $consulta = m_credito::administradores();
-      $usuario = $fila['IDUSUARIO'];
+    //$consulta = m_credito::administradores();
+      //$usuario = $fila['IDUSUARIO'];
       $u_origen = $_SESSION['usuario'];
       $sql = "INSERT INTO MENSAJES (U_ORIGEN,U_DESTINO, MENSAJE, FECHA) VALUES ($u_origen, -1, '$texto', CURDATE() )";
       $conBD->ejecutarconsulta($sql);
@@ -115,6 +115,17 @@ class m_credito{
     $conBD = new conexion();
     $usuario = $_SESSION['usuario'];
     $sql = "INSERT INTO credito (ESTADO,INTERES,MONTO,USUARIO) VALUES ('EN ESPERA',$interes,$monto,$usuario)";
+    return $conBD->ejecutarconsulta($sql);
+  }
+  public static function creditosVisitanteAprobados(){
+    
+    $conBD = new conexion();
+    $sql = "SELECT * FROM credito WHERE CORREO != '' AND ESTADO = 'APROBADO' ";
+    return $conBD->ejecutarconsulta($sql); 
+  }
+  public static function aumentarMonto($id_credito,$monto){
+    $conBD = new conexion();
+    $sql = "UPDATE credito SET MONTO = MONTO + $monto WHERE IDCREDITO = $id_credito";
     return $conBD->ejecutarconsulta($sql);
   }
 
