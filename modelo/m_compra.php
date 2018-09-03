@@ -21,4 +21,5 @@ class compra {
       $conBD = new conexion();
       $sql = "UPDATE COMPRA SET COMPRA.MONTO";
     }
+    
 }

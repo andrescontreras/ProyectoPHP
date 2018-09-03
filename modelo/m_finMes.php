@@ -35,7 +35,7 @@
     public static function obtenerMes($date)
     {
       $conBD = new conexion();
-      $sql = "MONTH("$date")";
+      //$sql = "MONTH("$date")";
     }
   }
 ?>

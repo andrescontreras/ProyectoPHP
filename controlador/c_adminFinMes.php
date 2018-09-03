@@ -1,21 +1,22 @@
 <?php
-  include_once("../modelo/m_finMes.php");
-  include_once("../modelo/m_usuario.php");
-  include_once("../modelo/m_credito.php");
-  include_once("../modelo/m_c_ahorro.php");
-  include_once("../modelo/m_correo.php");
-  include_once("../modelo/m_transaccion.php");
-  include_once("../modelo/m_tarjeta_c.php");
-  include_once("c_correo");
+  include_once "../modelo/m_finMes.php";
+  include_once "../modelo/m_usuario.php" ;
+  include_once "../modelo/m_credito.php" ;
+  include_once "../modelo/m_c_ahorro.php" ;
+  include_once "../controlador/c_correo.php";
+  //include_once "../modelo/m_correo.php";
+  include_once "../modelo/m_transaccion.php" ;
+  include_once "../modelo/m_tarjeta_c.php";
+ 
   class c_adminFinMes
   {
     //Inicia la operación de fin de mes
     public static function finDeMes()
     {
-      c_adminFinMes::cobrarCreditos();
-      c_adminFinMes::cobrarTarjetas();
+      //c_adminFinMes::cobrarCreditos();
+      //c_adminFinMes::cobrarTarjetas();
       c_adminFinMes::cobrarCuotaManejo();
-      c_adminFinMes::incrementarSaldoCuentas();
+      //c_adminFinMes::incrementarSaldoCuentas();
     }
     //cobra los créditos
     public static function cobrarCreditos()

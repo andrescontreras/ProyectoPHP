@@ -371,6 +371,7 @@ class cliente{
     {
       $res = m_usuario::notificacionesNoLeidas($idusuario);
       $count = 0;
+      
       if ( $res->num_rows > 0 )
       {
         while ($fila = mysqli_fetch_array($res))
