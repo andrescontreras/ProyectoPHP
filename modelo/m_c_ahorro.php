@@ -19,7 +19,7 @@ class c_ahorro {
         $conBD = new conexion();
         $id_ahorro=$_SESSION['id_ahorro'];
 
-        echo "UPDATE c_ahorro SET JAVECOINS = JAVECOINS-$pagar WHERE IDC_AHORRO = $id_ahorro";
+        //echo "UPDATE c_ahorro SET JAVECOINS = JAVECOINS-$pagar WHERE IDC_AHORRO = $id_ahorro";
         $sql = "UPDATE c_ahorro SET JAVECOINS = JAVECOINS-$pagar WHERE IDC_AHORRO = $id_ahorro";
         return $conBD->ejecutarconsulta($sql);
     }

@@ -32,12 +32,22 @@ echo cliente::CreditosxUsuario();
 </form>
 <?php
 if(isset($_GET['pagar_monto'])){
+    if(empty($_GET['monto']) && empty($_GET['credito'])){
+        echo "Debe colocar un valor en la casilla del monto <br>";
+        echo "Debe colocar un credito que quiere pagar<br>";
+    }else if(empty($_GET['monto']) || !is_numeric($_GET['monto'])){
+        echo "Debe colocar un valor en la casilla del monto y debe ser un numero<br>";
+    }else if(empty($_GET['credito'])){
+        echo "Debe colocar un credito que quiere pagar<br>";
+    }else{
     $porciones = explode("_", $_GET['credito']);
     $id_Credito=$porciones[1]; // porción1
     //echo "idCredito $id_Credito";
     $tipo_pago = $_GET["tipoPago"];
     $monto=$_GET['monto'];
     echo cliente::pagarCredito($monto,$id_Credito,$tipo_pago);
+    }
+    
 }
 ?>
 </body>

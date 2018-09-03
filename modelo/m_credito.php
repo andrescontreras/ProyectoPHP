@@ -45,6 +45,18 @@ class m_credito{
       $conBD->ejecutarconsulta($sql);
     }
   }
+  //Crear notificacion de solicitud de un credito por parte de un cliente
+  public static function enviarNotificacionCreditoUsuario($texto)
+  {
+    $conBD = new conexion();
+    $consulta = m_credito::administradores();
+    while ($fila = mysqli_fetch_array($consulta)) {
+      $usuario = $fila['IDUSUARIO'];
+      $u_origen = $_SESSION['usuario'];
+      $sql = "INSERT INTO MENSAJES (U_ORIGEN,U_DESTINO, MENSAJE, FECHA) VALUES ($u_origen," . $usuario . ", '$texto', CURDATE() )";
+      $conBD->ejecutarconsulta($sql);
+    }
+  }
     //Crear credito
   public static function crearCredito($monto, $cedula, $correo, $interes)
   {

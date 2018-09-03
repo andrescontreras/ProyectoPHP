@@ -55,7 +55,10 @@ class cliente{
     }
     public static function crearTCredito($id_cAhorro){
         $consulta =  tarjeta_c::crearTCredito($id_cAhorro);
+        $id_usu = $_SESSION['usuario'];
         if($consulta){
+            $texto= "El usuario con id $id_usu ha solicitado una tarjeta de credito";
+            m_credito::enviarNotificacionCreditoUsuario($texto);
             return "Se solicito la tarjeta de credito";
         }
         else{
@@ -97,7 +100,7 @@ class cliente{
             $pagar=$monto_consig/1000;
             //echo "pagar en pesos $pagar";
         }
-        if(($monto_cuenta-$pagar)<0 && $usuario_depositar!=$_SESSION['usuario']){
+        if(($monto_cuenta-$pagar)<0 && $usuario_depositar!=$_SESSION['id_ahorro']){
             return "No tiene la cantidad de monto a consignar en la cuenta";
         }
         else{
@@ -113,10 +116,13 @@ class cliente{
             $consulta=c_ahorro::consignarMonto($pagar,$usuario_depositar);
             //echo "UPDATE c_ahorro SET JaveCoins = JaveCoins + $pagar WHERE ID =$usuario_depositar";
             if ($consulta) {
-            echo "Consignacion realizada";
+                echo "Consignacion realizada";
+                $id_usu=$_SESSION['usuario'];
+                $texto="El usuario $id_usu ha consignado a la cuenta de ahorro $usuario_depositar el valor de $pagar $tipoPago";
+                m_credito::enviarNotificacionCreditoUsuario($texto);
                 transaccion::crearTransaccionConsignacion($pagar,$usuario_depositar);
             }
-            if($usuario_depositar!=$_SESSION['usuario']){
+            if($usuario_depositar!=$_SESSION['id_ahorro']){
                 $consulta = c_ahorro::disminuirJaveCoins($monto_cuenta,$pagar);
             }
 
@@ -144,7 +150,10 @@ class cliente{
     }
     public static function solicitudCredito($interes,$monto){
         $consulta= m_credito::crearCreditoCliente($interes,$monto);
+        $id_usu = $_SESSION['usuario'];
         if($consulta){
+            $texto= "El usuario con id $id_usu ha solicitado un credito";
+            m_credito::enviarNotificacionCreditoUsuario($texto);
             return "Se envio la solicitud del credito, espere a que se apruebe por el administrador";
         }
     }
@@ -181,12 +190,20 @@ class cliente{
                 if($saldo>0){
                     $sobrante =$pagar-$saldo;
                     if($sobrante<0 || $sobrante==0){
+                        $id_usu=$_SESSION['usuario'];
+                        $id_ahorro=$_SESSION['id_ahorro'];
+                        $texto="El usuario $id_usu ha pagado el valor de $pagar $tipoPago con la cuenta de ahorro $id_ahorro a la tarjeta de credito con id $id_Tcredito";
+                        m_credito::enviarNotificacionCreditoUsuario($texto);
                         tarjeta_c::disminuir_saldo($pagar,$id_Tcredito);
                         c_ahorro::disminuirJaveCoins($jave_coins,$pagar);
                         transaccion::crearTransaccionPagoTCredito($pagar,$id_Tcredito);
                         return "Se realizo el pago de la tarjeta";
                     }
                     else{//sobrante>0
+                        $id_usu=$_SESSION['usuario'];
+                        $id_ahorro=$_SESSION['id_ahorro'];
+                        $texto="El usuario $id_usu ha pagado el valor de $saldo $tipoPago con la cuenta de ahorro $id_ahorro a la tarjeta de credito con id $id_Tcredito";
+                        m_credito::enviarNotificacionCreditoUsuario($texto);
                         c_ahorro::disminuirJaveCoins($jave_coins,$saldo);
                         tarjeta_c::disminuir_saldo($saldo,$id_Tcredito);
                         transaccion::crearTransaccionPagoTCredito($saldo,$id_Tcredito);
@@ -245,12 +262,20 @@ class cliente{
                 if($saldo>0){
                     $sobrante =$pagar-$saldo;
                     if($sobrante<0 || $sobrante==0){
+                        $id_usu=$_SESSION['usuario'];
+                        $id_ahorro=$_SESSION['id_ahorro'];
+                        $texto="El usuario $id_usu ha pagado el valor de $pagar $tipoPago con la cuenta de ahorro $id_ahorro al credito con id $id_Credito";
+                        m_credito::enviarNotificacionCreditoUsuario($texto);
                         m_credito::disminuir_monto($pagar,$id_Credito);
                         c_ahorro::disminuirJaveCoins($jave_coins,$pagar);
                         transaccion::crearTransaccionPagoCredito($pagar,$id_Credito);
                         return "Se realizo el pago del credito";
                     }
                     else{//sobrante>0
+                        $id_usu=$_SESSION['usuario'];
+                        $id_ahorro=$_SESSION['id_ahorro'];
+                        $texto="El usuario $id_usu ha pagado el valor de $saldo $tipoPago con la cuenta de ahorro $id_ahorro al credito con id $id_Credito";
+                        m_credito::enviarNotificacionCreditoUsuario($texto);
                         m_credito::disminuir_monto($saldo,$id_Credito);
                         c_ahorro::disminuirJaveCoins($jave_coins,$saldo);
                         transaccion::crearTransaccionPagoCredito($saldo,$id_Credito);
@@ -284,12 +309,18 @@ class cliente{
                 if($saldo>0){
                     $sobrante =$pagar-$saldo;
                     if($sobrante<0 || $sobrante==0){
+                        $id_usu=$_SESSION['usuario'];
+                        $texto="El usuario $id_usu ha pagado el valor de $pagar $tipoPago con la cuenta de ahorro $id_CAhorro al credito con id $id_tarjetaC";
+                        m_credito::enviarNotificacionCreditoUsuario($texto);
                         c_ahorro::disminuirJaveCoinsXIDAhorro($pagar,$id_CAhorro);
                         tarjeta_c::disminuir_saldo($pagar,$id_tarjetaC);
                         transaccion::crearTransaccionPagoTCredito($pagar,$id_tarjetaC);
                         return "Se realizo el pago de la tarjeta";
                     }
                     else{//sobrante>0
+                        $id_usu=$_SESSION['usuario'];
+                        $texto="El usuario $id_usu ha pagado el valor de $saldo $tipoPago con la cuenta de ahorro $id_CAhorro a la tarjeta de credito con id $id_tarjetaC";
+                        m_credito::enviarNotificacionCreditoUsuario($texto);
                         c_ahorro::disminuirJaveCoinsXIDAhorro($saldo,$id_CAhorro);
                         tarjeta_c::disminuir_saldo($saldo,$id_tarjetaC);
                         transaccion::crearTransaccionPagoTCredito($saldo,$id_tarjetaC);
@@ -314,6 +345,9 @@ class cliente{
                 return "Realizando la compra sobrepasa el sobrecupo, compra cancelada";
             }
             else{
+                $id_usu=$_SESSION['usuario'];
+                $texto="El usuario $id_usu ha pagado el valor de $monto con la tarjeta de credito $id_tarjetaC para la compra de un $descripcion";
+                m_credito::enviarNotificacionCreditoUsuario($texto);
                 compra::crearCompra($cuotas,$monto,$descripcion);
                 tarjeta_c::aumentar_saldo($monto);
                 transaccion::crearTransaccionCompra($monto,$cuotas);
