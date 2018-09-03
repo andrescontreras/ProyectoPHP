@@ -39,7 +39,7 @@ class m_credito{
   {
     $conBD = new conexion();
     //$consulta = m_credito::administradores();
-      $usuario = $fila['IDUSUARIO'];
+      //$usuario = $fila['IDUSUARIO'];
       $u_origen = $_SESSION['usuario'];
       $sql = "INSERT INTO MENSAJES (U_ORIGEN,U_DESTINO, MENSAJE, FECHA) VALUES ($u_origen, -1, '$texto', CURDATE() )";
       $conBD->ejecutarconsulta($sql);
