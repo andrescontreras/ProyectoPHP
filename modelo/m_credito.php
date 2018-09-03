@@ -38,7 +38,7 @@ class m_credito{
   public static function enviarNotificacionCreditoUsuario($texto)
   {
     $conBD = new conexion();
-    $consulta = m_credito::administradores();
+    //$consulta = m_credito::administradores();
       $usuario = $fila['IDUSUARIO'];
       $u_origen = $_SESSION['usuario'];
       $sql = "INSERT INTO MENSAJES (U_ORIGEN,U_DESTINO, MENSAJE, FECHA) VALUES ($u_origen, -1, '$texto', CURDATE() )";
