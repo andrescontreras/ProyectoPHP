@@ -12,7 +12,6 @@ class c_adminEditCredito
     {
 
         $this->tarjeta_c = $_GET["credito"];
-        echo "ENTRO FUNCION11111111111111" . $this->tarjeta_c;
         $consulta = m_credito::getDatosCredito($this->tarjeta_c);
         $str_datos = "";
         while ($fila = mysqli_fetch_array($consulta)) {
@@ -21,8 +20,22 @@ class c_adminEditCredito
     }
     public function setDatosCredito( $interes, $estado, $id_credito)
     {
+        $bandera = true;
+        if(!is_numeric($interes))
+        {
+            echo "<div class='alert alert-danger' role='alert'>
+            Interes debe ser numerico
+          </div>";
+          $bandera = false;
+        }
+        if($bandera)
+        {
+            echo "<div class='alert alert-success' role='alert'>
+            Se actualizaron los datos correctamente
+          </div>";
         echo "ENTRO FUNCION" . $this->tarjeta_c;
-        m_credito::setDatosCredito( $interes ,$estado,$id_credito);
+        //m_credito::setDatosCredito( $interes ,$estado,$id_credito);
+        }
     }
 
 }

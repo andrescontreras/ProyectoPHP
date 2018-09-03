@@ -10,52 +10,67 @@
 <body>
     <h3>Editar tarjeta de credito</h3>
     <?php
-      include_once "../controlador/c_adminEditTarjetaC.php";
-      $editT = new c_adminEditTarjetaC();
-      $editT->getDatosTarjeta();
-      $_SESSION['id_tarjeta_c'] = $_GET['tarjeta_c'];
+    include_once "../controlador/c_adminEditTarjetaC.php";
+    $editT = new c_adminEditTarjetaC();
+    $editT->getDatosTarjeta();
+    $_SESSION['id_tarjeta_c'] = $_GET['tarjeta_c'];
+    ?>
+
+    <?php
+    if (isset($_GET['guardar'])) {
+
+      echo $cuota_manejo = $_GET['cuota_manejo'];
+      echo $cupo = $_GET["cupo"];
+      echo $sobrecupo = $_GET["sobrecupo"];
+      echo $tasa_interes = $_GET["tasa_interes"];
+      echo $estado = $_GET["estado"];
+      echo $id_tarjeta = $_GET["tarjeta_c"];
+      echo $editT->setDatosTarjeta($cuota_manejo, $cupo, $sobrecupo, $tasa_interes, $estado, $id_tarjeta);
+
+    }
+
     ?>
 
     <form action="" method="get">
     <div class="form-group row">
     <label for="inputEmail3" class="col-sm-2 col-form-label">Tarjeta a modificar</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" readonly  name="tarjeta_c" value=" <?php echo $_GET['credito'] ?> ">
+      <input type="text" class="form-control" readonly  name="tarjeta_c" value="<?php echo $_GET['tarjeta_c'] ?>">
     </div>
   </div>
     <div class="form-group row">
     <label for="inputEmail3" class="col-sm-2 col-form-label">Cuota de manejo</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control"  name="cuota_manejo" value=" <?php echo $editT->datos[1] ?> ">
+      <input type="text" class="form-control"  name="cuota_manejo" value="<?php echo $editT->datos[1] ?>">
     </div>
   </div>
   <div class="form-group row">
     <label for="inputEmail3" class="col-sm-2 col-form-label">Cupo</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control"  name="cupo" value=" <?php echo $editT->datos[4] ?> ">
+      <input type="text" class="form-control"  name="cupo" value="<?php echo $editT->datos[4] ?>">
     </div>
     </div>
   </div>
   <div class="form-group row">
     <label for="inputEmail3" class="col-sm-2 col-form-label">Sobrecupo</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" name="sobrecupo" value=" <?php echo $editT->datos[5] ?> ">
+      <input type="text" class="form-control" name="sobrecupo" value="<?php echo $editT->datos[5] ?>">
     </div>
     </div>
   </div>
   <div class="form-group row">
     <label for="inputEmail3" class="col-sm-2 col-form-label">Tasa interes</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control"  name="tasa_interes" value=" <?php echo $editT->datos[6] ?> ">
+      <input type="text" class="form-control"  name="tasa_interes" value="<?php echo $editT->datos[6] ?>">
     </div>
     </div>
   </div>
 
   <div class="form-group col-md-3">
     <label for="exampleFormControlSelect1">Estado de la tarjeta</label>
-    <select class="form-control" id="exampleFormControlSelect1" name="estado" value =" <?php echo $editT->datos[7] ?>">
-      <option>Aprobada</option>
-      <option>Rechazada</option>
+    <select class="form-control" id="exampleFormControlSelect1" name="estado" value ="<?php echo $editT->datos[7] ?>">
+      <option>APROBADO</option>
+      <option>RECHAZADO</option>
     </select>
   </div>
   <div class="form-group row">
@@ -67,20 +82,6 @@
   
 </form>
 
-<?php
-if(isset($_GET['guardar'])){
-  
-   echo $cuota_manejo=$_GET['cuota_manejo'];
-   echo $cupo = $_GET["cupo"];
-   echo $sobrecupo= $_GET["sobrecupo"];
-   echo $tasa_interes= $_GET["tasa_interes"];
-   echo $estado= $_GET["estado"];
-   echo $id_tarjeta = $_GET["tarjeta_c"];
-   echo $editT->setDatosTarjeta($cuota_manejo, $cupo, $sobrecupo, $tasa_interes, $estado, $id_tarjeta);
-   
-}
-    
-?>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
