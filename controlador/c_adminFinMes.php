@@ -42,10 +42,10 @@
               m_finMes::crearTransaccionPagoCredito($valorPagado, $filaAhorro['IDC_AHORRO'] );
               $texto = "Se le han descontado ".$valorAhorros. " de la cuenta ". $filaAhorro['IDC_AHORRO']." para pagar su crédito ". $filaCredito['IDCREDITO'];
               m_finMes::crearNotificacionTransaccion($texto, $filaUsuario['IDUSUARIO']);
-            } else {//Si no es cliente
-
-            }
-          }
+            } 
+          }else{ //Si no es cliente
+            echo "xd";
+        }
           if ($deudaCredito > 0 )
           {
             $deudaCredito = $deudaCredito * $filaCredito*['INTERES'];
@@ -69,11 +69,15 @@
       $consulta=c_ahorro::allSelectAhorro();
       while ($fila = mysqli_fetch_array($consulta))
       {
+        $id_ahorro= $fila['IDC_AHORRO'];
         $cuota_manejo=$fila['CUOTA_MANEJO'];
         $jave_coins=$fila['JAVECOINS'];
         $total = $jave_coins - $cuota_manejo;
+        //Cuando no le alcanza a pagar con las javecoins que tiene la cuenta, descuento todo lo que tiene 
         if($total<0){
-          
+          c_ahorro::disminuirJaveCoinsXIDAhorro( $jave_coins,$id_ahorro);
+        }else{
+          c_ahorro::disminuirJaveCoinsXIDAhorro( $cuota_manejo,$id_ahorro);
         }
       }
     }

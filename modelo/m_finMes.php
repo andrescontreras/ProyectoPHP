@@ -1,7 +1,7 @@
 <?php
   include_once "../modelo/m_conexion.php";
 
-  class m_finMes.php
+  class m_finMes
   {
     public static function crearTransaccionPagoCredito($monto,$c_origen)
     {
@@ -13,7 +13,7 @@
     public static function crearNotificacionTransaccion($texto, $u_destino)
     {
       $conBD = new conexion();
-      $sql "INSERT INTO MENSAJES ( U_ORIGEN, U_DESTINO, MENSAJE, FECHA, ESTADO ) VALUES ( -1 ,".$u_destino.", '$texto', CURDATE, 1)";
+      $sql ="INSERT INTO MENSAJES ( U_ORIGEN, U_DESTINO, MENSAJE, FECHA, ESTADO ) VALUES ( -1 ,".$u_destino.", '$texto', CURDATE, 1)";
       $conBD->ejecutarconsulta($sql);
     }
   }
