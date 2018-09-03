@@ -38,7 +38,7 @@ class c_ahorro {
     public static function allSelectAhorro(){
         $conBD = new conexion();
         $id_usu=$_SESSION['usuario'];
-        $sql = "SELECT * FROM c_ahorro";
+        $sql = "SELECT * FROM c_ahorro" ;
         return $conBD->ejecutarconsulta($sql);
 
     }
