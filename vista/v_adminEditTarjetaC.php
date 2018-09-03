@@ -19,13 +19,13 @@
     <?php
     if (isset($_GET['guardar'])) {
 
-      echo $cuota_manejo = $_GET['cuota_manejo'];
-      echo $cupo = $_GET["cupo"];
-      echo $sobrecupo = $_GET["sobrecupo"];
-      echo $tasa_interes = $_GET["tasa_interes"];
-      echo $estado = $_GET["estado"];
-      echo $id_tarjeta = $_GET["tarjeta_c"];
-      echo $editT->setDatosTarjeta($cuota_manejo, $cupo, $sobrecupo, $tasa_interes, $estado, $id_tarjeta);
+      $cuota_manejo = $_GET['cuota_manejo'];
+      $cupo = $_GET["cupo"];
+      $sobrecupo = $_GET["sobrecupo"];
+      $tasa_interes = $_GET["tasa_interes"];
+      $estado = $_GET["estado"];
+      $id_tarjeta = $_GET["tarjeta_c"];
+      $editT->setDatosTarjeta($cuota_manejo, $cupo, $sobrecupo, $tasa_interes, $estado, $id_tarjeta);
 
     }
 
