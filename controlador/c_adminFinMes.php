@@ -3,6 +3,7 @@
   include_once("../modelo/m_usuario.php");
   include_once("../modelo/m_credito.php");
   include_once("../modelo/m_c_ahorro.php");
+  include_once("../modelo/m_correo.php");
   include_once("../modelo/m_transaccion.php");
   class c_adminFinMes
   {
@@ -57,18 +58,44 @@
         //La consulta me devuelve a los visitantes que tienen el credito aprobado
         $consulta=m_credito::creditosVisitanteAprobados();
         while ($fila = mysqli_fetch_array($consulta)){
-          if($fila['MONTO'==0]){
-            $fecha_pago = $fila['FECHA_PAGO'];
-            $idcredito=$fila['IDCREDITO'];
+          $correo = $fila['CORREO'];
+          $fecha_pago = $fila['FECHA_PAGO'];
+          $idcredito=$fila['IDCREDITO'];
+          $interes = $fila['INTERES'];
+          $monto_debe =$fila['MONTO'];
+          if($monto_debe==0){
             //Averiguar ultima transaccion que se hizo a este credito con filtro en tipo de 'PAGOCREDITO'
             //para saber la ultima fecha que se termino de pagar el credito
             $consulta2= transaccion::buscarTransaccionVisitante($idcredito);
             while ($fila2 = mysqli_fetch_array($consulta2)){
               $fecha_final=$fila2['FECHA'];
             }
-            //Comparar fechas y si la fecha final es menor que la fecha pago, no pasa nada
+            $fin_mes=$_GET['fecha'];
+              //Comparar fechas y si la fecha final es menor que la fecha pago, no pasa nada
+            //Cuando el ultimo pago que se hizo al credito supera la fecha limite de pago y es antes que el fin de mes
+            if( ($fecha_final>$fecha_pago) && ($fecha_final < $fin_mes)){ 
+              $datetime1 = new DateTime($fecha_final);
+              $datetime2 = new DateTime($fin_mes);
+              $interval = $datetime1->diff($datetime2);
+              $dias = $interval->format('%a');
+              $monto = $interes * $dias;
+              m_credito::aumentarMonto($idcredito,$monto);
+            }
           }
-          
+          else{
+              $subject="Credito sin pagar";
+              $mensaje ="El credito que pedio con un valor de $monto_debe vencio la fecha de pago $fecha_pago";
+              correo::enviarCorreo($correo,$subject,$mensaje);
+              //Sacar del fecha de pago el mes, para que pueda sacar los dias de ese mes y multiplicarlos con el interes
+              //y despues aumentar el monto de ese credito
+              $porciones = explode("-", $fecha_pago);
+              $mes=$porciones[1]; // porción1
+              $dias_mes=diasMes($mes);
+              $monto= $interes * $dias_mes;
+              m_credito::aumentarMonto($idcredito,$monto);
+              
+
+          }
         }
       }
       
@@ -116,6 +143,9 @@
           m_finMes::crearNotificacionTransaccion($texto, $usuario);
         }
       }
+    }
+    public static function diasMes($mes){
+      cal_days_in_month(CAL_GREGORIAN, $mes, 2018);
     } 
   }
 ?>
