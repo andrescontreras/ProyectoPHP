@@ -4,11 +4,17 @@ session_start();
 include_once "../controlador/c_cliente.php";
 //include_once "../controlador/c_correo.php";
 //correo::enviarCorreo("santiagosw18@gmail.com","Prueba","Esto es una prueba de mandar un correo por PHP");
-;
 $idUsu = cliente::datosUsuario_ID($_SESSION['nombre_cliente']);
 $_SESSION['usuario']=$idUsu;
 $usuario = cliente::nomUsuario();
-$n_notificaiones =  cliente::noLeidos($_SESSION['usuario']);
+if (cliente::esAdmin($_SESSION['usuario']))
+{
+    $n_notificaiones = cliente::noLeidos($_SESSION['usuario']);
+}else
+{
+  $n_notificaiones = cliente::noLeidos($_SESSION['usuario']);
+}
+
 
 //Si no funciona con COOKIE utilizar session
 //setcookie("usuario",$idUsu,time()+3600);
