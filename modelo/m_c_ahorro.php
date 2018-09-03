@@ -81,7 +81,7 @@ class c_ahorro {
     public static function enviarNotificacionConsignaciónVis($u_destino,$texto)
     {
       $conBD = new conexion();
-      $sql = "INSERT INTO MENSAJES (U_DESTINO, MENSAJE, ESTADO) VALUES (".$u_destino.", '$texto', 1 )";
+      $sql = "INSERT INTO MENSAJES (U_DESTINO, MENSAJE, ESTADO, FECHA) VALUES (".$u_destino.", '$texto', 1, CURDATE() )";
       $conBD->ejecutarconsulta($sql);
     }
     //Se registra la transaccion de Consignacion
@@ -104,6 +104,6 @@ class c_ahorro {
         return $conBD->ejecutarconsulta($sql);
     }
 
-   
+
 }
 ?>

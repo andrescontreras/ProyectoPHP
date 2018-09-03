@@ -31,5 +31,11 @@
       $sql = "UPDATE C_AHORRO SET C_AHORRO.JAVECOINS = ".$monto." WHERE C_AHORRO.IDC_AHORRO=".$idc_ahorro;
       $conBD->ejecutarconsulta($sql);
     }
+
+    public static function obtenerMes($date)
+    {
+      $conBD = new conexion();
+      $sql = "MONTH("$date")";
+    }
   }
 ?>
