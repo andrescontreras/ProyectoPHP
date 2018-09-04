@@ -10,6 +10,7 @@
 </head>
 <body>
 <?php include_once "../controlador/c_adminCliente.php";
+session_start();
 if ($_SESSION['id_admin']) {
     $admin = new c_adminCliente();
     $admin->getTajetas_c();
