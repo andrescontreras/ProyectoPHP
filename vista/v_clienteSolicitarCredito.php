@@ -1,6 +1,9 @@
 <?php
 session_start();
 include_once "../controlador/c_cliente.php";
+if (!$_SESSION['nombre_cliente']) {
+    header("Location: v_ERROR.php");
+}
 ?>
 <html>
 <body>

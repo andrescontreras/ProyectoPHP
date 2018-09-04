@@ -1,10 +1,14 @@
 <?php
 session_start();
 include_once "../controlador/c_cliente.php";
-if(isset($_GET['selecAhorro'])){
-$porciones = explode("_", $_GET['cuentasAhorro']);
-$id_ahorro=$porciones[1]; // porción1
-$_SESSION['id_ahorro']=$id_ahorro;
+if ($_SESSION['nombre_cliente']) {
+    if (isset($_GET['selecAhorro'])) {
+        $porciones = explode("_", $_GET['cuentasAhorro']);
+        $id_ahorro = $porciones[1]; // porción1
+        $_SESSION['id_ahorro'] = $id_ahorro;
+    }
+} else {
+    header("Location: v_ERROR.php");
 }
 ?>
 <html>
@@ -12,7 +16,7 @@ $_SESSION['id_ahorro']=$id_ahorro;
 <h2>Menu cuenta de ahorro</h2>
 <div>
 <label for="">Cuenta de ahorro con id</label>
-<input type="text" value="<?php echo $_SESSION['id_ahorro']?>">
+<input type="text" value="<?php echo $_SESSION['id_ahorro'] ?>">
 </div>
 <form action="v_clienteRetirar.php" method="get">
 <div>

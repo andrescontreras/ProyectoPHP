@@ -4,16 +4,23 @@ session_start();
 include_once "../controlador/c_cliente.php";
 //include_once "../controlador/c_correo.php";
 //correo::enviarCorreo("santiagosw18@gmail.com","Prueba","Esto es una prueba de mandar un correo por PHP");
-$idUsu = cliente::datosUsuario_ID($_SESSION['nombre_cliente']);
-$_SESSION['usuario']=$idUsu;
-$usuario = cliente::nomUsuario();
-if (cliente::esAdmin($_SESSION['usuario']))
-{
+if ($_SESSION['nombre_cliente']) {
+  $idUsu = cliente::datosUsuario_ID($_SESSION['nombre_cliente']);
+  $_SESSION['usuario']=$idUsu;
+  $usuario = cliente::nomUsuario();
+  if (cliente::esAdmin($_SESSION['usuario']))
+  {
+      $n_notificaiones = cliente::noLeidos($_SESSION['usuario']);
+  }else
+  {
     $n_notificaiones = cliente::noLeidos($_SESSION['usuario']);
-}else
-{
-  $n_notificaiones = cliente::noLeidos($_SESSION['usuario']);
+  }
 }
+else
+{
+  header("Location: v_ERROR.php");
+}
+
 
 
 //Si no funciona con COOKIE utilizar session

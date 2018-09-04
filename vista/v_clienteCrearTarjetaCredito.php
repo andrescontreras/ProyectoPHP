@@ -1,6 +1,9 @@
 <?php 
 session_start();
-include ("C:/xampp/htdocs/ProyectoPHP/controlador/c_cliente.php");
+include ("../controlador/c_cliente.php");
+if (!$_SESSION['nombre_cliente']) {
+    header("Location: v_ERROR.php");
+}
 ?>
 <html>
 <body>

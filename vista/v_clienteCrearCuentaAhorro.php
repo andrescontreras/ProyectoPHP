@@ -1,7 +1,14 @@
 <?php
 session_start();
-include ("C:/xampp/htdocs/ProyectoPHP/controlador/c_cliente.php");
+include_once "../controlador/c_cliente.php";
+if ($_SESSION['nombre_cliente']) {
 $usuario = cliente::nomUsuario();
+}
+else
+{
+  header("Location: v_ERROR.php");
+}
+
 ?>
 <html>
 <body>

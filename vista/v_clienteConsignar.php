@@ -1,11 +1,16 @@
 <?php
-session_start(); 
+session_start();
 include_once "../controlador/c_cliente.php";
-if(isset($_GET['consignar'])){
-    $monto_c=$_GET['monto_consig'];
-    $cuenta_c= $_GET['usu_consig'];
+if ($_SESSION['nombre_cliente']) {
+    if (isset($_GET['consignar'])) {
+        $monto_c = $_GET['monto_consig'];
+        $cuenta_c = $_GET['usu_consig'];
+    }
+} else {
+    header("Location: v_ERROR.php");
 }
-$monto_cuenta=cliente::JaveCoins_CuentaAhorro();
+
+$monto_cuenta = cliente::JaveCoins_CuentaAhorro();
 ?>
 <html>
 <body>
@@ -22,15 +27,15 @@ $monto_cuenta=cliente::JaveCoins_CuentaAhorro();
 </div>
 <div>
 <label for="monto_c">Monto de la cuenta</label>
-<input type="text" name="monto_cuenta" id=monto_c value="<?php echo $monto_cuenta?>">
+<input type="text" name="monto_cuenta" id=monto_c value="<?php echo $monto_cuenta ?>">
 </div>
 <div>
 <label for="monto_cons">Monto a consignar</label>
-<input type="text" id=monto_cons name="monto_consig" value="<?php if(isset($monto_c))echo $monto_c; ?>">
+<input type="text" id=monto_cons name="monto_consig" value="<?php if (isset($monto_c)) echo $monto_c; ?>">
 </div>
 <div>
 <label for="usu_cons">Cuenta a consignar</label>
-<input type="text"  id=usu_cons name="usu_consig" value="<?php if(isset($cuenta_c)) echo $cuenta_c; ?>">
+<input type="text"  id=usu_cons name="usu_consig" value="<?php if (isset($cuenta_c)) echo $cuenta_c; ?>">
 </div>
 <input type="submit" value="Consignar" name=consignar>
 </form>
@@ -44,24 +49,23 @@ $monto_cuenta=cliente::JaveCoins_CuentaAhorro();
 
 
 <?php
-if(isset($_GET['consignar'])){
-    if(empty($_GET['usu_consig']) && empty($_GET['monto_consig'])){
+if (isset($_GET['consignar'])) {
+    if (empty($_GET['usu_consig']) && empty($_GET['monto_consig'])) {
         echo "Debe colocar la cuenta a la que le va a consignar y debe ser un numero <br>";
         echo "Debe colocar el monto que quiere consignar y debe ser un numero <br>";
-    }else if(empty($_GET['monto_consig']) || !is_numeric($_GET['monto_consig'])){
+    } else if (empty($_GET['monto_consig']) || !is_numeric($_GET['monto_consig'])) {
         echo "Debe colocar el monto que quiere consignar y debe ser un numero<br>";
-    }
-    else if(empty($_GET['usu_consig']) || !is_numeric($_GET['usu_consig'])){
+    } else if (empty($_GET['usu_consig']) || !is_numeric($_GET['usu_consig'])) {
         echo "Debe colocar la cuenta a la que le va a consignar y debe ser un numero<br>";
-    }else{
-        $usuario_depositar=$_GET['usu_consig'];
+    } else {
+        $usuario_depositar = $_GET['usu_consig'];
         $tipo_pago = $_GET["tipoPago"];
-        $monto_consig= $_GET["monto_consig"];
-        echo cliente::consignar($tipo_pago,$monto_consig,$usuario_depositar);
+        $monto_consig = $_GET["monto_consig"];
+        echo cliente::consignar($tipo_pago, $monto_consig, $usuario_depositar);
     }
 }
 
-    
+
 ?>
 </body>
 </html>
