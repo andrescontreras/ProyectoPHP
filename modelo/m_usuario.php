@@ -66,7 +66,7 @@ class m_usuario{
     public static function notificacionesNoLeidas($id_usuario)
     {
       $conBD = new conexion ();
-      $sql = "SELECT * FROM MENSAJES WHERE (MENSAJES.U_DESTINO = ". $id_usuario. " or MENSAJES.U_ORIGEN=".$id_usuario.") and MENSAJES.ESTADO = 1";
+      $sql = "SELECT * FROM MENSAJES WHERE MENSAJES.U_DESTINO = ". $id_usuario." and MENSAJES.ESTADO = 1";
       return $conBD->ejecutarconsulta($sql);
     }
     //Obtiene las cuentas de ahorros asociadas al USUARIO de mayor a menor monto

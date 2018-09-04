@@ -8,13 +8,7 @@ if ($_SESSION['nombre_cliente']) {
   $idUsu = cliente::datosUsuario_ID($_SESSION['nombre_cliente']);
   $_SESSION['usuario']=$idUsu;
   $usuario = cliente::nomUsuario();
-  if (cliente::esAdmin($_SESSION['usuario']))
-  {
-      $n_notificaiones = cliente::noLeidos($_SESSION['usuario']);
-  }else
-  {
-    $n_notificaiones = cliente::noLeidos($_SESSION['usuario']);
-  }
+  $n_notificaiones = cliente::noLeidos($_SESSION['usuario']);
 }
 else
 {
