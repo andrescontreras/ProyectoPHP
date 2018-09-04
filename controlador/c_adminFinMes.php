@@ -65,7 +65,7 @@
         while ($fila = mysqli_fetch_array($consulta)){
           $correo = $fila['CORREO'];
           $fecha_pago = $fila['FECHA_PAGO'];
-          $fecha_pago= diaHabil($fecha_pago);
+          $fecha_pago= c_adminFinMes::diaHabil($fecha_pago);
           $idcredito=$fila['IDCREDITO'];
           $interes = $fila['INTERES'];
           $monto_debe =$fila['MONTO'];
@@ -90,13 +90,13 @@
           }
           else{
               $subject="Credito sin pagar";
-              $mensaje ="El credito que pedio con un valor de $monto_debe vencio la fecha de pago $fecha_pago";
+              $mensaje ="El credito que pedio con un valor de $monto_debe , vencio la fecha  $fecha_pago";
               correo::enviarCorreo($correo,$subject,$mensaje);
               //Sacar del fecha de pago el mes, para que pueda sacar los dias de ese mes y multiplicarlos con el interes
               //y despues aumentar el monto de ese credito
               $porciones = explode("-", $fecha_pago);
               $mes=$porciones[1]; // porción1
-              $dias_mes=diasMes($mes);
+              $dias_mes=c_adminFinMes::diasMes($mes);
               $monto= $interes * $dias_mes;
               m_credito::aumentarMonto($idcredito,$monto);
 
@@ -203,7 +203,7 @@
       $mes=$porciones[1]; // porción1
       $tipo_dia=date("N", mktime(0,0,0,$mes,$dia,$año)); // Me dice el dia(1 para Lunes, 7 para Domingo) de una fecha ingresada
       if($tipo_dia == 6){
-        $dias_mes=diasMes($mes);
+        $dias_mes=c_adminFinMes::diasMes($mes);
         $nuevo_dia=$dia+2;
         if($nuevo_dia>$dias_mes){
           return $fecha;
@@ -214,7 +214,7 @@
         //Verificar todos los meses
       }
       else if($tipo_dia == 7){
-        $dias_mes=diasMes($mes);
+        $dias_mes=c_adminFinMes::diasMes($mes);
         $nuevo_dia=$dia+1;
         if($nuevo_dia>$dias_mes){
           return $fecha;
