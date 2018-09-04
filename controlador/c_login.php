@@ -18,21 +18,37 @@ class c_login
                 $this->usuario = $fila;
             }
             echo "ID: " . $this->usuario[0];
-            if ($this->usuario[3] == 'ADMIN' and $this->usuario[2] == $_POST['clave']) {
-                
+            echo $this->usuario[2];
+            if (password_verify($_POST['clave'], $this->usuario[2])) {
+                echo "CORRECTO";
+            } else {
+                echo "INCORRECTO";
+            }
+            echo  "ESSSS:".$this->usuario[4];
+            if($this->usuario[3] == 'ADMIN')
+            {
+                echo "ES ADNIN";
+            }
+
+            if($this->usuario[4] == 'CLIENTE')
+            {
+                echo "ES CLIENTE";
+            }
+            if ($this->usuario[4] == 'ADMIN' and password_verify($_POST['clave'], $this->usuario[2])) {
+
                 session_start();
                 $_SESSION["id_admin"] = $this->usuario[0];
                 header("Location: v_adminPrincipal.php");
-            } elseif ($this->usuario[3] == 'CLIENTE' and $this->usuario[2] == $_POST['clave']) {
+            } elseif ($this->usuario[3] == 'CLIENTE' and password_verify($_POST['clave'], $this->usuario[2])) {
                 session_start();
                 $_SESSION["nombre_cliente"] = $this->usuario[1];
                 header("Location: v_clientePrincipal.php");
 
             } else {
                 echo "<div class='alert alert-danger' role='alert'>
-                Usuario o contraseña incorrectos
+                Usuario o contraseña incorrectos pass
               </div>";
-               
+
             }
         } else {
             echo "<div class='alert alert-danger' role='alert'>
@@ -45,12 +61,12 @@ class c_login
     {
         $usuario = $_POST['usuario'];
         $clave = $_POST['clave'];
-        if(!empty($usuario) && !empty($clave))
-        {
+        if (!empty($usuario) && !empty($clave)) {
             $consulta = m_usuario::getUsuario($_POST['usuario']);
             $str_datos = "";
             if ($consulta->num_rows < 1) {
-                $consulta = m_usuario::setUsuario($usuario,$clave);
+                $clave1 = password_hash($clave, PASSWORD_DEFAULT);
+                $consulta = m_usuario::setUsuario($usuario, $clave1);
                 echo "Usuario creado";
                 echo "<div class='alert alert-success' role='alert'>
                 Usuario creado
@@ -59,15 +75,13 @@ class c_login
                 echo "<div class='alert alert-danger' role='alert'>
                     El nombre de usuario ya existe
                   </div>";
-            }   
-        }
-        else
-        {
+            }
+        } else {
             echo "<div class='alert alert-danger' role='alert'>
             Los campos no pueden estar vacios
           </div>";
         }
-        
+
 
     }
 }

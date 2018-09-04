@@ -8,31 +8,31 @@ if (mysqli_query($con,$sql)) {
 }else{
  echo mysqli_error($con);
 }
-$sql = "INSERT INTO USUARIO (USUARIO, PASSWORD, TIPO ) VALUES ('felipe', 'god', 'ADMIN')";//:v
+$sql = "INSERT INTO USUARIO (USUARIO, PASSWORD, TIPO ) VALUES ('felipe',". '$2y$10$UID0oyj7kCDUq3lzhBh53epXv6YKuIyH/ZmY.b4XIcJ6JvTUew9nm'.", 'ADMIN')";//:v
 if (mysqli_query($con,$sql)) {
  echo "Datos insertados :3  |";
 }else{
  echo mysqli_error($con);
 }
-$sql = "INSERT INTO USUARIO (USUARIO, PASSWORD, TIPO ) VALUES ('DASH', 'JAJA', 'CLIENTE')";
+$sql = "INSERT INTO USUARIO (USUARIO, PASSWORD, TIPO ) VALUES ('DASH',". '$2y$10$E0rv0ughVAJeNIwE39QhUucSTQZkeLf/M0H6N/9oU.n2MEY2Dzp9G'.", 'CLIENTE')";
 if (mysqli_query($con,$sql)) {
  echo " Datos insertados :3 |";
 }else{
  echo mysqli_error($con);
 }
-$sql = "INSERT INTO USUARIO (USUARIO, PASSWORD, TIPO ) VALUES ('cocu', 'nubo', 'CLIENTE')";
+$sql = "INSERT INTO USUARIO (USUARIO, PASSWORD, TIPO ) VALUES ('cocu', ".'$2y$10$1jUmDujxpwWVOAXVcpbMF.UoEr/0zO/Dh/HZ6409llaVM9KtfP5Jy'.", 'CLIENTE')";
 if (mysqli_query($con,$sql)) {
  echo " Datos insertados :3 |";
 }else{
  echo mysqli_error($con);
 }
-$sql = "INSERT INTO USUARIO (USUARIO, PASSWORD, TIPO ) VALUES ('chanti', 'lli3', 'CLIENTE')";
+$sql = "INSERT INTO USUARIO (USUARIO, PASSWORD, TIPO ) VALUES ('chanti', ".'$2y$10$ovkGQCBUuVJVtFO7x.qV.ewmY33C6S1BTqbzy4rJblfbjH5TL0ycG'.", 'CLIENTE')";
 if (mysqli_query($con,$sql)) {
  echo " Datos insertados :3 |";
 }else{
  echo mysqli_error($con);
 }
-$sql = "INSERT INTO USUARIO (USUARIO, PASSWORD, TIPO ) VALUES ('zero', 'el', 'CLIENTE')";
+$sql = "INSERT INTO USUARIO (USUARIO, PASSWORD, TIPO ) VALUES ('zero', ".'$2y$10$SVWIo4BZFQo3yLl0oNlC7.GvjmJR5txX0xUePAyBc0iULfNl24aTu'.", 'CLIENTE')";
 if (mysqli_query($con,$sql)) {
  echo " Datos insertados :3 |";
 }else{
