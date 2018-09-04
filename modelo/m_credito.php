@@ -20,11 +20,7 @@ class m_credito{
   public static function actualizarCredito($id, $monto)
   {
     $conBD = new conexion();
-    if ($monto == 0) {
-      $sql = "DELETE FROM CREDITO WHERE CREDITO.IDCREDITO =" . $id;
-    } else {
-      $sql = "UPDATE CREDITO SET MONTO = " . $monto . " WHERE CREDITO.IDCREDITO =" . $id;
-    }
+    $sql = "UPDATE CREDITO SET MONTO = " . $monto . " WHERE CREDITO.IDCREDITO =" . $id;
     return $conBD->ejecutarconsulta($sql);
   }
     //Crear notificacion solicitud crédito
@@ -118,10 +114,10 @@ class m_credito{
     return $conBD->ejecutarconsulta($sql);
   }
   public static function creditosVisitanteAprobados(){
-    
+
     $conBD = new conexion();
     $sql = "SELECT * FROM credito WHERE CORREO != '' AND ESTADO = 'APROBADO' ";
-    return $conBD->ejecutarconsulta($sql); 
+    return $conBD->ejecutarconsulta($sql);
   }
   public static function aumentarMonto($id_credito,$monto){
     $conBD = new conexion();
