@@ -86,23 +86,23 @@ include_once '../controlador/c_visitante.php';
     <?php
       if (!empty($errCedula))
       {
-        echo "<span style='color:red;border-style:inset;background-color: rgba(219, 55, 38, 0.56);' >".$errCedula."</span><br>";
+        echo "<span style='border-radius: 5px; color:red;border-style:inset;background-color: rgba(219, 55, 38, 0.56);' >".$errCedula."</span><br>";
       }
       if (!empty($errCorreo))
       {
-        echo "<span style='color:red;border-style:inset;background-color: rgba(219, 55, 38, 0.56);' >".$errCorreo."</span><br>";
+        echo "<span style='border-radius: 5px; color:red;border-style:inset;background-color: rgba(219, 55, 38, 0.56);' >".$errCorreo."</span><br>";
       }
       if (!empty($errMonto))
       {
-        echo "<span style='color:red;border-style:inset;background-color: rgba(219, 55, 38, 0.56);' >".$errMonto."</span><br>";
+        echo "<span style='border-radius: 5px; color:red;border-style:inset;background-color: rgba(219, 55, 38, 0.56);' >".$errMonto."</span><br>";
       }
       if (!empty($errIdCuenta))
       {
-        echo "<span style='color:red;border-style:inset;background-color: rgba(219, 55, 38, 0.56);' >".$errIdCuenta."</span><br>";
+        echo "<span style='border-radius: 5px; color:red;border-style:inset;background-color: rgba(219, 55, 38, 0.56);' >".$errIdCuenta."</span><br>";
       }
       if (!empty($done))
       {
-        echo "<span style='color:rgb(7, 64, 5);border-style:inset;background-color: rgba(13, 193, 36, 0.57);' >".$done."</span><br>";
+        echo "<span style='border-radius: 5px; color:rgb(7, 64, 5);border-style:inset;background-color: rgba(13, 193, 36, 0.57);' >".$done."</span><br>";
       }
      ?>
     <form action="" method="post">

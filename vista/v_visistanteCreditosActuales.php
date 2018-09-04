@@ -60,15 +60,15 @@
     <?php
       if (!empty($errAhorros))
       {
-        echo "<span style='color:red;border-style:inset;background-color: rgba(219, 55, 38, 0.56);' >".$errAhorros."</span><br>";
+        echo "<span style='border-radius: 5px; color:red;border-style:inset;background-color: rgba(219, 55, 38, 0.56);' >".$errAhorros."</span><br>";
       }
       if (!empty($errMonto))
       {
-        echo "<span style='color:red;border-style:inset;background-color: rgba(219, 55, 38, 0.56);' >".$errMonto."</span><br>";
+        echo "<span style='border-radius: 5px; color:red;border-style:inset;background-color: rgba(219, 55, 38, 0.56);' >".$errMonto."</span><br>";
       }
       if (!empty($done))
       {
-        echo "<span style='color:rgb(7, 64, 5);border-style:inset;background-color: rgba(13, 193, 36, 0.57);' >".$done."</span><br>";
+        echo "<span style='border-radius: 5px; color:rgb(7, 64, 5);border-style:inset;background-color: rgba(13, 193, 36, 0.57);' >".$done."</span><br>";
       }
      ?>
     <form action="v_visistanteCreditosActuales.php" method="post">

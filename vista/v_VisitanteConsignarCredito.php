@@ -56,7 +56,7 @@
     }
     if (!empty($errCorreo))
     {
-      echo "<span style='color:red;border-style:inset;background-color: rgba(219, 55, 38, 0.56);' >".$errCorreo."</span><br>";
+      echo "<span style='border-radius: 5px; color:red;border-style:inset;background-color: rgba(219, 55, 38, 0.56);' >".$errCorreo."</span><br>";
     }
      ?>
     <form action="v_VisitanteConsignarCredito.php" method="post">
