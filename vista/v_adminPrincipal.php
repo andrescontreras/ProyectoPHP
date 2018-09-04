@@ -5,7 +5,13 @@ include_once "../controlador/c_adminFinMes.php";
 include_once "../controlador/c_cliente.php";
 
 session_start();
-$n_notificaiones = cliente::noLeidos($_SESSION['id_admin']);
+if (cliente::esAdmin($_SESSION['id_admin']))
+  {
+      $n_notificaiones = cliente::noLeidos($_SESSION['id_admin']);
+  }else
+  {
+    $n_notificaiones = cliente::noLeidos($_SESSION['id_admin']);
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
