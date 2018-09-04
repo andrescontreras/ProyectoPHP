@@ -20,12 +20,12 @@
 }
 .navegador
 {
-  padding: 40px;
-
+  padding: 30px 20px;
 }
 
 .navegador nav a{
   color: black;
+  text-align: center;
   padding: 30px;
 }
 

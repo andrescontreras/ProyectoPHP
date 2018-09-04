@@ -71,9 +71,18 @@ include_once '../controlador/c_visitante.php';
   <head>
     <meta charset="utf-8">
     <title></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  </head>
   </head>
   <body>
-    <h1>Consignar en cuenta de ahorros</h1>
+    <h1 class="display-3">Consignar en cuenta de ahorros</h1>
+    <div>
+      <nav class="nav">
+        <a class="nav-link active" href="v_VisitanteSolicitarCredito.php">Solicitar crédito</a>
+        <a class="nav-link active" href="v_VisitanteConsignarCredito.php">Consignar crédito</a>
+        <a class="nav-link active" href="v_VisitanteConsignarC_ahorro.php">Consignar a cuenta de ahorros</a>
+      </nav>
+    </div>
     <?php
       if (!empty($errCedula))
       {
@@ -97,15 +106,28 @@ include_once '../controlador/c_visitante.php';
       }
      ?>
     <form action="" method="post">
-      Cedula: <input type="text" name="visCedula">
-      Correo: <input type="email" name="visCorreo">
-      IdCuenta: <input type="text" name="visIdCuenta">
-      Monto: <input type="number" name="visMonto">
-      <select name="moneda">
-        <option value="1">Pesos</option>
-        <option value="2">Javecoins</option>
-      </select>
-      <input type="submit" name="visConsignarAhorros" value="Consignar">
+      <div class="form-group">
+        <label>Cedula</label>
+        <input class="form-control-sm" type="text" name="visCedula">
+      </div>
+      <div class="form-group">
+        <label>Correo</label>
+        <input class="form-control-sm" type="email" name="visCorreo">
+      </div>
+      <div class="form-group">
+        <label>IdCuenta</label>
+        <input class="form-control-sm" type="text" name="visIdCuenta">
+      </div>
+      <div class="form-group">
+        <label>Monto</label>
+        <input class="form-control-sm" type="number" name="visMonto">
+        <select class="form-control-sm" name="moneda">
+          <option value="1">Pesos</option>
+          <option value="2">Javecoins</option>
+        </select>
+      </div>
+      <input class="btn btn-primary" type="submit" name="visConsignarAhorros" value="Consignar">
     </form>
+
   </body>
 </html>

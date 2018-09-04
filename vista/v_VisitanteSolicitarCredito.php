@@ -55,9 +55,17 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   </head>
   <body>
-    <h1>Solicitar Crédito</h1>
+    <h1 class="display-3">Solicitar Crédito</h1>
+    <div>
+      <nav class="nav">
+        <a class="nav-link active" href="v_VisitanteSolicitarCredito.php">Solicitar crédito</a>
+        <a class="nav-link active" href="v_VisitanteConsignarCredito.php">Consignar crédito</a>
+        <a class="nav-link active" href="v_VisitanteConsignarC_ahorro.php">Consignar a cuenta de ahorros</a>
+      </nav>
+    </div>
     <?php
       if ($errCedula != "")
       {
@@ -77,14 +85,23 @@
       }
      ?>
     <form action="v_VisitanteSolicitarCredito.php" method="post">
-      Monto: <input type="text" name="visMonto">
-      <select name="moneda">
-        <option value="1">Pesos</option>
-        <option value="2">Javecoins</option>
-      </select>
-      Cédula: <input type="text" name="visCedula">
-      Correo: <input type="email" name="visCorreo">
-      <input type="submit" name="visSolicitarCredito" value="enviar">
+      <div class="form-group">
+        <label>Monto </label>
+        <input class="form-control-sm" type="text" name="visMonto">
+        <select name="moneda" class="form-control-sm">
+          <option value="1">Pesos</option>
+          <option value="2">Javecoins</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Cédula</label>
+        <input class="form-control-sm" type="text" name="visCedula">
+      </div>
+      <div class="form-group">
+        <label>Correo</label>
+        <input class="form-control-sm" type="email" name="visCorreo">
+      </div>
+      <input class="btn btn-primary" type="submit" name="visSolicitarCredito" value="Enviar">
     </form>
   </body>
 </html>

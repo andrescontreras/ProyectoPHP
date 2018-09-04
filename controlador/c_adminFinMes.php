@@ -27,6 +27,7 @@
         $creditos = m_credito::mostrarCreditos($filaUsuario['IDUSUARIO']);
         while ($filaCredito = mysqli_fetch_array($creditos))
         {
+          echo $filaUsuario['IDUSUARIO'];
           $ahorro = m_usuario::obtenerC_Ahorro($filaUsuario['IDUSUARIO']); //OBTIENE LAS CUENTAS DE AHORRO DE MAYOR A MENOR MONTO
           $deudaCredito = $filaCredito['MONTO'];
           $valorPagado = 0;
