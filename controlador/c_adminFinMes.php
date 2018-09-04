@@ -57,7 +57,7 @@
           }
           if ($deudaCredito > 0 )
           {
-            $deudaCredito = ($deudaCredito * $filaCredito['INTERES']) + $deudaCredito;
+            $deudaCredito = $filaCredito['INTERES'] + $deudaCredito;
             m_credito::actualizarCredito( $filaCredito['IDCREDITO'] , $deudaCredito );
             $texto = "Se ha actualizado el valor de su credito ".$filaCredito['IDCREDITO'];
             m_finMes::crearNotificacionTransaccion($texto, $filaUsuario['IDUSUARIO']);
