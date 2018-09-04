@@ -1,0 +1,10 @@
+
+para crear la base de datos ejecutar el archivo /modelo/m_crearBD.php
+para llenar los datos ejecutar el siguiente archivo /modelo/datos.php
+para entrar a la pargina se hace sobre index.php
+
+INTEGRANTES DEL GRUPO:
+
+ANDRES MARIÑO
+SANTIAGO SALAMANCA
+ANDRES FELIPE CONTRERAS
