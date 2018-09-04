@@ -10,8 +10,13 @@
 </head>
 <body>
 <?php include_once "../controlador/c_adminVisitante.php";
+session_start();
+if ($_SESSION['id_admin']) {
         $visitante = new c_adminVisitante();
         $visitante->getCreditos();
+    } else {
+        header("Location: v_ERROR.php");
+    }
     ?>
 <form action="v_adminEditCredito.php" method="get">
        <label for="">

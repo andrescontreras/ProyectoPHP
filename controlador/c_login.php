@@ -19,21 +19,7 @@ class c_login
             }
             echo "ID: " . $this->usuario[0];
             echo $this->usuario[2];
-            if (password_verify($_POST['clave'], $this->usuario[2])) {
-                echo "CORRECTO";
-            } else {
-                echo "INCORRECTO";
-            }
-            echo  "ESSSS:".$this->usuario[4];
-            if($this->usuario[3] == 'ADMIN')
-            {
-                echo "ES ADNIN";
-            }
-
-            if($this->usuario[4] == 'CLIENTE')
-            {
-                echo "ES CLIENTE";
-            }
+            
             if ($this->usuario[4] == 'ADMIN' and password_verify($_POST['clave'], $this->usuario[2])) {
 
                 session_start();

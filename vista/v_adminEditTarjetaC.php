@@ -11,6 +11,7 @@
     <h3>Editar tarjeta de credito</h3>
     <?php
     include_once "../controlador/c_adminEditTarjetaC.php";
+    session_start();
     if ($_SESSION['id_admin']) {
       $editT = new c_adminEditTarjetaC();
       $editT->getDatosTarjeta();
