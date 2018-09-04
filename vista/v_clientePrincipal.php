@@ -46,17 +46,17 @@ else
 <input type ="text" class="form-control"  name="nomUsuario" id="txtNomUsuario" value="<?php if(isset($usuario))echo $usuario?>">
 </div>
 <div>
-<input type="submit" name="crear_cuenta_ahorro" value="Crear cuenta de ahorro">
+<input class="btn btn-primary mb-2" type="submit" name="crear_cuenta_ahorro" value="Crear cuenta de ahorro">
 </div>
 </form>
 <div>
 <form action="v_clienteCrearTarjetaCredito.php" method="post">
-<input type="submit" name="crear_tarjetacredito" value="Crear tarjeta de credito">
+<input class="btn btn-primary mb-2" type="submit" name="crear_tarjetacredito" value="Crear tarjeta de credito">
 </div>
 </form>
 <div>
 <form action="v_clienteSolicitarCredito.php" method="post">
-<input type="submit" name="pedir_credito" value="Solicitar credito">
+<input class="btn btn-primary mb-2" type="submit" name="pedir_credito" value="Solicitar credito">
 </form>
 </div>
 <div>
@@ -67,7 +67,7 @@ else
 echo cliente::datosCuentaAhorro();
 ?>
 </select>
-<input type="submit" value ="Seleccionar" name ="selecAhorro">
+<input class="btn btn-primary mb-2" type="submit" value ="Seleccionar" name ="selecAhorro">
 </form>
 </div>
 <form action="v_clienteMenuTCredito.php">
@@ -79,7 +79,7 @@ echo cliente::datosCuentaAhorro();
 echo cliente::datosTarjetaCredito();
 ?>
 </select>
-<input type="submit" value ="Seleccionar" name ="selecTCredito">
+<input class="btn btn-primary mb-2" type="submit" value ="Seleccionar" name ="selecTCredito">
 </div>
 </form>
 

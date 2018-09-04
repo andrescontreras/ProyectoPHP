@@ -66,7 +66,7 @@
   </div>
   <div class="form-group row">
     <div class="col-sm-10">
-    <input type="submit" name="guardar" value="guardar">
+    <input type="submit" class="btn btn-info btn-md" name="guardar" value="guardar">
     </div>
   </div>
   

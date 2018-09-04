@@ -29,8 +29,8 @@ session_start();
 </head>
 <body>
     <h1 >panel de administración</h1>
-    <form action="v_adminBanco.php" method="get">
-       <label for="">Valores del banco <input type="submit" value="Modificar"></label>
+    <form action="v_adminBanco.php"   method="get">
+       <label for="">Valores del banco <input type="submit" class="btn btn-info btn-md" value="Modificar"></label>
     </form>
     <div>
         <h3>Centro de mensajes</h3>
@@ -65,7 +65,7 @@ session_start();
             }
             ?>
         </select>
-        <input type="submit" value="Entrar">
+        <input type="submit" class="btn btn-info btn-md" value="Entrar">
        </label>
     </form>
     <br>
@@ -80,7 +80,7 @@ session_start();
         }
         ?>
         </select>
-        <input type="submit" value="Entrar">
+        <input type="submit" class="btn btn-info btn-md" value="Entrar">
        </label>
     </form>
 
@@ -92,7 +92,7 @@ session_start();
         });
     </script>
     <input type="text" name="fecha_pago" id="">
-    <input type="submit" value="Fin de mes" name ="fin_mes">
+    <input type="submit" class="btn btn-info btn-md" value="Fin de mes" name ="fin_mes">
     </form>
     <?php
 

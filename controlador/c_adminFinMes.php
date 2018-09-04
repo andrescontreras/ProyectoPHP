@@ -15,8 +15,8 @@
     {
       c_adminFinMes::cobrarCreditos($finMes);
       //c_adminFinMes::cobrarTarjetas();
-      //c_adminFinMes::cobrarCuotaManejo();
-      //c_adminFinMes::incrementarSaldoCuentas();
+      c_adminFinMes::cobrarCuotaManejo();
+      c_adminFinMes::incrementarSaldoCuentas();
     }
     //cobra los créditos
     public static function cobrarCreditos($finMes)

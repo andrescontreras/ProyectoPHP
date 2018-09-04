@@ -17,10 +17,7 @@
 if ($_SESSION['id_admin']) {
    $banco = new c_adminBanco();
    $banco->getDatosBanco();
-   echo $banco->nombreBanco;
-   echo $banco->cuota_manejo;
-   echo $banco->interes_mora;
-   echo $banco->interes;
+   
   } else {
     header("Location: v_ERROR.php");
 }
@@ -70,7 +67,7 @@ if(isset($_GET['guardar'])){
   </div>
   <div class="form-group row">
     <div class="col-sm-10">
-      <input type="submit" name="guardar" value="Guardar">
+      <input type="submit" class="btn btn-info btn-md" name="guardar" value="Guardar">
     </div>
   </div>
   

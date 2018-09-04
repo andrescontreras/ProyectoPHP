@@ -60,6 +60,7 @@ include_once "../modelo/m_mensaje.php";
             // operacion
             tarjeta_c::setDatosTarjeta($cuota_manejo, $cupo, $sobrecupo, $tasa_interes, $estado, $id_tarjeta);
             // mensaje
+            session_start();
             $usuario = $_SESSION['id_admin'];
             $mensaje = "el administrador $usuario ha $estado la tarjeta de credito con id $id_credito el dia ".date("Y-m-d H:i:s");
             m_mensaje::mensaje(-1,$this->datos[2],$mensaje);
