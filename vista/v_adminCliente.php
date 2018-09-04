@@ -30,7 +30,7 @@ if ($_SESSION['id_admin']) {
         }
         ?>
         </select>
-        <input type="submit" value="Entrar">
+        <input type="submit" class="btn btn-info btn-md" value="Entrar">
        </label>
     </form>
     <br>
@@ -45,7 +45,7 @@ if ($_SESSION['id_admin']) {
         }
         ?>
         </select>
-        <input type="submit" value="Entrar">
+        <input type="submit" class="btn btn-info btn-md" value="Entrar">
        </label>
     </form>
 
