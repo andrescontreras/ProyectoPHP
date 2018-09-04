@@ -27,10 +27,10 @@ else
 <label class="col-sm-2 col-form-label" for="monto_cons">Monto que quiere consignar</label>
 <input class="form-control" type="text"  id=monto_cons name="monto_consig" value="<?php if(isset($monto)) echo $monto;?>">
 </div>
-<input type="submit" name="botonMonto" value="Crear cuenta de ahorro">
+<input class="btn btn-primary mb-2" type="submit" name="botonMonto" value="Crear cuenta de ahorro">
 </form>
 <form action="v_clientePrincipal.php">
-<input type="submit" name=volver value="Volver">
+<input class="btn btn-primary mb-2" type="submit" name=volver value="Volver">
 </form>
 <?php
 if(isset($_POST['botonMonto'])){
