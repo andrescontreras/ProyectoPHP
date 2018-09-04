@@ -11,15 +11,15 @@
   class c_adminFinMes
   {
     //Inicia la operación de fin de mes
-    public static function finDeMes()
+    public static function finDeMes($finMes)
     {
-      //c_adminFinMes::cobrarCreditos();
+      c_adminFinMes::cobrarCreditos($finMes);
       //c_adminFinMes::cobrarTarjetas();
-      c_adminFinMes::cobrarCuotaManejo();
+      //c_adminFinMes::cobrarCuotaManejo();
       //c_adminFinMes::incrementarSaldoCuentas();
     }
     //cobra los créditos
-    public static function cobrarCreditos()
+    public static function cobrarCreditos($finMes)
     {
       $usuarios = m_usuario::getUsuarios();
       while ($filaUsuario = mysqli_fetch_array($usuarios))
@@ -27,7 +27,7 @@
         $creditos = m_credito::mostrarCreditos($filaUsuario['IDUSUARIO']);
         while ($filaCredito = mysqli_fetch_array($creditos))
         {
-          $ahorro = m_usuario::obtenerC_Ahorros($filaUsuario['IDUSUARIO']); //OBTIENE LAS CUENTAS DE AHORRO DE MAYOR A MENOR MONTO
+          $ahorro = m_usuario::obtenerC_Ahorro($filaUsuario['IDUSUARIO']); //OBTIENE LAS CUENTAS DE AHORRO DE MAYOR A MENOR MONTO
           $deudaCredito = $filaCredito['MONTO'];
           $valorPagado = 0;
           if ($deudaCredito->num_rows > 0 ){ //Si es cliente
@@ -76,7 +76,7 @@
             while ($fila2 = mysqli_fetch_array($consulta2)){
               $fecha_final=$fila2['FECHA'];
             }
-            $fin_mes=$_GET['fecha'];
+            $fin_mes=$finMes;
               //Comparar fechas y si la fecha final es menor que la fecha pago, no pasa nada
             //Cuando el ultimo pago que se hizo al credito supera la fecha limite de pago y es antes que el fin de mes
             if( ($fecha_final>$fecha_pago) && ($fecha_final < $fin_mes)){
@@ -145,7 +145,7 @@
       $consulta = m_banco::getDatosBanco();
       $fila = mysqli_fetch_array($consulta);
       $interes = $fila['INTERES'];
-      $consulta = m_finMes::obtenerC_Ahorros();
+      $consulta = m_finMes::obtenerC_Ahorro();
       while ($fila = mysqli_fetch_array($consulta))
       {
         $saldo = ($fila['JAVECOINS']*$interes) + $fila['JAVECOINS'];
