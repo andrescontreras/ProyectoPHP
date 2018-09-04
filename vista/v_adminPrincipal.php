@@ -5,13 +5,10 @@ include_once "../controlador/c_adminFinMes.php";
 include_once "../controlador/c_cliente.php";
 
 session_start();
-if (cliente::esAdmin($_SESSION['id_admin']))
-  {
-      $n_notificaiones = cliente::noLeidos($_SESSION['id_admin']);
-  }else
-  {
-    $n_notificaiones = cliente::noLeidos($_SESSION['id_admin']);
-  }
+
+  $n_notificaiones = cliente::noLeidos(-1);
+  $_SESSION['usuario'] = -1;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,7 +69,7 @@ if (cliente::esAdmin($_SESSION['id_admin']))
        </label>
     </form>
     <br>
-    
+
     <form action="v_adminVisitante.php" method="get">
        <label for="">
         Usuarios visitantes:
