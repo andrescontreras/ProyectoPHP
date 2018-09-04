@@ -13,8 +13,14 @@
     <h3>Editar credito</h3>
     <?php
     include_once "../controlador/c_adminEditCredito.php";
-    $editC = new c_adminEditCredito();
-    $editC->getDatosCredito();
+    session_start();
+    if ($_SESSION['id_admin']) {
+      $editC = new c_adminEditCredito();
+      $editC->getDatosCredito();
+    } else {
+      header("Location: v_ERROR.php");
+    }
+
 
     ?>
     <?php

@@ -1,5 +1,6 @@
 <?php
 include_once "../modelo/m_tarjeta_c.php";
+include_once "../modelo/m_mensaje.php";
     class c_adminEditTarjetaC{
         public $usuario;
         public $tarjeta_c;
@@ -56,7 +57,12 @@ include_once "../modelo/m_tarjeta_c.php";
             echo "<div class='alert alert-success' role='alert'>
             Se actualizaron los datos correctamente
           </div>";
+            // operacion
             tarjeta_c::setDatosTarjeta($cuota_manejo, $cupo, $sobrecupo, $tasa_interes, $estado, $id_tarjeta);
+            // mensaje
+            $usuario = $_SESSION['id_admin'];
+            $mensaje = "el administrador $usuario ha $estado la tarjeta de credito con id $id_credito el dia ".date("Y-m-d H:i:s");
+            m_mensaje::mensaje(-1,$this->datos[2],$mensaje);
         }
         
     }

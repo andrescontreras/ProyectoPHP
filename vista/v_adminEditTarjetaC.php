@@ -11,9 +11,13 @@
     <h3>Editar tarjeta de credito</h3>
     <?php
     include_once "../controlador/c_adminEditTarjetaC.php";
-    $editT = new c_adminEditTarjetaC();
-    $editT->getDatosTarjeta();
-    $_SESSION['id_tarjeta_c'] = $_GET['tarjeta_c'];
+    if ($_SESSION['id_admin']) {
+      $editT = new c_adminEditTarjetaC();
+      $editT->getDatosTarjeta();
+      $_SESSION['id_tarjeta_c'] = $_GET['tarjeta_c'];
+    } else {
+      header("Location: v_ERROR.php");
+    }
     ?>
 
     <?php

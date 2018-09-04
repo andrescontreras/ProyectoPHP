@@ -3,8 +3,9 @@
 
 include_once "../controlador/c_adminFinMes.php";
 include_once "../controlador/c_cliente.php";
+
 session_start();
-$n_notificaiones =  cliente::noLeidos($_SESSION['id_admin']);
+$n_notificaiones = cliente::noLeidos($_SESSION['id_admin']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,28 +34,32 @@ $n_notificaiones =  cliente::noLeidos($_SESSION['id_admin']);
         <div class="navegador">
     <nav>
       <a href="v_clientePrincipal.php">Pagina principal</a>
-      <?php echo "<a href='v_notificaciones.php' class = 'gold_plating' data-notificaciones='$n_notificaiones'  > Notificaciones </a> ";?>
+      <?php echo "<a href='v_notificaciones.php' class = 'gold_plating' data-notificaciones='$n_notificaiones'  > Notificaciones </a> "; ?>
     </nav>
   </div>
 
 
     </div>
     <?php include_once "../controlador/c_adminPrincipal.php";
+    if ($_SESSION['id_admin']) {
         $admin = new c_adminPrincipal();
         $admin->getUsuarios();
         $admin->getVisitantes();
-        echo  "SESSION: ".$_SESSION["id_admin"];
+        echo "SESSION: " . $_SESSION["id_admin"];
         $admin->admin = $_SESSION["id_admin"];
+    } else {
+        header("Location: v_ERROR.php");
+    }
+
     ?>
      <form action="v_adminCliente.php" method="get">
        <label for="">
         Usuarios clientes:
         <select name="cliente" id="cliente">
             <?php
-                foreach($admin->usuarios as $value)
-                {
-                    echo "<option value=".$value[0].">".$value[1]."</option>";
-                }
+            foreach ($admin->usuarios as $value) {
+                echo "<option value=" . $value[0] . ">" . $value[1] . "</option>";
+            }
             ?>
         </select>
         <input type="submit" value="Entrar">
@@ -67,11 +72,10 @@ $n_notificaiones =  cliente::noLeidos($_SESSION['id_admin']);
         Usuarios visitantes:
         <select name="visitante" id="visitante">
         <?php
-                foreach($admin->visitantes as $value)
-                {
-                    echo "<option value=".$value[6].">".$value[1]."</option>";
-                }
-            ?>
+        foreach ($admin->visitantes as $value) {
+            echo "<option value=" . $value[6] . ">" . $value[1] . "</option>";
+        }
+        ?>
         </select>
         <input type="submit" value="Entrar">
        </label>
@@ -88,10 +92,11 @@ $n_notificaiones =  cliente::noLeidos($_SESSION['id_admin']);
     <input type="submit" value="Fin de mes" name ="fin_mes">
     </form>
     <?php
-    if(isset($_GET['fin_mes'])){
+
+    if (isset($_GET['fin_mes'])) {
         c_adminFinMes::findeMes($_GET['fecha_pago']);
     }
-    
+
     ?>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

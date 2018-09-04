@@ -19,6 +19,7 @@ class c_login
             }
             echo "ID: " . $this->usuario[0];
             if ($this->usuario[3] == 'ADMIN' and $this->usuario[2] == $_POST['clave']) {
+                
                 session_start();
                 $_SESSION["id_admin"] = $this->usuario[0];
                 header("Location: v_adminPrincipal.php");

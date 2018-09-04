@@ -1,5 +1,5 @@
 <?php
- ?>
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -11,30 +11,32 @@
   </head>
   <body>
   <?php include_once "../controlador/c_login.php";
-        $login = new c_login();
-    ?>
+  $login = new c_login();
+  session_start();
+  session_destroy();
+  ?>
   <?php
-  if(isset($_POST['ingresar'])){
-    $usuario= $_POST['usuario'];
-    $clave= $_POST['clave'];
+  if (isset($_POST['ingresar'])) {
+    $usuario = $_POST['usuario'];
+    $clave = $_POST['clave'];
     echo "<h1>ENTRO LOGIN</h1>";
     $login->iniciar();
-    }elseif(isset($_POST['crear_usuario'])){
-      $usuario= $_POST['usuario'];
-      $clave= $_POST['clave'];
-      echo "<h1>ENTRO LOGIN</h1>";
-      $login->registrarse();
-      }
+  } elseif (isset($_POST['crear_usuario'])) {
+    $usuario = $_POST['usuario'];
+    $clave = $_POST['clave'];
+    echo "<h1>ENTRO LOGIN</h1>";
+    $login->registrarse();
+  }
   ?>
     
     <form action="" method="post">
   <div class="form-group">
     <label for="exampleInputEmail1">Usuario</label>
-    <input type="text" class="form-control"  name="usuario" id="txtUsuario" value="<?php if(isset($usuario)) echo $usuario ?>">
+    <input type="text" class="form-control"  name="usuario" id="txtUsuario" value="<?php if (isset($usuario)) echo $usuario ?>">
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control"name="clave" id="txtClave" value="<?php if(isset($clave)) echo $clave ?>">
+    <input type="password" class="form-control"name="clave" id="txtClave" value="<?php if (isset($clave)) echo $clave ?>">
   </div>
   <button type="submit" name="ingresar" value="Iniciar sesion" class="btn btn-primary">Iniciar sesion</button>
   <button type="submit" name="crear_usuario" value="Crear usuario" class="btn btn-primary">Registrarse</button>

@@ -10,20 +10,24 @@
 </head>
 <body>
 <?php include_once "../controlador/c_adminCliente.php";
-        $admin = new c_adminCliente();
-        $admin->getTajetas_c();
-        $admin->getCreditos();
-    ?>
+if ($_SESSION['id_admin']) {
+    $admin = new c_adminCliente();
+    $admin->getTajetas_c();
+    $admin->getCreditos();
+} else {
+    header("Location: v_ERROR.php");
+}
+
+?>
 <form action="v_adminEditTarjetaC.php" method="get">
        <label for="">
         tarjetas de credito del cliente:
         <select name="tarjeta_c" id="tarjeta_c">
         <?php
-                foreach($admin->tarjetas_c as $value)
-                {
-                    echo "<option value=".$value[0].">".$value[0]."</option>";
-                }
-            ?>
+        foreach ($admin->tarjetas_c as $value) {
+            echo "<option value=" . $value[0] . ">" . $value[0] . "</option>";
+        }
+        ?>
         </select>
         <input type="submit" value="Entrar">
        </label>
@@ -35,11 +39,10 @@
         creditos del cliente:
         <select name="credito" id="credito">
         <?php
-                foreach($admin->creditos as $value)
-                {
-                    echo "<option value=".$value[0].">".$value[0]."</option>";
-                }
-            ?>
+        foreach ($admin->creditos as $value) {
+            echo "<option value=" . $value[0] . ">" . $value[0] . "</option>";
+        }
+        ?>
         </select>
         <input type="submit" value="Entrar">
        </label>
