@@ -32,8 +32,8 @@ if (cliente::esAdmin($_SESSION['id_admin']))
 </head>
 <body>
     <h1 >panel de administración</h1>
-    <form action="v_adminBanco.php" method="get">
-       <label for="">Valores del banco <input type="submit" value="Modificar"></label>
+    <form action="v_adminBanco.php"   method="get">
+       <label for="">Valores del banco <input type="submit" class="btn btn-info btn-md" value="Modificar"></label>
     </form>
     <div>
         <h3>Centro de mensajes</h3>
@@ -68,7 +68,7 @@ if (cliente::esAdmin($_SESSION['id_admin']))
             }
             ?>
         </select>
-        <input type="submit" value="Entrar">
+        <input type="submit" class="btn btn-info btn-md" value="Entrar">
        </label>
     </form>
     <br>
@@ -83,7 +83,7 @@ if (cliente::esAdmin($_SESSION['id_admin']))
         }
         ?>
         </select>
-        <input type="submit" value="Entrar">
+        <input type="submit" class="btn btn-info btn-md" value="Entrar">
        </label>
     </form>
 
@@ -95,7 +95,7 @@ if (cliente::esAdmin($_SESSION['id_admin']))
         });
     </script>
     <input type="text" name="fecha_pago" id="">
-    <input type="submit" value="Fin de mes" name ="fin_mes">
+    <input type="submit" class="btn btn-info btn-md" value="Fin de mes" name ="fin_mes">
     </form>
     <?php
 
