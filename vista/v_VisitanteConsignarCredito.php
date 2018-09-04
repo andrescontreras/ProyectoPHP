@@ -38,23 +38,37 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   </head>
   <body>
-    <h1>Consignar a crédito</h1>
+    <h1 class="display-3">Consignar a crédito</h1>
+    <div>
+      <nav class="nav">
+        <a class="nav-link active" href="v_VisitanteSolicitarCredito.php">Solicitar crédito</a>
+        <a class="nav-link active" href="v_VisitanteConsignarCredito.php">Consignar crédito</a>
+        <a class="nav-link active" href="v_VisitanteConsignarC_ahorro.php">Consignar a cuenta de ahorros</a>
+      </nav>
+    </div>
     <?php
     if (!empty($errCedula))
     {
-      echo "<span style='color:red;border-style:inset;background-color: rgba(219, 55, 38, 0.56);' >".$errCedula."</span><br>";
+      echo "<span style='border-radius: 5px; color:red;border-style:inset;background-color: rgba(219, 55, 38, 0.56);' >".$errCedula."</span><br>";
     }
     if (!empty($errCorreo))
     {
-      echo "<span style='color:red;border-style:inset;background-color: rgba(219, 55, 38, 0.56);' >".$errCorreo."</span><br>";
+      echo "<span style='border-radius: 5px; color:red;border-style:inset;background-color: rgba(219, 55, 38, 0.56);' >".$errCorreo."</span><br>";
     }
      ?>
     <form action="v_VisitanteConsignarCredito.php" method="post">
-      Cédula: <input type="text" name="visCedula">
-      Correo: <input type="text" name="visCorreo">
-      <input type="submit" name="visConsignarCredito" value="entrar">
+      <div class="form-group">
+        <label>Cédula</label>
+        <input class="form-control-sm"type="text" name="visCedula">
+      </div>
+      <div class="form-group">
+        <label>Correo</label>
+        <input class="form-control-sm" type="text" name="visCorreo">
+      </div>
+      <input class="btn btn-primary" type="submit" name="visConsignarCredito" value="entrar">
     </form>
   </body>
 </html>

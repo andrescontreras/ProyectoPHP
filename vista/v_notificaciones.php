@@ -23,7 +23,7 @@
   <body>
     <div class="navegador">
       <nav>
-        <a href="v_clientePrincipal.php">Pagina principal</a>
+        <a href="v_page.php">Pagina principal</a>
         <?php echo "<a href='v_notificaciones.php' class = 'gold_plating' data-notificaciones='$n_notificaiones'  > Notificaciones </a> ";?>
       </nav>
     </div>

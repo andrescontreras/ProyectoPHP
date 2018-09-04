@@ -13,12 +13,17 @@
 <h3>Modificar valores del banco</h3>
 <?php 
   include ("../controlador/c_adminBanco.php");
+  session_start();
+if ($_SESSION['id_admin']) {
    $banco = new c_adminBanco();
    $banco->getDatosBanco();
    echo $banco->nombreBanco;
    echo $banco->cuota_manejo;
    echo $banco->interes_mora;
    echo $banco->interes;
+  } else {
+    header("Location: v_ERROR.php");
+}
 ?>
 
 <?php
