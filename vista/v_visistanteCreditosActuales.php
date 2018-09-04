@@ -102,6 +102,6 @@
       </div>
       <input class="btn btn-primary" type="submit" name="visConsignar" value="consignar">
     </form>
-    <button style="margin-top:20px" class="btn btn-primary" type="button" onclick="window.location.href ='v_visitanteConsignarC_ahorro.php'">Volver</button>
+    <button style="margin-top:20px" class="btn btn-primary" type="button" onclick="window.location.href ='v_VisitanteConsignarCredito.php'">Volver</button>
   </body>
 </html>
