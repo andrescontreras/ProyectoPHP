@@ -8,37 +8,37 @@ if (mysqli_query($con,$sql)) {
 }else{
  echo mysqli_error($con);
 }
-$sql = "INSERT INTO USUARIO (USUARIO, PASSWORD, TIPO ) VALUES ('felipe',". '$2y$10$UID0oyj7kCDUq3lzhBh53epXv6YKuIyH/ZmY.b4XIcJ6JvTUew9nm'.", 'ADMIN')";//:v
+$sql = "INSERT INTO USUARIO (USUARIO, PASSWORD, TIPO ) VALUES ('felipe',". "'".password_hash("god", PASSWORD_DEFAULT)."'".", 'ADMIN')";//:v
 if (mysqli_query($con,$sql)) {
  echo "Datos insertados :3  |";
 }else{
  echo mysqli_error($con);
 }
-$sql = "INSERT INTO USUARIO (USUARIO, PASSWORD, TIPO ) VALUES ('DASH',". '$2y$10$E0rv0ughVAJeNIwE39QhUucSTQZkeLf/M0H6N/9oU.n2MEY2Dzp9G'.", 'CLIENTE')";
+$sql = "INSERT INTO USUARIO (USUARIO, PASSWORD, TIPO ) VALUES ('DASH',"."'".password_hash("JAJA", PASSWORD_DEFAULT)."'".", 'CLIENTE')";
 if (mysqli_query($con,$sql)) {
  echo " Datos insertados :3 |";
 }else{
  echo mysqli_error($con);
 }
-$sql = "INSERT INTO USUARIO (USUARIO, PASSWORD, TIPO ) VALUES ('cocu', ".'$2y$10$1jUmDujxpwWVOAXVcpbMF.UoEr/0zO/Dh/HZ6409llaVM9KtfP5Jy'.", 'CLIENTE')";
+$sql = "INSERT INTO USUARIO (USUARIO, PASSWORD, TIPO ) VALUES ('cocu', "."'".password_hash("nubo", PASSWORD_DEFAULT)."'".", 'CLIENTE')";
 if (mysqli_query($con,$sql)) {
  echo " Datos insertados :3 |";
 }else{
  echo mysqli_error($con);
 }
-$sql = "INSERT INTO USUARIO (USUARIO, PASSWORD, TIPO ) VALUES ('chanti', ".'$2y$10$ovkGQCBUuVJVtFO7x.qV.ewmY33C6S1BTqbzy4rJblfbjH5TL0ycG'.", 'CLIENTE')";
+$sql = "INSERT INTO USUARIO (USUARIO, PASSWORD, TIPO ) VALUES ('chanti', "."'".password_hash("lli3", PASSWORD_DEFAULT)."'".", 'CLIENTE')";
 if (mysqli_query($con,$sql)) {
  echo " Datos insertados :3 |";
 }else{
  echo mysqli_error($con);
 }
-$sql = "INSERT INTO USUARIO (USUARIO, PASSWORD, TIPO ) VALUES ('zero', ".'$2y$10$SVWIo4BZFQo3yLl0oNlC7.GvjmJR5txX0xUePAyBc0iULfNl24aTu'.", 'CLIENTE')";
+$sql = "INSERT INTO USUARIO (USUARIO, PASSWORD, TIPO ) VALUES ('zero', "."'".password_hash("el", PASSWORD_DEFAULT)."'".", 'CLIENTE')";
 if (mysqli_query($con,$sql)) {
  echo " Datos insertados :3 |";
 }else{
  echo mysqli_error($con);
 }
-$sql = "INSERT INTO USUARIO (USUARIO, PASSWORD, TIPO ) VALUES ('juan', 'al', 'ADMIN')";
+$sql = "INSERT INTO USUARIO (USUARIO, PASSWORD, TIPO ) VALUES ('juan',"."'". password_hash("al", PASSWORD_DEFAULT)."'".", 'ADMIN')";
 if (mysqli_query($con,$sql)) {
  echo " Datos insertados :3 |";
 }else{

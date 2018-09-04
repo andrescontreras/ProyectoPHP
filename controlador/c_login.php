@@ -39,7 +39,7 @@ class c_login
                 session_start();
                 $_SESSION["id_admin"] = $this->usuario[0];
                 header("Location: v_adminPrincipal.php");
-            } elseif ($this->usuario[3] == 'CLIENTE' and password_verify($_POST['clave'], $this->usuario[2])) {
+            } elseif ($this->usuario[4] == 'CLIENTE' and password_verify($_POST['clave'], $this->usuario[2])) {
                 session_start();
                 $_SESSION["nombre_cliente"] = $this->usuario[1];
                 header("Location: v_clientePrincipal.php");
