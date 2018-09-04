@@ -149,10 +149,10 @@
       $consulta = m_banco::getDatosBanco();
       $fila = mysqli_fetch_array($consulta);
       $interes = $fila['INTERES'];
-      $consulta = m_finMes::obtenerC_Ahorro();
+      $consulta = m_finMes::obtenerC_Ahorros();
       while ($fila = mysqli_fetch_array($consulta))
       {
-        $saldo = ($fila['JAVECOINS']*$interes) + $fila['JAVECOINS'];
+        $saldo = $interes + $fila['JAVECOINS'];
         m_finMes::incrementarSaldo($saldo, $fila['IDC_AHORRO']);
       }
 

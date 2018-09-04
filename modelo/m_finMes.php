@@ -21,7 +21,7 @@
     public static function obtenerC_Ahorros()
     {
       $conBD = new conexion();
-      $sql = "SELECT IDC_AHORRO FROM C_AHORRO";
+      $sql = "SELECT * FROM C_AHORRO";
       return $conBD->ejecutarconsulta($sql);
     }
     //Incrementa el saldo de las cuentas en base al interes del banco (global)
