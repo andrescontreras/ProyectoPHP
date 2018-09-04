@@ -27,6 +27,7 @@
         $creditos = m_credito::mostrarCreditos($filaUsuario['IDUSUARIO']);
         while ($filaCredito = mysqli_fetch_array($creditos))
         {
+          echo $filaUsuario['IDUSUARIO'];
           $ahorro = m_usuario::obtenerC_Ahorro($filaUsuario['IDUSUARIO']); //OBTIENE LAS CUENTAS DE AHORRO DE MAYOR A MENOR MONTO
           $deudaCredito = $filaCredito['MONTO'];
           $valorPagado = 0;
@@ -56,7 +57,7 @@
           }
           if ($deudaCredito > 0 )
           {
-            $deudaCredito = ($deudaCredito * $filaCredito['INTERES']) + $deudaCredito;
+            $deudaCredito = $filaCredito['INTERES'] + $deudaCredito;
             m_credito::actualizarCredito( $filaCredito['IDCREDITO'] , $deudaCredito );
             $texto = "Se ha actualizado el valor de su credito ".$filaCredito['IDCREDITO'];
             m_finMes::crearNotificacionTransaccion($texto, $filaUsuario['IDUSUARIO']);
