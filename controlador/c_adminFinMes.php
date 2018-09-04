@@ -7,7 +7,7 @@
   //include_once "../modelo/m_correo.php";
   include_once "../modelo/m_transaccion.php" ;
   include_once "../modelo/m_tarjeta_c.php";
- 
+
   class c_adminFinMes
   {
     //Inicia la operación de fin de mes
@@ -30,10 +30,11 @@
           $ahorro = m_usuario::obtenerC_Ahorro($filaUsuario['IDUSUARIO']); //OBTIENE LAS CUENTAS DE AHORRO DE MAYOR A MENOR MONTO
           $deudaCredito = $filaCredito['MONTO'];
           $valorPagado = 0;
-          if ($deudaCredito->num_rows > 0 ){ //Si es cliente
+          //EL ERROR ES QUE AHORRO QUEDA VACIO TO DO
+          if ($ahorro->num_rows > 0 ){ //Si es cliente
             while ( $filaAhorro = mysqli_fetch_array($ahorro) && $deudaCredito > 0)
             {
-              $valorAhorros = $filaAhorro['JAVECOINS'] ;
+              $valorAhorros = $filaAhorro['JAVECOINS'];
               if (  $valorAhorros - $deudaCredito <= 0 )
               {
                 $valorPagado = $valorAhorros;
@@ -42,16 +43,17 @@
               else {
                 $valorPagado = $deudaCredito;
                 $deudaCredito = 0;
-                $valorAhorros = $filaCredito['Monto'];
+                $valorAhorros = $filaCredito['MONTO'];
               }
               m_credito::actualizarCredito( $filaCredito['IDCREDITO'] , $deudaCredito );
+              echo "hola papas<br>";
+              echo "kedice: ".$deudaCredito.":".$valorPagado ." : ".$valorAhorros." : ".$filaAhorro['IDC_AHORRO']."<br>";
               c_ahorro::disminuirJaveCoinsXIDAhorro( $valorAhorros, $filaAhorro['IDC_AHORRO']);
               m_finMes::crearTransaccionPagoCredito($valorPagado, $filaAhorro['IDC_AHORRO'] );
               $texto = "Se le han descontado ".$valorAhorros. " de la cuenta ". $filaAhorro['IDC_AHORRO']." para pagar su crédito ". $filaCredito['IDCREDITO'];
               m_finMes::crearNotificacionTransaccion($texto, $filaUsuario['IDUSUARIO']);
             }
           }
-        }
           if ($deudaCredito > 0 )
           {
             $deudaCredito = ($deudaCredito * $filaCredito['INTERES']) + $deudaCredito;
@@ -60,6 +62,7 @@
             m_finMes::crearNotificacionTransaccion($texto, $filaUsuario['IDUSUARIO']);
           }
         }
+      }
         //La consulta me devuelve a los visitantes que tienen el credito aprobado
         $consulta=m_credito::creditosVisitanteAprobados();
         while ($fila = mysqli_fetch_array($consulta)){
@@ -161,7 +164,7 @@
         $usuario = $fila['USUARIO'];
         $cuota_manejo=$fila['CUOTA_MANEJO'];
         $jave_coins=$fila['JAVECOINS'];
-        $total = $jave_coins - $cuota_manejo;       
+        $total = $jave_coins - $cuota_manejo;
         if($total>=0){ //Cuando tiene suficiente cantidad de JaveCoins
           $jave_coins = $total;
           c_ahorro::disminuirJaveCoinsXIDAhorro( $cuota_manejo,$id_ahorro);

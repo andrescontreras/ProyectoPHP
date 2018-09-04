@@ -26,7 +26,7 @@
     if ($err == false)
     {
 
-      
+
       if ( $_POST['moneda'] == 1 )
       {
         $monto = $_POST['visMonto']/1000;
@@ -44,7 +44,7 @@
         $done = "Se le descontaron $". $monto . "<br>";
       }
 
-      c_visitante::transaccionCredito( $_POST['visAhorros'], $_POST['visMonto'], $_SESSION['visCedula'], $_SESSION['visCorreo']);
+      c_visitante::transaccionCredito( $_POST['visAhorros'], $monto, $_SESSION['visCedula'], $_SESSION['visCorreo']);
     }
   }
 ?>
